@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\api",
+    "\\api\\auto-complete",
+    "\\api\\flights_search",
+    "\\api\\flights_search\\flights"
+  ],
+  "SelectedNode": "\\api\\flights_search\\flights\\route.js",
+  "PreviewInSolutionExplorer": false
+}
