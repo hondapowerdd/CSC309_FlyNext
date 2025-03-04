@@ -1,5 +1,17 @@
 ﻿import axios from "axios";
 
+//Helper to check time is valid or not
+const isValidDate = (dateString) => {
+    const regex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!regex.test(dateString)) return false;
+
+    const [year, month, day] = dateString.split('-');
+    const monthInt = parseInt(month, 10);
+    const dayInt = parseInt(day, 10);
+
+    return monthInt >= 1 && monthInt <= 12 && dayInt >= 1 && dayInt <= 31;
+};
+
 export const GET = async (req) => {
     const { searchParams } = new URL(req.url);
     const origin = searchParams.get("origin");
@@ -7,6 +19,34 @@ export const GET = async (req) => {
     const date = searchParams.get("date");
     const returnDate = searchParams.get("returnDate");
     const flightId = searchParams.get("id");
+
+    // Validate parameter 
+    if (typeof source !== 'string' || typeof destination !== 'string' || typeof date !== 'string') {
+        return res.status(400).json({ error: "Invalid parameter type: source, destination, and date must be strings" });
+    }
+
+    //Validate date 
+    if (!isValidDate(date)) {
+        return res.status(400).json({ error: "Invalid date format. Use YYYY-MM-DD with valid month/day values" });
+    }
+
+    //Validate returnDate is after date
+    if (returnDate) {
+        if (typeof returnDate !== 'string') {
+            return res.status(400).json({ error: "Invalid returnDate type: must be a string" });
+        }
+
+        if (!isValidDate(returnDate)) {
+            return res.status(400).json({ error: "Invalid returnDate format. Use YYYY-MM-DD with valid month/day values" });
+        }
+
+        const departureDate = new Date(date);
+        const returnDateObj = new Date(returnDate);
+
+        if (returnDateObj <= departureDate) {
+            return res.status(400).json({ error: "Return date must be after departure date" });
+        }
+    }
 
     //check three necessary info
     if (!origin || !destination || !date) {
