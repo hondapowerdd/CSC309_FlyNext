@@ -4,17 +4,185 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String @unique
+  id          String  @id @default(uuid())
+  firstName   String
+  lastName    String
+  email       String  @unique
+  password    String
+  profilePic  String?
+  phoneNumber String?
+
+  role String @default("USER")
+  // role contains: USER, HOTEL_OWNER, VISITOR
+
+  unreadCount Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  hotels        Hotel[]
+  bookings      Booking[]
+  itineraries   Itinerary[]
+  payments      Payment[]
+  notifications Notification[]
+  preferences   UserPreferences? // one-to-one relation with UserPreferences
+  invoices      Invoice[]
+}
+
+model UserPreferences {
+  id     String @id @default(uuid())
+  userId String @unique
+
+  theme String @default("LIGHT")
+  // theme contains: LIGHT, DARK
+
+  language  String   @default("en")
+  fontSize  Int      @default(14)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id]) // one-to-one relation with User
+}
+
+model Hotel {
+  id         String   @id @default(uuid())
+  name       String
+  logo       String?
+  address    String
+  city       String
+  starRating Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  ownerId  String
+  owner    User         @relation(fields: [ownerId], references: [id])
+  rooms    Room[]
+  bookings Booking[]
+  images   HotelImage[]
+}
+
+model HotelImage {
+  id       String @id @default(uuid())
+  hotel    Hotel  @relation(fields: [hotelId], references: [id])
+  hotelId  String
+  imageUrl String
+}
+
+model Room {
+  id   String @id @default(uuid())
+  name String
+
+  type String @default("SINGLE")
+  // type contains: SINGLE, DOUBLE, SUITE, DELUXE
+
+  amenities     String
+  pricePerNight Float
+  availability  Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  hotelId  String
+  hotel    Hotel       @relation(fields: [hotelId], references: [id])
+  images   RoomImage[]
+  bookings Booking[]
+}
+
+model RoomImage {
+  id       String @id @default(uuid())
+  imageUrl String
+
+  roomId String
+  room   Room   @relation(fields: [roomId], references: [id])
+}
+
+model Booking {
+  id           String    @id @default(uuid())
+  checkInDate  DateTime?
+  checkOutDate DateTime?
+
+  status String @default("CONFIRMED")
+  // status contains: CONFIRMED, CANCELED, PENDING
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId  String
+  user    User    @relation(fields: [userId], references: [id])
+  hotelId String?
+  hotel   Hotel?  @relation(fields: [hotelId], references: [id])
+  roomId  String?
+  room    Room?   @relation(fields: [roomId], references: [id])
+
+  itineraryId String?
+  itinerary   Itinerary? @relation(fields: [itineraryId], references: [id])
+}
+
+model Itinerary {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  bookings Booking[]
+  payments Payment[]
+  invoices Invoice[]
+  userId   String
+  user     User      @relation(fields: [userId], references: [id])
+}
+
+model Payment {
+  id     String @id @default(uuid())
+  amount Float
+
+  status String @default("PENDING")
+  // status contains: PENDING, COMPLETED, FAILED
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  itineraryId String
+  itinerary   Itinerary @relation(fields: [itineraryId], references: [id])
+}
+
+model Invoice {
+  id        String   @id @default(uuid())
+  pdfUrl    String
+  createdAt DateTime @default(now())
+
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  itineraryId String
+  itinerary   Itinerary @relation(fields: [itineraryId], references: [id])
+}
+
+model Notification {
+  id      String @id @default(uuid())
+  message String
+
+  type String @default("GENERAL")
+  // type contains: BOOKING_CONFIRMED, BOOKING_CANCELED, NEW_BOOKING, GENERAL
+
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
