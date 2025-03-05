@@ -5,13 +5,13 @@ import { generateTokenPack } from "@/auth/token";
 
 export async function POST(request, { params }) {
     // User Login
-    const { id } = await params;
+    const { email } = await params;
     const { password } = await request.json();
 
     let user;
 
     try {
-        user = await database.User.findUnique({ where: { id } });
+        user = await database.User.findUnique({ where: { email } });
     } catch (e) {
         return NextResponse.json({error: "Database issue"}, { status: 500 });
     }

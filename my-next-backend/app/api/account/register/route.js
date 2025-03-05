@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
-import database from "@/db/database";
 import { encrypt } from "@/auth/encryption";
+import database from "@/db/database";
+import { generateTokenPack } from "@/auth/token"
+
 
 export async function POST(request) {
     // User Registration
@@ -15,12 +17,13 @@ export async function POST(request) {
         password: password
     }
 
-    user = Object.keys(user).forEach(i => (!user[i] || typeof user[i] !== "string")  && delete user[i]);
+    Object.keys(user).forEach(i => ((!user[i] || typeof user[i] !== "string")  && delete user[i]));
 
     if (!user["email"] || !user["password"]) return NextResponse.json({error: 'Invalid registration information'}, { status: 400 });
     
+    let id;
     try {
-        await database.User.create({ data: {...user, password: encrypt(password)} });
+        id = (await database.User.create({ data: {...user, password: encrypt(password)} }))["id"];
     } catch (e) {
         return NextResponse.json({error: 'Invalid registration information'}, { status: 400 });
     }
