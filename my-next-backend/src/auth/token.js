@@ -40,8 +40,9 @@ export function verifyRefreshToken(token) {
 }
 
 export function verify(request) {
-    // Verify the tokens. If a valid access token exist, return its paylod; Otherwise try to resolve a refresh token.
-    // If no valid token exist, return null
+    // Verify the tokens. If a valid access token exist, return its paylod in an object;
+    // Otherwise try to resolve a refresh token.
+    // If no valid token exist, return object with null payloads
     const authorization = request.headers.get("authorization");
 
     if (authorization) {

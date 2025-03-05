@@ -21,12 +21,12 @@ export async function POST(request) {
 
     if (!user["email"] || !user["password"]) return NextResponse.json({error: 'Invalid registration information'}, { status: 400 });
     
-    let id;
+    let uid;
     try {
-        id = (await database.User.create({ data: {...user, password: encrypt(password)} }))["id"];
+        uid = (await database.User.create({ data: {...user, password: encrypt(password)} }))["uid"];
     } catch (e) {
         return NextResponse.json({error: 'Invalid registration information'}, { status: 400 });
     }
 
-    return NextResponse.json(generateTokenPack({id: id}));
+    return NextResponse.json(generateTokenPack({uid: uid}));
   }

@@ -5,7 +5,7 @@ import { verify } from "@/auth/token";
 export async function PATCH(request, { params }) {
     // Profile update
 
-    const { id } = await params;
+    const { uid } = await params;
 
     const {accessToken, refreshToken} = verify(request);
 
@@ -16,9 +16,9 @@ export async function PATCH(request, { params }) {
         );
     }
 
-    const userId = accessToken? accessToken["id"]:refreshToken["id"];
+    const userId = accessToken? accessToken["uid"]:refreshToken["uid"];
 
-    if (userId !== id) {
+    if (userId !== uid) {
         return NextResponse.json(
             { error: "Invalid credential" },
             { status: 401 },
@@ -35,12 +35,12 @@ export async function PATCH(request, { params }) {
 
     try {
         await database.User.update({
-            where: { id: id },
+            where: { uid: uid },
             data: Object.keys(user).forEach(i => (!user[i] || typeof user[i] !== "string")  && delete user[i]),
           })
     } catch (e) {
         return NextResponse.json({error: "Incorrect profile information"}, { status: 400 });
     }
     
-    return NextResponse.json({message: "Profile update succeed", tokenUpdates: refreshToken? generateTokenPack({id: id}):null});
+    return NextResponse.json({message: "Profile update succeed", tokenUpdates: refreshToken? generateTokenPack({uid: uid}):null});
 }
