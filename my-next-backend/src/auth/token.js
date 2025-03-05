@@ -53,3 +53,8 @@ export function verify(request) {
 
     return { "refreshToken": verifyRefreshToken(request.cookies.refreshToken) };
 }
+
+export function updateTokens(refreshToken) {
+    // Return a new token pack if the refreshToken contains a valid uid, else null
+    return (refreshToken && refreshToken["uid"])? generateTokenPack({uid: refreshToken["uid"]}):null;
+}

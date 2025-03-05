@@ -1,6 +1,6 @@
 import database from "@/db/database";
 import { NextResponse } from "next/server";
-import { verify } from "@/auth/token";
+import { verify, updateTokens } from "@/auth/token";
 
 export async function PATCH(request, { params }) {
     // Profile update
@@ -32,15 +32,16 @@ export async function PATCH(request, { params }) {
         email: email,
         phoneNumber: phoneNumber
     }
+    Object.entries(user).forEach((k, v) => (!v || typeof v !== "string")  && delete user[k]);
 
     try {
         await database.User.update({
             where: { uid: uid },
-            data: Object.keys(user).forEach(i => (!user[i] || typeof user[i] !== "string")  && delete user[i]),
-          })
+            data: user,
+        })
     } catch (e) {
         return NextResponse.json({error: "Incorrect profile information"}, { status: 400 });
     }
     
-    return NextResponse.json({message: "Profile update succeed", tokenUpdates: refreshToken? generateTokenPack({uid: uid}):null});
+    return NextResponse.json({message: "Profile update succeed", tokenUpdates: updateTokens(refreshToken)});
 }

@@ -16,8 +16,7 @@ export async function POST(request) {
         phoneNumber: phoneNumber,
         password: password
     }
-
-    Object.keys(user).forEach(i => ((!user[i] || typeof user[i] !== "string")  && delete user[i]));
+    Object.entries(user).forEach((k, v) => (!v || typeof v !== "string")  && delete user[k]);
 
     if (!user["email"] || !user["password"]) return NextResponse.json({error: 'Invalid registration information'}, { status: 400 });
     
