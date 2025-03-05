@@ -5,6 +5,16 @@ const prisma = new PrismaClient();
 async function main() {
     console.log("Seeding database...");
 
+    // clear the room table
+    await prisma.room.deleteMany({});
+
+    // clear the hotel table
+    await prisma.hotel.deleteMany({});
+
+    // delete all existing notifications
+    await prisma.notification.deleteMany({});
+
+
     let owner = await prisma.user.findFirst({ where: { email: "owner@example.com" } });
 
     if (!owner) {
@@ -16,6 +26,30 @@ async function main() {
                 email: "owner@example.com",
                 password: "hashed_password",
                 role: "ADMIN",
+            },
+        });
+    }
+
+
+    let notif = await prisma.notification.findFirst({ where: { userId: "owner_1" } });
+    if (!notif) {
+        notif = await prisma.notification.create({
+            data: {
+                id: "notif_1",
+                userId: "owner_1",
+                message: "New booking made for your hotel",
+                isRead: false,
+                type: "NEW_BOOKING",
+            },
+        });
+
+        notif = await prisma.notification.create({
+            data: {
+                id: "notif_2",
+                userId: "owner_1",
+                message: "Booking cancelled by customer",
+                isRead: false,
+                type: "CANCELLED_BOOKING",
             },
         });
     }
@@ -35,6 +69,31 @@ async function main() {
         });
     }
 
+    let notif2 = await prisma.notification.findFirst({ where: { userId: "customer_1" } });
+    if (!notif2) {
+        notif2 = await prisma.notification.create({
+            data: {
+                id: "notif_3",
+                userId: "customer_1",
+                message: "Booking confirmed for Grand Hotel",
+                isRead: false,
+                type: "CONFIRMED_BOOKING",
+            },
+        });
+
+        notif2 = await prisma.notification.create({
+            data: {
+                id: "notif_4",
+                userId: "customer_1",
+                message: "Booking cancelled by hotel",
+                isRead: false,
+                type: "BOOKING_CANCELLED",
+            },
+        });
+    }
+
+
+
     let visitor = await prisma.user.findFirst({ where: { email: "vistor@example.com" } });
 
     if (!visitor) {
@@ -49,9 +108,6 @@ async function main() {
             },
         });
     }
-
-    // clear the hotel table
-    await prisma.hotel.deleteMany({});
 
     const existingHotels = await prisma.hotel.findMany();
     if (existingHotels.length === 0) {
@@ -75,9 +131,6 @@ async function main() {
             },
         });
     }
-
-    // clear the room table
-    await prisma.room.deleteMany({});
 
     const existingRooms = await prisma.room.findMany();
     if (existingRooms.length === 0) {
