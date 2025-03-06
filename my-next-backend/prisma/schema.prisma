@@ -21,8 +21,9 @@ datasource db {
 
 model User {
   id          String  @id @default(uuid())
-  firstName   String
-  lastName    String
+  uid         String  @unique
+  firstName   String?
+  lastName    String?
   email       String  @unique
   password    String
   profilePic  String?
@@ -61,6 +62,7 @@ model UserPreferences {
 
 model Hotel {
   id         String   @id @default(uuid())
+  hid        String  @unique
   name       String
   logo       String?
   address    String   @default("UNKNOWN")
@@ -90,9 +92,9 @@ model Room {
   type String @default("SINGLE")
   // type contains: SINGLE, DOUBLE, SUITE, DELUXE
 
-  amenities     String
+  amenities     String?
   pricePerNight Float
-  availability  Int
+  availability  Int      @default(0)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -100,6 +102,8 @@ model Room {
   hotel    Hotel       @relation(fields: [hotelId], references: [id])
   images   RoomImage[]
   bookings Booking[]
+
+  @@unique([hotelId, name])
 }
 
 model RoomImage {
