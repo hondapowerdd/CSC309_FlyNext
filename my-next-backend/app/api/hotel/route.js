@@ -1,6 +1,9 @@
 import database from "@/db/database";
 import { NextResponse } from "next/server";
 import { resolveTokens, updateTokens } from "@/auth/token";
+import { saveFilePublic } from "@/utils/io";
+import { join } from "path";
+import { nanoid } from 'nanoid';
 
 export async function POST(request) {
     // Add hotel
@@ -29,15 +32,63 @@ export async function POST(request) {
         );
     }
 
-    const { hotel } = await request.json();
-    Object.entries(hotel).forEach((k, v) => (!v || typeof v !== "string")  && delete user[k]);
-    const { name, logo, address, city, starRating } = hotel;
+    const form = await request.formData();
 
-    try {
-        await database.Hotel.create({ data: { name, logo, address, city, starRating } });
-    } catch (e) {
-        return NextResponse.json({error: 'Invalid hotel information'}, { status: 400 });
+    const hid = nanoid(10);
+
+    // Save the logo
+    const logo = form.get("logo");
+    let logoName = undefined;
+    if (logo && logo.type && logo.type.startsWith('image/')) {
+        try {
+            logoName = await saveFilePublic(join('hotels', hid, 'logo'), logo);
+        } catch (e) {
+            return NextResponse.json({ error: "Could not save the logo" }, { status: 400 });
+        }
     }
+
+    // Create the hotel
+    const hotel = {
+        name: form.get("name"),
+        logo: logoName,
+        address: form.get("address"),
+        city: form.get("city"),
+        starRating: parseInt(form.get("starRating")),
+        hid: hid,
+        ownerId: user.id
+    }
+    Object.entries(hotel).forEach(([k, v]) => (!v || typeof v !== "string") && delete user[k]);
+
+    let hotelId;
+    try {
+        hotelId = (await database.Hotel.create({ data: hotel }))["id"];
+    } catch (e) {
+        return NextResponse.json({ error: e.message }, { status: 400 });
+    }
+
+    // Save hotel images
+    const hotelImgs = form.getAll("hotelImg").slice(0, 9);
+    let imgSaveFailed = false
+    try {
+        const hotelImgNames = [];
+        for (const [i, hotelImg] of hotelImgs.entries()) {
+            if (hotelImg && hotelImg.type && hotelImg.type.startsWith('image/')) {
+                hotelImgNames.push(saveFilePublic(join("hotels", hid, "hotelImgs"), hotelImg, ("_" + i.toString())));
+            }
+        }
+
+        for (let hotelImgName of (await Promise.all(hotelImgNames))) {
+            console.log(hotelImgName);
+            await database.HotelImage.create({ data: {
+                hotelId: hotelId,
+                imageUrl: hotelImgName
+            } });
+        }
+    } catch (e) { console.log(e.message); imgSaveFailed = true; }
+    console.log(imgSaveFailed);
     
-    return NextResponse.json({message: "Hotel created", tokenUpdates: tokenType==="refresh"? updateTokens(uid):null});
+    return NextResponse.json({
+        message: "Hotel created" + (imgSaveFailed? "; Some received images were not saved":""),
+        tokenUpdates: tokenType==="refresh"? updateTokens(uid):null
+    });
 }

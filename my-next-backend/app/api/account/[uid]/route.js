@@ -27,9 +27,9 @@ export async function PATCH(request, { params }) {
     let profilePicName = undefined;
     if (profilePic && profilePic.type && profilePic.type.startsWith('image/')) {
         try {
-            profilePicName = await saveFilePublic(join(uid, 'profileImgs'), profilePic);
+            profilePicName = await saveFilePublic(join('profiles', uid, 'profileImgs'), profilePic);
         } catch (e) {
-            return NextResponse.json({ error: e.message }, { status: 400 });
+            return NextResponse.json({ error: "Could not save the profile img" }, { status: 400 });
         }
     }
     
