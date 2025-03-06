@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\account\\register",
+    "\\book\\flight",
+    "\\book\\hotel",
+    "\\flights_search",
+    "\\flights_search\\flights",
+    "\\hotel_search",
+    "\\hotel_search\\search",
+    "\\suggestion",
+    "\\suggestion\\hotels"
+  ],
+  "SelectedNode": "\\suggestion\\hotels\\route.js",
+  "PreviewInSolutionExplorer": false
+}
