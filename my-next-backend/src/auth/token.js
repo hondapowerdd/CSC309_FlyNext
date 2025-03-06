@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { cookies } from 'next/headers';
 
 const _generateToken = (object, secret, expiration) => {
     console.log(object);
@@ -7,11 +8,11 @@ const _generateToken = (object, secret, expiration) => {
 }
 
 export function generateAccessToken(object) {
-    return _generateToken({...object, tokenType: "access"}, process.env.JWT_SECRET_ACCESS, process.env.JWT_EXPIRY_TIME_ACCESS);
+    return _generateToken(object, process.env.JWT_SECRET_ACCESS, process.env.JWT_EXPIRY_TIME_ACCESS);
 }
 
 export function generateRefreshToken(object) {
-    return _generateToken({...object, tokenType: "refresh"}, process.env.JWT_SECRET_REFRESH, process.env.JWT_EXPIRY_TIME_REFRESH);
+    return _generateToken(object, process.env.JWT_SECRET_REFRESH, process.env.JWT_EXPIRY_TIME_REFRESH);
 }
 
 export function generateTokenPack(object) {
@@ -28,7 +29,7 @@ const _verfiyToken = (token, secret) => {
 
     try {
         return jwt.verify(token, secret);
-    } catch { return null; }
+    } catch (e) { return null; }
 }
 
 export function verifyACCESSToken(token) {
@@ -39,7 +40,7 @@ export function verifyRefreshToken(token) {
     return _verfiyToken(token, process.env.JWT_SECRET_refresh);
 }
 
-export function verify(request) {
+export async function verify(request) {
     // Verify the tokens. If a valid access token exist, return its paylod in an object;
     // Otherwise try to resolve a refresh token.
     // If no valid token exist, return object with null payloads
@@ -51,7 +52,7 @@ export function verify(request) {
         if (payload) return {"accessToken": payload};
     }
 
-    return { "refreshToken": verifyRefreshToken(request.cookies.refreshToken) };
+    return { "refreshToken": verifyRefreshToken((await cookies()).get("refreshToken")["value"]) };
 }
 
 export function updateTokens(uid) {
@@ -59,11 +60,11 @@ export function updateTokens(uid) {
     return uid? generateTokenPack({uid: uid}):null;
 }
 
-export function resolveTokens(request) {
-    const {accessToken, refreshToken} = verify(request);
+export async function resolveTokens(request) {
+    const { accessToken, refreshToken } = await verify(request);
 
-    if (accessToken) return {uid: accessToken["uid"], tokenType: "access"};
-    if (refreshToken) return {uid: refreshToken["uid"], tokenType: "refresh"};
+    if (accessToken) return { uid: accessToken["uid"], tokenType: "access" };
+    if (refreshToken) return { uid: refreshToken["uid"], tokenType: "refresh" };
 
     return {};
 }

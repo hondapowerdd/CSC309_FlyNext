@@ -2,12 +2,13 @@ import { NextResponse } from "next/server";
 import { encrypt } from "@/auth/encryption";
 import database from "@/db/database";
 import { generateTokenPack } from "@/auth/token"
+import { nanoid } from 'nanoid';
 
 
 export async function POST(request) {
     // User Registration
   
-    const { email, password, firstName, lastName, phoneNumber } = await request.json();
+    const { email, password, firstName, lastName, phoneNumber } = (await request.json())["registerInfo"];
 
     let user = {
         firstName: firstName,
@@ -16,16 +17,23 @@ export async function POST(request) {
         phoneNumber: phoneNumber,
         password: password
     }
+
+    // Ignore illegal entries
     Object.entries(user).forEach((k, v) => (!v || typeof v !== "string")  && delete user[k]);
 
-    if (!user["email"] || !user["password"]) return NextResponse.json({error: 'Invalid registration information'}, { status: 400 });
+    if (!user["email"] || !user["password"]) return NextResponse.json({ error: 'Invalid registration information' }, { status: 400 });
     
-    let uid;
-    try {
-        uid = (await database.User.create({ data: {...user, password: encrypt(password)} }))["uid"];
+    const uid = nanoid(10); // Unique uid, also for homepage url
+
+    try { // Create user
+        await database.User.create({ data: {
+            ...user,
+            uid,
+            password: encrypt(password)
+        } });
     } catch (e) {
-        return NextResponse.json({error: 'Invalid registration information'}, { status: 400 });
+        return NextResponse.json({ error: 'Invalid registration information' }, { status: 400 });
     }
 
-    return NextResponse.json(generateTokenPack({uid: uid}));
+    return NextResponse.json({uid: uid, tokens: generateTokenPack({uid: uid})});
   }

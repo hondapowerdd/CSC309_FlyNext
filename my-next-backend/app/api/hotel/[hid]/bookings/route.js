@@ -5,7 +5,7 @@ import { resolveTokens, updateTokens } from "@/auth/token";
 export async function GET(request, { params }) {
     // get bookings
 
-    const { uid, tokenType } = resolveTokens(request);
+    const { uid, tokenType } = await resolveTokens(request);
 
     if (!uid) {
         return NextResponse.json(
@@ -75,7 +75,7 @@ export async function GET(request, { params }) {
 export async function DELETE(request, { params }) {
     // Delete some bookings
 
-    const { uid, tokenType } = resolveTokens(request);
+    const { uid, tokenType } = await resolveTokens(request);
 
     if (!uid) {
         return NextResponse.json(

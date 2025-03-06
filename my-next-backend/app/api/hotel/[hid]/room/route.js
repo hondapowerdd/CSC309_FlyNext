@@ -19,7 +19,7 @@ const _retrieveHotel = async (hid, uid) => {
 export async function GET(request, { params }) {
     // get bookings
 
-    const { uid, tokenType } = resolveTokens(request);
+    const { uid, tokenType } = await resolveTokens(request);
 
     if (!uid) {
         return NextResponse.json(
@@ -52,7 +52,7 @@ export async function GET(request, { params }) {
 export async function POST(request, { params }) {
     // Define a room type
 
-    const { uid, tokenType } = resolveTokens(request);
+    const { uid, tokenType } = await resolveTokens(request);
 
     if (!uid) {
         return NextResponse.json(
@@ -92,7 +92,7 @@ export async function POST(request, { params }) {
 export async function Patch(request, { params }) {
     // Modify room availability
 
-    const { uid, tokenType } = resolveTokens(request);
+    const { uid, tokenType } = await resolveTokens(request);
 
     if (!uid) {
         return NextResponse.json(

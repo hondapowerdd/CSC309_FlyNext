@@ -10,18 +10,18 @@ export async function POST(request, { params }) {
 
     let user;
 
-    try {
+    try { // Find user
         user = await database.User.findUnique({ where: { uid } });
     } catch (e) {
         return NextResponse.json({error: "Database issue"}, { status: 500 });
     }
     
-    if (!user || !verifyEncrypted(password, user.password)) {
+    if (!user || !verifyEncrypted(password, user.password)) { // Verrify password
         return NextResponse.json(
             { error: "Invalid id or password" },
             { status: 401 },
         );
     }
     
-    return NextResponse.json(generateTokenPack({id: id}));
+    return NextResponse.json({ tokens: generateTokenPack({ uid: uid }) });
 }

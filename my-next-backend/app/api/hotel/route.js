@@ -5,7 +5,7 @@ import { resolveTokens, updateTokens } from "@/auth/token";
 export async function POST(request) {
     // Add hotel
 
-    const { uid, tokenType } = resolveTokens(request);
+    const { uid, tokenType } = await resolveTokens(request);
 
     if (!uid) {
         return NextResponse.json(

@@ -1,11 +1,13 @@
 import database from "@/db/database";
 import { NextResponse } from "next/server";
 import { resolveTokens, updateTokens } from "@/auth/token";
+import { saveFilePublic } from "@/utils/io";
+import { join } from "path";
 
 export async function PATCH(request, { params }) {
     // Profile update
 
-    const resolvedToken = resolveTokens(request)["tokenType"];
+    const resolvedToken = await resolveTokens(request);
     const tokenType = resolvedToken["tokenType"];
     const tokenUid = resolvedToken["uid"];
 
@@ -18,23 +20,41 @@ export async function PATCH(request, { params }) {
         );
     }
 
-    const {firstName, lastName, email, phoneNumber} = params;
-    const user = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        phoneNumber: phoneNumber
-    }
-    Object.entries(user).forEach((k, v) => (!v || typeof v !== "string")  && delete user[k]);
+    // Use form data since we have images.
+    const form = await request.formData();
 
-    try {
+    const profilePic = form.get("profilePic");
+    let profilePicName = undefined;
+    if (profilePic && profilePic.type && profilePic.type.startsWith('image/')) {
+        try {
+            profilePicName = await saveFilePublic(join(uid, 'profileImgs'), profilePic);
+        } catch (e) {
+            return NextResponse.json({ error: e.message }, { status: 400 });
+        }
+    }
+    
+    const user = {
+        firstName: form.get("firstName"),
+        lastName: form.get("lastName"),
+        email: form.get("email"),
+        phoneNumber: form.get("phoneNumber"),
+        profilePic: profilePicName
+    }
+
+    // Ignore illegal entries
+    Object.entries(user).forEach(([k, v]) => (!v || typeof v !== "string")  && delete user[k]);
+
+    try { // Update profile
         await database.User.update({
             where: { uid: uid },
             data: user,
         })
     } catch (e) {
-        return NextResponse.json({error: "Incorrect profile information"}, { status: 400 });
+        return NextResponse.json({ error: "Invalid profile update info" }, { status: 400 });
     }
     
-    return NextResponse.json({message: "Profile update succeed", tokenUpdates: tokenType==="refresh"? updateTokens(uid):null});
+    return NextResponse.json({
+        message: "Profile update succeed",
+        tokenUpdates: tokenType==="refresh"? updateTokens(uid):null
+    });
 }
