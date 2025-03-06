@@ -89,6 +89,7 @@ export async function POST(request) {
     
     return NextResponse.json({
         message: "Hotel created" + (imgSaveFailed? "; Some received images were not saved":""),
+        hid: hid,
         tokenUpdates: tokenType==="refresh"? updateTokens(uid):null
     });
 }

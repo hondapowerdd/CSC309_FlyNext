@@ -18,8 +18,7 @@ export async function GET(request, { params }) {
 
     let hotel;
 
-    // Validate hotel ownership
-    try {
+    try { // Validate hotel ownership
         hotel = await database.Hotel.findUnique({ where: { hid } });
     } catch (e) {
         return NextResponse.json({error: "Database issue"}, { status: 500 });
