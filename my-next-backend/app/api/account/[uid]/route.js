@@ -1,24 +1,17 @@
 import database from "@/db/database";
 import { NextResponse } from "next/server";
-import { verify, updateTokens } from "@/auth/token";
+import { resolveTokens, updateTokens } from "@/auth/token";
 
 export async function PATCH(request, { params }) {
     // Profile update
 
+    const resolvedToken = resolveTokens(request)["tokenType"];
+    const tokenType = resolvedToken["tokenType"];
+    const tokenUid = resolvedToken["uid"];
+
     const { uid } = await params;
 
-    const {accessToken, refreshToken} = verify(request);
-
-    if (!accessToken && !refreshToken) {
-        return NextResponse.json(
-            { error: "Invalid credential" },
-            { status: 401 },
-        );
-    }
-
-    const userId = accessToken? accessToken["uid"]:refreshToken["uid"];
-
-    if (userId !== uid) {
+    if (tokenUid !== uid) {
         return NextResponse.json(
             { error: "Invalid credential" },
             { status: 401 },
@@ -43,5 +36,5 @@ export async function PATCH(request, { params }) {
         return NextResponse.json({error: "Incorrect profile information"}, { status: 400 });
     }
     
-    return NextResponse.json({message: "Profile update succeed", tokenUpdates: updateTokens(refreshToken)});
+    return NextResponse.json({message: "Profile update succeed", tokenUpdates: tokenType==="refresh"? updateTokens(uid):null});
 }

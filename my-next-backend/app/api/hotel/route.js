@@ -1,20 +1,18 @@
 import database from "@/db/database";
 import { NextResponse } from "next/server";
-import { verify, updateTokens } from "@/auth/token";
+import { resolveTokens, updateTokens } from "@/auth/token";
 
 export async function POST(request) {
     // Add hotel
 
-    const {accessToken, refreshToken} = verify(request);
+    const { uid, tokenType } = resolveTokens(request);
 
-    if (!accessToken && !refreshToken) {
+    if (!uid) {
         return NextResponse.json(
             { error: "Invalid credential" },
             { status: 401 },
         );
     }
-
-    const uid = accessToken? accessToken["uid"]:refreshToken["uid"];
 
     let user;
 
@@ -24,7 +22,7 @@ export async function POST(request) {
         return NextResponse.json({error: "Database issue"}, { status: 500 });
     }
     
-    if (!user || !verifyEncrypted(password, user.password)) {
+    if (!user || user.uid !== uid) {
         return NextResponse.json(
             { error: "Invalid credential" },
             { status: 401 },
@@ -41,5 +39,5 @@ export async function POST(request) {
         return NextResponse.json({error: 'Invalid hotel information'}, { status: 400 });
     }
     
-    return NextResponse.json({message: "Hotel created", tokenUpdates: updateTokens(refreshToken)});
+    return NextResponse.json({message: "Hotel created", tokenUpdates: tokenType==="refresh"? updateTokens(uid):null});
 }

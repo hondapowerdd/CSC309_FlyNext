@@ -54,7 +54,16 @@ export function verify(request) {
     return { "refreshToken": verifyRefreshToken(request.cookies.refreshToken) };
 }
 
-export function updateTokens(refreshToken) {
+export function updateTokens(uid) {
     // Return a new token pack if the refreshToken contains a valid uid, else null
-    return (refreshToken && refreshToken["uid"])? generateTokenPack({uid: refreshToken["uid"]}):null;
+    return uid? generateTokenPack({uid: uid}):null;
+}
+
+export function resolveTokens(request) {
+    const {accessToken, refreshToken} = verify(request);
+
+    if (accessToken) return {uid: accessToken["uid"], tokenType: "access"};
+    if (refreshToken) return {uid: refreshToken["uid"], tokenType: "refresh"};
+
+    return {};
 }
