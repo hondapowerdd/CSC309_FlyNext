@@ -146,7 +146,7 @@ model Booking {
   roomId  String?
   room    Room?   @relation(fields: [roomId], references: [id])
 
-  flightId String? // New field for flight references
+  flightReference String? // New field for flight references
 
   itineraryId String?
   itinerary   Itinerary? @relation(fields: [itineraryId], references: [id])

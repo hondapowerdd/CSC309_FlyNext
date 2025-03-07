@@ -39,11 +39,13 @@ export const POST = async (req) => {
             },
         });
 
+        const bookingReference = response.data?.bookingReference;
+
         await prisma.booking.create({
             data: {
                 userId: user.id,
                 itineraryId: itineraryId,
-                flightId: flightId,
+                flightReference: bookingReference,
                 type: "FLIGHT"
             }
         });
