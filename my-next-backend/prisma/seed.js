@@ -21,6 +21,7 @@ async function main() {
         owner = await prisma.user.create({
             data: {
                 id: "owner_1",
+                uid: "owner_1",
                 firstName: "John",
                 lastName: "Doe",
                 email: "owner@example.com",
@@ -60,6 +61,7 @@ async function main() {
         customer = await prisma.user.create({
             data: {
                 id: "customer_1",
+                uid: "customer_1",
                 firstName: "Jane",
                 lastName: "Smith",
                 email: "customer@example.com",
@@ -100,6 +102,7 @@ async function main() {
         visitor = await prisma.user.create({
             data: {
                 id: "visitor_1",
+                uid: "visitor_1",
                 firstName: "Alice",
                 lastName: "Johnson",
                 email: "vistor@example.com",
@@ -114,6 +117,7 @@ async function main() {
         await prisma.hotel.create({
             data: {
                 id: "hotel_1",
+                hid: "hotel_1",
                 name: "Grand Hotel",
                 city: "Toronto",
                 starRating: 5,
@@ -124,6 +128,7 @@ async function main() {
         await prisma.hotel.create({
             data: {
                 id: "hotel_2",
+                hid: "hotel_2",
                 name: "SB Hotel",
                 city: "New York",
                 starRating: 4,
