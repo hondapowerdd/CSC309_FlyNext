@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "fs/promises";
+import { rm, mkdir, writeFile } from "fs/promises";
 import { join, extname } from "path";
 
 export async function saveFilePublic(pathUnderPublic, file, fileNo="") {
@@ -8,6 +8,8 @@ export async function saveFilePublic(pathUnderPublic, file, fileNo="") {
     const filename = Date.now().toString() + fileNo + extname(file.name);
     const saveDir = join(process.cwd(), 'public', pathUnderPublic);
 
+    // clear the dir
+    await rm(saveDir, { recursive: true, force: true });
     // Ensure folder exist
     await mkdir(saveDir, { recursive: true });
 

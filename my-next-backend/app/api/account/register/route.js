@@ -8,7 +8,7 @@ import { nanoid } from 'nanoid';
 export async function POST(request) {
     // User Registration
   
-    const { email, password, firstName, lastName, phoneNumber } = (await request.json())["registerInfo"];
+    const { email, password, firstName, lastName, phoneNumber } = (await request.json())["registration"];
 
     let user = {
         firstName: firstName,
@@ -32,8 +32,11 @@ export async function POST(request) {
             password: encrypt(password)
         } });
     } catch (e) {
-        return NextResponse.json({ error: 'Invalid registration information' }, { status: 400 });
+        return NextResponse.json({ error: 'Database Issue' }, { status: 400 });
     }
 
-    return NextResponse.json({uid: uid, tokens: generateTokenPack({uid: uid})});
+    return NextResponse.json({
+        uid: uid,
+        tokens: generateTokenPack({ uid: uid })
+    });
   }

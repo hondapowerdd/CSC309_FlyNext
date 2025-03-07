@@ -91,7 +91,7 @@ model Room {
   id   String @id @default(uuid())
   name String
 
-  type String @default("SINGLE")
+  type String
   // type contains: SINGLE, DOUBLE, SUITE, DELUXE
 
   amenities     String?
@@ -106,7 +106,7 @@ model Room {
   bookings Booking[]
   roomAvailability RoomAvailability[]
 
-  @@unique([hotelId, name])
+  @@unique([hotelId, name, type])
 }
 
 model RoomAvailability {

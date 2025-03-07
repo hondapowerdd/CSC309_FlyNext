@@ -78,17 +78,16 @@ export async function POST(request) {
         }
 
         for (let hotelImgName of (await Promise.all(hotelImgNames))) {
-            console.log(hotelImgName);
             await database.HotelImage.create({ data: {
                 hotelId: hotelId,
                 imageUrl: hotelImgName
             } });
         }
-    } catch (e) { console.log(e.message); imgSaveFailed = true; }
-    console.log(imgSaveFailed);
+    } catch (e) { imgSaveFailed = true; }
     
     return NextResponse.json({
-        message: "Hotel created" + (imgSaveFailed? "; Some received images were not saved":""),
+        message: "Hotel created",
+        imgSaveFailed: imgSaveFailed,
         hid: hid,
         tokenUpdates: tokenType==="refresh"? updateTokens(uid):null
     });
