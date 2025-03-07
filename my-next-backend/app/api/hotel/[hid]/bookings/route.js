@@ -19,9 +19,12 @@ export async function GET(request, { params }) {
     let hotel;
 
     try { // Validate hotel ownership
-        hotel = await database.Hotel.findUnique({ where: { hid } });
+        hotel = await database.Hotel.findUnique({
+            where: { hid },
+            include: { owner: true, bookings: { include: { room: params["roomTypes"] } } }
+        });
     } catch (e) {
-        return NextResponse.json({error: "Database issue"}, { status: 500 });
+        return NextResponse.json({ error: "Database issue" }, { status: 500 });
     }
     
     if (!hotel) return NextResponse.json(
@@ -37,34 +40,38 @@ export async function GET(request, { params }) {
     // Filter bookings
     let bookings = hotel.bookings
     if (bookings) {
-        let { checkInDate, checkOutDate, roomTypes } = await request.json();
+        const { searchParams } = new URL(request.url);
 
-        if (checkInDate) {
+        let startDate = searchParams.get("startDate");
+        if (startDate) {
             try {
-                checkInDate = new Date(checkInDate);
+                startDate = new Date(startDate);
             }
             catch (e) {
                 return NextResponse.json({error: "Invalid check-in date"}, { status: 400 });
             }
             
-            bookings = bookings.filter(booking => booking.checkInDate >= checkInDate);
+            bookings = bookings.filter(booking => booking.checkInDate >= startDate);
         }
 
-        if (checkOutDate) {
+        let endDate = searchParams.get("endDate");
+        if (endDate) {
             try {
-                checkOutDate = new Date(checkOutDate);
+                endDate = new Date(endDate);
             }
             catch (e) {
                 return NextResponse.json({error: "Invalid check-out date"}, { status: 400 });
             }
 
-            bookings = bookings.filter(booking => booking.checkOutDate <= checkOutDate);
+            bookings = bookings.filter(booking => booking.checkOutDate <= endDate);
         }
 
+        let roomTypes = searchParams.get("roomTypes");
         if (roomTypes) {
-            if (!Array.isArray(roomTypes)) return NextResponse.json({error: "Invalid roomType filter"}, { status: 400 });
+            roomTypes = roomTypes.split(',');
 
-            bookings.filter(booking => roomTypes.includes(booking.room.type));
+            console.log(roomTypes);
+            bookings = bookings.filter(booking => (booking.room && roomTypes.includes(booking.room.type)));
         } 
     }
     
@@ -89,9 +96,12 @@ export async function DELETE(request, { params }) {
 
     // Validate hotel ownership
     try {
-        hotel = await database.Hotel.findUnique({ where: { hid } });
+        hotel = await database.Hotel.findUnique({
+            where: { hid },
+            include: { owner: true }
+        });
     } catch (e) {
-        return NextResponse.json({error: "Database issue"}, { status: 500 });
+        return NextResponse.json({ error: "Database issue" }, { status: 500 });
     }
     
     if (!hotel) return NextResponse.json(
@@ -108,14 +118,31 @@ export async function DELETE(request, { params }) {
     if (!bookingIds || !Array.isArray(bookingIds)) return NextResponse.json({error: "Invalid booking ids"}, { status: 400 });
 
     try {
-        await database.example.deleteMany({
+        const bookingsToDelete = await database.Booking.findMany({
+            where: {
+                id: { in: bookingIds }
+            }
+          });
+        await database.Booking.deleteMany({
             where: {
                 id: { in: bookingIds }
             }
         });
+        for (const booking of bookingsToDelete) {
+            await database.RoomAvailability.updateMany({
+                where: {
+                    roomId: booking.roomId,
+                    date: {
+                        gte: booking.checkInDate,
+                        lt: booking.checkOutDate
+                    }
+                },
+                data: { availability: { increment: 1 } },
+            });
+        }
     }
     catch (e) {
-        return NextResponse.json({error: "Database issue"}, { status: 500 });
+        return NextResponse.json({ error: "Database issue" }, { status: 500 });
     }
 
     return NextResponse.json({message: "Booking(s) deleted", tokenUpdates: tokenType==="refresh"? updateTokens(uid):null});
