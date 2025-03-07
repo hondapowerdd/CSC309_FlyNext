@@ -202,6 +202,18 @@ async function main() {
         },
     });
 
+    // await prisma.booking.create({
+    //     data: {
+    //         id: "booking_2",
+    //         hotelId: "hotel_1",
+    //         roomId: "room_1",
+    //         userId: customer.id,
+    //         checkInDate: new Date("2025-03-13"),
+    //         checkOutDate: new Date("2025-03-18"),
+    //         status: "CONFIRMED",
+    //     },
+    // });
+
     console.log("Seeding complete!");
 }
 

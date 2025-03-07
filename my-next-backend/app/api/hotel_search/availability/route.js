@@ -159,4 +159,5 @@ function getDateRange(startDate, endDate) {
 
 
 // ------------------------------------------------------------------------------------------
+// query example:
 // curl -X GET "http://localhost:3002/api/hotel_search/availability?hotelId=hotel_1&checkInDate=2025-03-10&checkOutDate=2025-03-15"
