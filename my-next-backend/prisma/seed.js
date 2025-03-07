@@ -14,6 +14,9 @@ async function main() {
     // delete all existing notifications
     await prisma.notification.deleteMany({});
 
+    // delete the bookings table
+    await prisma.booking.deleteMany({});
+
 
     let owner = await prisma.user.findFirst({ where: { email: "owner@example.com" } });
 
@@ -144,6 +147,7 @@ async function main() {
                 id: "room_1",
                 hotelId: "hotel_1",
                 name: "Deluxe Suite",
+                type: "SINGLE",
                 pricePerNight: 300,
                 availability: 5,
                 amenities: "Free Wi-Fi, Breakfast Included",
@@ -154,9 +158,10 @@ async function main() {
             data: {
                 id: "room_2",
                 hotelId: "hotel_1",
+                type: "DOUBLE",
                 name: "Standard Room",
                 pricePerNight: 150,
-                availability: 0,
+                availability: 1,
                 amenities: "Free Wi-Fi",
             },
         });
@@ -183,6 +188,19 @@ async function main() {
             },
         });
     }
+
+    // create a booking to hotel_1
+    await prisma.booking.create({
+        data: {
+            id: "booking_1",
+            hotelId: "hotel_1",
+            roomId: "room_2",
+            userId: customer.id,
+            checkInDate: new Date("2025-03-09"),
+            checkOutDate: new Date("2025-03-12"),
+            status: "CONFIRMED",
+        },
+    });
 
     console.log("Seeding complete!");
 }
