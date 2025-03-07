@@ -30,6 +30,7 @@ model User {
   phoneNumber String?
   passportNumber String? @unique
 
+
   role String @default("USER")
   // role contains: USER, HOTEL_OWNER, VISITOR
 

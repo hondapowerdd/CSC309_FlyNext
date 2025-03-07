@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+hello-prisma/
 
 # next.js
 /.next/
@@ -40,6 +41,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 /app/.vs/*
+/my-next-backend/.vs/*
+.vscode/
+my-next-backend/.vs/
 
 # database
-/prisma/dev.db
+/prisma/dev.db.vs/
+my-next-backend/prisma/dev.db-journal
