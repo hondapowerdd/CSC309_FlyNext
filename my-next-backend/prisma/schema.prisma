@@ -133,6 +133,9 @@ model Booking {
   status String @default("CONFIRMED")
   // status contains: CONFIRMED, CANCELED, PENDING
 
+   type String?  @default("HOTEL")
+  // type contains: HOTEL, FLIGHT
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -142,6 +145,8 @@ model Booking {
   hotel   Hotel?  @relation(fields: [hotelId], references: [id])
   roomId  String?
   room    Room?   @relation(fields: [roomId], references: [id])
+
+  flightId String? // New field for flight references
 
   itineraryId String?
   itinerary   Itinerary? @relation(fields: [itineraryId], references: [id])

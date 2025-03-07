@@ -1,8 +1,13 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
+import { resolveTokens, updateTokens } from "@/auth/token";
 
 export const POST = async (req) => {
     try {
+        const resolvedToken = await resolveTokens(req);
+        const tokenType = resolvedToken["tokenType"];
+        const tokenUid = resolvedToken["uid"];
+
         const { userId, hotelId, roomId, checkInDate, checkOutDate } = await req.json();
 
         if (!userId || !hotelId || !roomId || !checkInDate || !checkOutDate) {
@@ -11,67 +16,94 @@ export const POST = async (req) => {
 
         const checkIn = new Date(checkInDate);
         const checkOut = new Date(checkOutDate);
+
         if (isNaN(checkIn) || isNaN(checkOut)) {
             return new Response(JSON.stringify({ error: "Invalid date format" }), { status: 400 });
         }
 
-        //date check
         if (checkIn >= checkOut) {
             return new Response(JSON.stringify({
                 error: "Check-out date must be after check-in date"
             }), { status: 400 });
         }
 
-        // check room avaliability
-        const existingBooking = await prisma.booking.findFirst({
-            where: {
-                roomId: roomId,
-                status: "CONFIRMED",
-                OR: [
-                    {
-                        checkInDate: { lte: checkOut },
-                        checkOutDate: { gte: checkIn }
-                    }
-                ]
-            }
-        });
-
-        if (existingBooking) {
-            return new Response(JSON.stringify({ error: "No available rooms for selected dates" }), { status: 409 });
-        }
-
-        // room avaliability
         const room = await prisma.room.findUnique({
             where: { id: roomId },
             select: { availability: true }
         });
 
-        if (!room || room.availability <= 0) {
-            return new Response(JSON.stringify({ error: "No available rooms of this type" }), { status: 400 });
+        if (!room) {
+            return new Response(JSON.stringify({ error: "Room not found" }), { status: 404 });
         }
 
-        // create room
-        const [booking, updatedRoom] = await prisma.$transaction([
-            prisma.booking.create({
-                data: {
-                    userId,
-                    hotelId,
-                    roomId,
-                    checkInDate: checkIn,
-                    checkOutDate: checkOut,
-                    status: "CONFIRMED",
-                }
-            }),
-            prisma.room.update({
-                where: { id: roomId },
-                data: { availability: { decrement: 1 } }
-            })
-        ]);
+        const datesToCheck = [];
+        for (let date = new Date(checkIn); date < checkOut; date.setDate(date.getDate() + 1)) {
+            datesToCheck.push(new Date(date));
+        }
+
+        const roomAvailabilities = await prisma.roomAvailability.findMany({
+            where: {
+                roomId: roomId,
+                date: { in: datesToCheck }
+            },
+            select: { date: true, availability: true }
+        });
+
+        for (const date of datesToCheck) {
+            const availabilityRecord = roomAvailabilities.find(record =>
+                record.date.getTime() === date.getTime()
+            );
+
+            if (availabilityRecord && availabilityRecord.availability >= room.availability) {
+                return new Response(JSON.stringify({
+                    error: `No available rooms for selected dates. Fully booked on ${date.toISOString().split('T')[0]}`
+                }), { status: 409 });
+            }
+        }
+
+        const booking = await prisma.booking.create({
+            data: {
+                userId,
+                hotelId,
+                roomId,
+                checkInDate: checkIn,
+                checkOutDate: checkOut,
+                status: "CONFIRMED",
+            }
+        });
+
+        const roomAvailabilityUpdates = [];
+        for (const date of datesToCheck) {
+            const existingAvailability = roomAvailabilities.find(record =>
+                record.date.getTime() === date.getTime()
+            );
+
+            if (existingAvailability) {
+                roomAvailabilityUpdates.push(
+                    prisma.roomAvailability.update({
+                        where: { roomId_date: { roomId: roomId, date: date } },
+                        data: { availability: { increment: 1 } }
+                    })
+                );
+            } else {
+                roomAvailabilityUpdates.push(
+                    prisma.roomAvailability.create({
+                        data: {
+                            roomId: roomId,
+                            date: date,
+                            availability: 1
+                        }
+                    })
+                );
+            }
+        }
+
+        await prisma.$transaction(roomAvailabilityUpdates);
 
         return new Response(JSON.stringify({
             message: "Hotel booking successful",
             booking,
-            remainingAvailability: updatedRoom.availability
+            tokenUpdates: tokenType === "refresh" ? updateTokens(tokenUid) : null
         }), {
             status: 200,
             headers: { "Content-Type": "application/json" },
