@@ -1,15 +1,19 @@
-﻿import axios from "axios";
+﻿//As a visitor, I want to search for flights by specifying a source,
+// destination, and date(s).Source and destination could be either a
+// city or an airport.I want to search for one - way or round - trip flights.
+
+// As a visitor, I want to view flight details, including departure / arrival times,
+// duration, and layovers.
+
+import axios from "axios";
 
 //Helper to check time is valid or not
 const isValidDate = (dateString) => {
     const regex = /^\d{4}-\d{2}-\d{2}$/;
     if (!regex.test(dateString)) return false;
 
-    const [year, month, day] = dateString.split('-');
-    const monthInt = parseInt(month, 10);
-    const dayInt = parseInt(day, 10);
-
-    return monthInt >= 1 && monthInt <= 12 && dayInt >= 1 && dayInt <= 31;
+    const [year, month, day] = dateString.split('-').map(Number);
+    return month >= 1 && month <= 12 && day >= 1 && day <= 31;
 };
 
 export const GET = async (req) => {
@@ -20,75 +24,67 @@ export const GET = async (req) => {
     const returnDate = searchParams.get("returnDate");
     const flightId = searchParams.get("id");
 
-    // Validate parameter 
-    if (typeof source !== 'string' || typeof destination !== 'string' || typeof date !== 'string') {
-        return res.status(400).json({ error: "Invalid parameter type: source, destination, and date must be strings" });
+
+    //validate require inputs
+    if (!origin || !destination || !date) {
+        return new Response(JSON.stringify({
+            error: "Missing origin/destination/date parameters"
+        }), { status: 400 });
     }
 
-    //Validate date 
+    // Validate parameters
+    if (typeof origin !== 'string' || typeof destination !== 'string' || typeof date !== 'string') {
+        return new Response(JSON.stringify({ error: "Invalid parameter type: origin, destination, and date must be strings" }), { status: 400 });
+    }
+
+    // Validate date format
     if (!isValidDate(date)) {
-        return res.status(400).json({ error: "Invalid date format. Use YYYY-MM-DD with valid month/day values" });
+        return new Response(JSON.stringify({ error: "Invalid date format. Use YYYY-MM-DD with valid values" }), { status: 400 });
     }
 
-    //Validate returnDate is after date
+    // Validate returnDate
     if (returnDate) {
-        if (typeof returnDate !== 'string') {
-            return res.status(400).json({ error: "Invalid returnDate type: must be a string" });
-        }
-
-        if (!isValidDate(returnDate)) {
-            return res.status(400).json({ error: "Invalid returnDate format. Use YYYY-MM-DD with valid month/day values" });
+        if (typeof returnDate !== 'string' || !isValidDate(returnDate)) {
+            return new Response(JSON.stringify({ error: "Invalid returnDate format. Use YYYY-MM-DD" }), { status: 400 });
         }
 
         const departureDate = new Date(date);
         const returnDateObj = new Date(returnDate);
-
         if (returnDateObj <= departureDate) {
-            return res.status(400).json({ error: "Return date must be after departure date" });
+            return new Response(JSON.stringify({ error: "Return date must be after departure date" }), { status: 400 });
         }
     }
 
-    //check three necessary info
-    if (!origin || !destination || !date) {
-        return new Response(JSON.stringify({ error: "Missing required query parameters" }), { status: 400 });
-    }
-
     try {
-        //find outbound
+        // Fetch outbound flights
         const outboundResponse = await axios.get("https://advanced-flights-system.replit.app/api/flights", {
             params: { origin, destination, date },
-            headers: {
-                "x-api-key": process.env.AFS_API_KEY
-            }
+            headers: { "x-api-key": process.env.AFS_API_KEY },
         });
 
         let outboundFlights = outboundResponse.data.results;
         let returnFlights = [];
 
-        //if there is returnDate(round-trip flights)
+        // If round-trip flight
         if (returnDate) {
             const returnResponse = await axios.get("https://advanced-flights-system.replit.app/api/flights", {
                 params: { origin: destination, destination: origin, date: returnDate },
-                headers: {
-                    "x-api-key": process.env.AFS_API_KEY
-                }
+                headers: { "x-api-key": process.env.AFS_API_KEY },
             });
 
             returnFlights = returnResponse.data.results;
         }
 
-        //If ask for detail. ***Quest2***
+        // If requesting flight details
         if (flightId) {
             const findFlight = (flights) =>
                 flights.flatMap(flightGroup => flightGroup.flights || []).find(f => f.id === flightId);
 
             const foundOutboundFlight = findFlight(outboundFlights);
             const foundReturnFlight = findFlight(returnFlights);
-
             const foundFlight = foundOutboundFlight || foundReturnFlight;
 
             if (foundFlight) {
-                // find layovers
                 const parentFlightGroup = [...outboundFlights, ...returnFlights].find(group =>
                     group.flights.some(f => f.id === flightId)
                 );
@@ -98,11 +94,8 @@ export const GET = async (req) => {
                     departureTime: foundFlight.departureTime,
                     arrivalTime: foundFlight.arrivalTime,
                     duration: foundFlight.duration,
-                    layovers: layovers
-                }), {
-                    status: 200,
-                    headers: { "Content-Type": "application/json" },
-                });
+                    layovers,
+                }), { status: 200, headers: { "Content-Type": "application/json" } });
             }
 
             return new Response(JSON.stringify({ error: "Flight not found" }), { status: 404 });
@@ -110,16 +103,10 @@ export const GET = async (req) => {
 
         return new Response(JSON.stringify({
             outboundFlights,
-            returnFlights: returnDate ? returnFlights : undefined
-        }), {
-            status: 200,
-            headers: { "Content-Type": "application/json" },
-        });
+            returnFlights: returnDate ? returnFlights : undefined,
+        }), { status: 200, headers: { "Content-Type": "application/json" } });
 
     } catch (error) {
-        return new Response(JSON.stringify({ error: "Failed to fetch flights", details: error.message }), {
-            status: 500,
-            headers: { "Content-Type": "application/json" },
-        });
+        return new Response(JSON.stringify({ error: "Failed to fetch flights", details: error.message }), { status: 500 });
     }
 };

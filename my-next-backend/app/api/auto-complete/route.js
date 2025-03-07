@@ -1,3 +1,6 @@
+//As a visitor, I want to have an auto-complete dropdown to suggest
+// cities and airports as I type in the source or destination field.
+
 import axios from "axios";
 
 export const GET = async (req) => {
