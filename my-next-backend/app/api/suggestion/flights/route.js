@@ -36,8 +36,12 @@ export const POST = async (req) => {
         }
 
         // generate link
-        const departureDate = checkInDate;
-        let link = `/flights_search/flights?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(hotel.city)}&date=${departureDate}`;
+        const protocol = req.headers.get('x-forwarded-proto') || 'http';
+        const host = req.headers.get('host');
+        const baseUrl = `${protocol}://${host}`;
+
+        // generate link
+        let link = `${baseUrl}/api/hotel_search/search?city=${encodeURIComponent(hotel.city)}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`;
 
         if (return_on_checkout) {
             link += `&returnDate=${checkOutDate}`;

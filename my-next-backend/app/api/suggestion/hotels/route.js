@@ -19,7 +19,12 @@ export const POST = async (req) => {
         }
 
         // Construct the hotel search link with pre-filled inputs
-        const link = `/hotel_search/search?city=${city}&checkIn=${checkIn}&checkOut=${checkOut}`;
+        const protocol = req.headers.get('x-forwarded-proto') || 'http';
+        const host = req.headers.get('host');
+        const baseUrl = `${protocol}://${host}`;
+
+        // Construct the hotel search link with pre-filled inputs
+        const link = `${baseUrl}/api/hotel_search/search?city=${encodeURIComponent(city)}&checkIn=${checkIn}&checkOut=${checkOut}`;
 
         return new Response(JSON.stringify({ link }), { status: 200 });
 
