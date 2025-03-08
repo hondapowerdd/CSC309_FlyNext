@@ -80,4 +80,4 @@ export async function GET(req) {
 // ------------------------------------------------------------------------------------------
 // sample query
 
-// curl -X GET "http://localhost:3002/api/notifications?userId=owner_1"
+// curl -X GET "http://localhost:3002/api/notifications"

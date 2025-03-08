@@ -1,0 +1,446 @@
+{
+	"info": {
+		"_postman_id": "6fdc7c28-89f5-4b17-be4b-fc8fab98f585",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42913915"
+	},
+	"item": [
+		{
+			"name": "search hotel by check-in date, check-out date, and city, and no additional filter",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/hotel_search/search?city=Toronto&checkInDate=2025-03-10&checkOutDate=2025-03-15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"hotel_search",
+						"search"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Toronto"
+						},
+						{
+							"key": "checkInDate",
+							"value": "2025-03-10"
+						},
+						{
+							"key": "checkOutDate",
+							"value": "2025-03-15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search hotel by check-in date, check-out date, and city, also apply name filter",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/hotel_search/search?city=Toronto&checkInDate=2025-03-10&checkOutDate=2025-03-15&name=Grand%20Hotel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"hotel_search",
+						"search"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Toronto"
+						},
+						{
+							"key": "checkInDate",
+							"value": "2025-03-10"
+						},
+						{
+							"key": "checkOutDate",
+							"value": "2025-03-15"
+						},
+						{
+							"key": "name",
+							"value": "Grand%20Hotel"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search hotel by by check-in date, check-out date, and city, also apply star rating filter",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/hotel_search/search?city=Toronto&checkInDate=2025-03-10&checkOutDate=2025-03-15&starRating=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"hotel_search",
+						"search"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Toronto"
+						},
+						{
+							"key": "checkInDate",
+							"value": "2025-03-10"
+						},
+						{
+							"key": "checkOutDate",
+							"value": "2025-03-15"
+						},
+						{
+							"key": "starRating",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search hotel by check-in date, check-out date, and city, and apply price filter",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/hotel_search/search?city=Toronto&checkInDate=2025-03-10&checkOutDate=2025-03-15&minPrice=100&maxPrice=250",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"hotel_search",
+						"search"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Toronto"
+						},
+						{
+							"key": "checkInDate",
+							"value": "2025-03-10"
+						},
+						{
+							"key": "checkOutDate",
+							"value": "2025-03-15"
+						},
+						{
+							"key": "minPrice",
+							"value": "100"
+						},
+						{
+							"key": "maxPrice",
+							"value": "250"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search hotel by check-in date, check-out date, and city, and apply all filter",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/hotel_search/search?city=Toronto&checkInDate=2025-03-10&checkOutDate=2025-03-15&name=Grand&starRating=5&minPrice=100&maxPrice=300",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"hotel_search",
+						"search"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Toronto"
+						},
+						{
+							"key": "checkInDate",
+							"value": "2025-03-10"
+						},
+						{
+							"key": "checkOutDate",
+							"value": "2025-03-15"
+						},
+						{
+							"key": "name",
+							"value": "Grand"
+						},
+						{
+							"key": "starRating",
+							"value": "5"
+						},
+						{
+							"key": "minPrice",
+							"value": "100"
+						},
+						{
+							"key": "maxPrice",
+							"value": "300"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get the hotel information by hotelId",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/hotel_search/information?hotelId=hotel_1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"hotel_search",
+						"information"
+					],
+					"query": [
+						{
+							"key": "hotelId",
+							"value": "hotel_1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get the hotel room availability for each day",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/hotel_search/availability?hotelId=hotel_1&checkInDate=2025-03-10&checkOutDate=2025-03-15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"hotel_search",
+						"availability"
+					],
+					"query": [
+						{
+							"key": "hotelId",
+							"value": "hotel_1"
+						},
+						{
+							"key": "checkInDate",
+							"value": "2025-03-10"
+						},
+						{
+							"key": "checkOutDate",
+							"value": "2025-03-15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get the notification for current user",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": [
+						{
+							"key": "secret",
+							"value": "aCcEsS",
+							"type": "string"
+						},
+						{
+							"key": "payload",
+							"value": "{\n    \"uid\":\"customer_1\"\n}",
+							"type": "string"
+						},
+						{
+							"key": "isSecretBase64Encoded",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "algorithm",
+							"value": "HS256",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "headerPrefix",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "queryParamKey",
+							"value": "token",
+							"type": "string"
+						},
+						{
+							"key": "header",
+							"value": "{}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/notifications?unreadOnly=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"notifications"
+					],
+					"query": [
+						{
+							"key": "unreadOnly",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mark the notification id as read",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": [
+						{
+							"key": "secret",
+							"value": "aCcEsS",
+							"type": "string"
+						},
+						{
+							"key": "payload",
+							"value": "{\n    \"uid\":\"customer_1\"\n}",
+							"type": "string"
+						},
+						{
+							"key": "isSecretBase64Encoded",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "algorithm",
+							"value": "HS256",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "headerPrefix",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "queryParamKey",
+							"value": "token",
+							"type": "string"
+						},
+						{
+							"key": "header",
+							"value": "{}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"notificationId\": \"notif_3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/notifications/read",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"notifications",
+						"read"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
