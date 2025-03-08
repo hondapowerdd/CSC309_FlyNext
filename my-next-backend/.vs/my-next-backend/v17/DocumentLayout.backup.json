@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\book\\hotel\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\api\\book\\hotel\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\prisma\\schema.prisma||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:prisma\\schema.prisma||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\book\\flight\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\api\\book\\flight\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\book\\hotel\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\api\\book\\hotel\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\book\\checkout\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -39,10 +43,6 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:prisma\\seed.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\prisma\\schema.prisma||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:prisma\\schema.prisma||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\hotel_search\\availability\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app\\api\\hotel_search\\availability\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
@@ -68,40 +68,14 @@
               "RelativeDocumentMoniker": "app\\api\\book\\flight\\route.js",
               "ToolTip": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\book\\flight\\route.js",
               "RelativeToolTip": "app\\api\\book\\flight\\route.js",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAC8AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-03-07T19:19:45.312Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "route.js",
-              "DocumentMoniker": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\notifications\\route.js",
-              "RelativeDocumentMoniker": "app\\api\\notifications\\route.js",
-              "ToolTip": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\notifications\\route.js",
-              "RelativeToolTip": "app\\api\\notifications\\route.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-03-07T19:19:12.688Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "route.js",
-              "DocumentMoniker": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\account\\[uid]\\login\\route.js",
-              "RelativeDocumentMoniker": "app\\api\\account\\[uid]\\login\\route.js",
-              "ToolTip": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\account\\[uid]\\login\\route.js",
-              "RelativeToolTip": "app\\api\\account\\[uid]\\login\\route.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-03-07T19:17:57.076Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\account\\[uid]\\route.js",
               "RelativeDocumentMoniker": "app\\api\\account\\[uid]\\route.js",
@@ -109,12 +83,11 @@
               "RelativeToolTip": "app\\api\\account\\[uid]\\route.js",
               "ViewState": "AgIAABsAAAAAAAAAAAAAABEAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-03-07T19:17:12.413Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-07T19:17:12.413Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\suggestion\\hotels\\route.js",
               "RelativeDocumentMoniker": "app\\api\\suggestion\\hotels\\route.js",
@@ -122,12 +95,11 @@
               "RelativeToolTip": "app\\api\\suggestion\\hotels\\route.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-03-07T19:08:30.946Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-07T19:08:30.946Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\suggestion\\flights\\route.js",
               "RelativeDocumentMoniker": "app\\api\\suggestion\\flights\\route.js",
@@ -135,12 +107,11 @@
               "RelativeToolTip": "app\\api\\suggestion\\flights\\route.js",
               "ViewState": "AgIAABcAAAAAAAAAAAAqwC8AAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-03-07T19:08:25.447Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-07T19:08:25.447Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "seed.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\prisma\\seed.js",
               "RelativeDocumentMoniker": "prisma\\seed.js",
@@ -148,25 +119,24 @@
               "RelativeToolTip": "prisma\\seed.js",
               "ViewState": "AgIAAJMAAAAAAAAAAAAAANkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-03-07T18:56:42.822Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-07T18:56:42.822Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\book\\hotel\\route.js",
               "RelativeDocumentMoniker": "app\\api\\book\\hotel\\route.js",
               "ToolTip": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\book\\hotel\\route.js",
               "RelativeToolTip": "app\\api\\book\\hotel\\route.js",
-              "ViewState": "AgIAAF8AAAAAAAAAAAAAAHwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAAAHcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-03-07T06:20:17.123Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\book\\checkout\\route.js",
               "RelativeDocumentMoniker": "app\\api\\book\\checkout\\route.js",
@@ -174,21 +144,44 @@
               "RelativeToolTip": "app\\api\\book\\checkout\\route.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-03-07T06:26:51.721Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-07T06:26:51.721Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 0,
               "Title": "schema.prisma",
               "DocumentMoniker": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\prisma\\schema.prisma",
               "RelativeDocumentMoniker": "prisma\\schema.prisma",
               "ToolTip": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\prisma\\schema.prisma",
               "RelativeToolTip": "prisma\\schema.prisma",
-              "ViewState": "AgIAAJ0AAAAAAAAAAAAgwM8AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAgwJwAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-03-07T06:49:23.923Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "route.js",
+              "DocumentMoniker": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\account\\[uid]\\login\\route.js",
+              "RelativeDocumentMoniker": "app\\api\\account\\[uid]\\login\\route.js",
+              "ToolTip": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\account\\[uid]\\login\\route.js",
+              "RelativeToolTip": "app\\api\\account\\[uid]\\login\\route.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-03-07T19:17:57.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "route.js",
+              "DocumentMoniker": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\notifications\\route.js",
+              "RelativeDocumentMoniker": "app\\api\\notifications\\route.js",
+              "ToolTip": "C:\\Users\\Kenson\\Desktop\\csc309\\CSC309_FlyNext\\my-next-backend\\app\\api\\notifications\\route.js",
+              "RelativeToolTip": "app\\api\\notifications\\route.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-03-07T19:19:12.688Z"
             },
             {
               "$type": "Document",

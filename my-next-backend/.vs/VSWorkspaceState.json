@@ -4,11 +4,13 @@
     "\\app",
     "\\app\\api",
     "\\app\\api\\book",
-    "\\app\\api\\book\\flight",
-    "\\app\\api\\book\\hotel",
-    "\\app\\api\\book\\validate_card",
-    "\\prisma"
+    "\\app\\api\\book\\checkout",
+    "\\app\\api\\hotel_search",
+    "\\app\\api\\hotel_search\\search",
+    "\\app\\api\\suggestion",
+    "\\app\\api\\suggestion\\flights",
+    "\\app\\api\\suggestion\\hotels"
   ],
-  "SelectedNode": "\\prisma\\schema.prisma",
+  "SelectedNode": "\\tsconfig.json",
   "PreviewInSolutionExplorer": false
 }
