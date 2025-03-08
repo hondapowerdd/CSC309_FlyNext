@@ -52,7 +52,7 @@ export async function verify(request) {
         if (payload) return {"accessToken": payload};
     }
 
-    return { "refreshToken": verifyRefreshToken((await cookies()).get("refreshToken")["value"]) };
+    return { "refreshToken": verifyRefreshToken((await cookies()).get("refreshToken")?.value) };
 }
 
 export function updateTokens(uid) {
