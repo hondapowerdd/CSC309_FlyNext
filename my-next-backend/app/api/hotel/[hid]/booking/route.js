@@ -70,7 +70,6 @@ export async function GET(request, { params }) {
         if (roomTypes) {
             roomTypes = roomTypes.split(',');
 
-            console.log(roomTypes);
             bookings = bookings.filter(booking => (booking.room && roomTypes.includes(booking.room.type)));
         } 
     }
@@ -78,7 +77,7 @@ export async function GET(request, { params }) {
     return NextResponse.json({bookings: bookings, tokenUpdates: tokenType==="refresh"? updateTokens(uid):null});
 }
 
-export async function DELETE(request, { params }) {
+export async function PATCH(request, { params }) {
     // Delete some bookings
 
     const { uid, tokenType } = await resolveTokens(request);
@@ -122,10 +121,11 @@ export async function DELETE(request, { params }) {
             where: {
                 id: { in: bookingIds }
             }
-          });
-        await database.Booking.deleteMany({
+        });
+        await database.Booking.updateMany({
             where: {
-                id: { in: bookingIds }
+                id: { in: bookingIds },
+                data: { status: "CANCELED" }
             }
         });
         for (const booking of bookingsToDelete) {
