@@ -48,7 +48,7 @@ export async function verify(request) {
 
     if (authorization) {
         const payload = verifyAccessToken(authorization.replace("Bearer ", ""));
-        
+
         if (payload) return {"accessToken": payload};
     }
 

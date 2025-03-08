@@ -23,16 +23,21 @@ export async function GET(req) {
         const { uid, tokenType } = await resolveTokens(req);
 
         // log the tokenUid
-        console.log("uid: ", uid);
-        return NextResponse.json({ error: "Missing userId" }, { status: 400 });
+        // console.log("uid: ", uid);
+        // console.log("tokenType: ", tokenType);
+        // return NextResponse.json({ uid });
+
+        // ---------------------------------------------------------------------
 
         // use tokenUid to find the userId
         // const uid = tokenUid;
-        const userId = await prisma.user.findUnique({
+        const userid = await prisma.user.findUnique({
             where: { uid },
             select: { id: true },
         });
 
+        const userId = userid.id;
+        // console.log("userId: ", userId);
 
         const { searchParams } = new URL(req.url);
         // const userId = searchParams.get("userId");
