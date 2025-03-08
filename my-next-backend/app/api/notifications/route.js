@@ -9,12 +9,32 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
+import { resolveTokens, updateTokens } from "@/auth/token";
+
 const prisma = new PrismaClient();
 
 export async function GET(req) {
     try {
+
+        // const resolvedToken = await resolveTokens(req);
+        // const tokenType = resolvedToken["tokenType"];
+        // const tokenUid = resolvedToken["uid"];
+
+        const { uid, tokenType } = await resolveTokens(req);
+
+        // log the tokenUid
+        console.log("uid: ", uid);
+
+        // use tokenUid to find the userId
+        // const uid = tokenUid;
+        const userId = await prisma.user.findUnique({
+            where: { uid },
+            select: { id: true },
+        });
+
+
         const { searchParams } = new URL(req.url);
-        const userId = searchParams.get("userId");
+        // const userId = searchParams.get("userId");
         const unreadOnly = searchParams.get("unreadOnly") === "true"; // Only unread notifications
         // const type = searchParams.get("type"); // Filter by type
 
@@ -37,7 +57,13 @@ export async function GET(req) {
             orderBy: { createdAt: "desc" },
         });
 
-        return NextResponse.json(notifications);
+        // return NextResponse.json(notifications);
+
+        return NextResponse.json({
+            notifications,
+            tokenUpdates: tokenType==="refresh"? updateTokens(uid):null
+        });
+
     } catch (error) {
         console.error("Error fetching notifications:", error);
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
@@ -49,4 +75,3 @@ export async function GET(req) {
 // sample query
 
 // curl -X GET "http://localhost:3002/api/notifications?userId=owner_1"
-//  curl -X GET "http://localhost:3002/api/notifications?userId=owner_1&unreadOnly=true"
