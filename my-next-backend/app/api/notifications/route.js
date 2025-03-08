@@ -16,7 +16,7 @@ export async function GET(req) {
         const { searchParams } = new URL(req.url);
         const userId = searchParams.get("userId");
         const unreadOnly = searchParams.get("unreadOnly") === "true"; // Only unread notifications
-        const type = searchParams.get("type"); // Filter by type
+        // const type = searchParams.get("type"); // Filter by type
 
         if (!userId) {
             return NextResponse.json({ error: "Missing userId" }, { status: 400 });
@@ -28,9 +28,9 @@ export async function GET(req) {
             whereClause.isRead = false;
         }
 
-        if (type) {
-            whereClause.type = type; // Filter by notification type
-        }
+        // if (type) {
+        //     whereClause.type = type; // Filter by notification type
+        // }
 
         const notifications = await prisma.notification.findMany({
             where: whereClause,
@@ -44,3 +44,9 @@ export async function GET(req) {
     }
 }
 
+
+// ------------------------------------------------------------------------------------------
+// sample query
+
+// curl -X GET "http://localhost:3002/api/notifications?userId=owner_1"
+//  curl -X GET "http://localhost:3002/api/notifications?userId=owner_1&unreadOnly=true"
