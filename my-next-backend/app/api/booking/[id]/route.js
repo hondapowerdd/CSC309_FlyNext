@@ -13,6 +13,13 @@ export async function PATCH(request, { params }) {
 
     let booking;
     try { // Cancel booking
+        booking = await database.Booking.findUnique({
+            where: {
+                id,
+                user: { uid: tokenUid }
+            },
+        });
+        if (booking.status === "CANCELED") return NextResponse.json({ error: "Booking already cancelled" }, { status: 400 });
         booking = await database.Booking.update({
             where: {
                 id,
@@ -21,25 +28,24 @@ export async function PATCH(request, { params }) {
             data: { status: "CANCELED" }
         })
     } catch (e) {
-        return NextResponse.json({ error: "Cancellation failed" }, { status: 500 });
+        return NextResponse.json({ error: e.message }, { status: 500 });
     }
 
     try { // Release availability
-        const booking = await database.roomAvailability.updateMany({
+        await database.roomAvailability.updateMany({
             where: {
                 roomId: booking.roomId,
                 date: {
                     gte: booking.checkInDate,
                     lt: booking.checkOutDate
-                },
-                user: { uid: tokenUid }
+                }
              },
             data: {
                 availability: { increment: 1 },
             },
-        })
+        });
     } catch (e) {
-        return NextResponse.json({ error: "Some error occured, please contact us via ..." }, { status: 500 });
+        return NextResponse.json({ error: "Failed to update availability info" }, { status: 500 });
     }
     
     return NextResponse.json({

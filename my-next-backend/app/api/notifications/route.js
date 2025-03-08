@@ -24,6 +24,7 @@ export async function GET(req) {
 
         // log the tokenUid
         console.log("uid: ", uid);
+        return NextResponse.json({ error: "Missing userId" }, { status: 400 });
 
         // use tokenUid to find the userId
         // const uid = tokenUid;
