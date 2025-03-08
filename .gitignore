@@ -1,2 +1,4 @@
 
 my-next-backend/prisma/dev.db
+my-next-backend/prisma/migrations/20250306025240_fit_for_hotel_management/migration.sql
+/my-next-backend/prisma/migrations
