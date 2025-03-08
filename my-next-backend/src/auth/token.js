@@ -57,7 +57,7 @@ export async function verify(request) {
 
 export function updateTokens(uid) {
     // Return a new token pack if the refreshToken contains a valid uid, else null
-    return uid? generateTokenPack({uid: uid}):null;
+    return uid? generateTokenPack({ uid: uid }):null;
 }
 
 export async function resolveTokens(request) {

@@ -7,9 +7,9 @@ import { join } from "path";
 export async function PATCH(request, { params }) {
     // Profile update
 
-    const resolvedToken = await resolveTokens(request);
-    const tokenType = resolvedToken["tokenType"];
-    const tokenUid = resolvedToken["uid"];
+    const { tokenType, tokenUid } = await resolveTokens(request);
+    // const tokenType = resolvedToken["tokenType"];
+    // const tokenUid = resolvedToken["uid"];
 
     const { uid } = await params;
 
