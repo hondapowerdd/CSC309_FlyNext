@@ -78,7 +78,7 @@ export async function GET(request, { params }) {
 }
 
 export async function PATCH(request, { params }) {
-    // Delete some bookings
+    // Cancel some bookings
 
     const { uid, tokenType } = await resolveTokens(request);
 

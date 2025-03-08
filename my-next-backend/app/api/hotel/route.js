@@ -61,9 +61,15 @@ export async function POST(request) {
 
     let hotelId;
     try {
+        await database.User.update(
+            {
+                where: { uid },
+                data: { role: "HOTEL_OWNER" }
+            }
+        );
         hotelId = (await database.Hotel.create({ data: hotel }))["id"];
     } catch (e) {
-        return NextResponse.json({ error: e.message }, { status: 400 });
+        return NextResponse.json({ error: "Hotel creation failed" }, { status: 400 });
     }
 
     // Save hotel images

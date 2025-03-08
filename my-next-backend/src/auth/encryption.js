@@ -1,11 +1,14 @@
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
+const bcrypt = require("bcrypt");
 
-export function encrypt(object) {
+function encrypt(object) {
     // Hash the password
     return bcrypt.hashSync(object, parseInt(process.env.BCRYPT_ROUNDS));
 }
 
-export function verifyEncrypted(object, encrypted) {
+function verifyEncrypted(object, encrypted) {
     // Compare the password
     return bcrypt.compareSync(object, encrypted);
 }
+
+module.exports = { encrypt, verifyEncrypted };

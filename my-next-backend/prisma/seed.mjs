@@ -1,6 +1,6 @@
-// const { PrismaClient } = require("@prisma/client");
 import { PrismaClient } from "@prisma/client";
-import { encrypt } from "../src/auth/encryption.js";
+import encryption from "../src/auth/encryption.js";
+const { encrypt } = encryption;
 
 const prisma = new PrismaClient();
 
