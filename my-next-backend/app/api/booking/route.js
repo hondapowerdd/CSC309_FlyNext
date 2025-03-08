@@ -22,18 +22,20 @@ export async function GET(request) {
             where: { uid },
             include: {
                 itineraries: {
-                    includ: {
-                        bookings: {
-                            room: true,
-                            hotel: true,
-                        },
+                    include: {
                         invoices: true
+                    }
+                },
+                bookings: {
+                    include: {
+                        room: true,
+                        hotel: true,
                     }
                 }
             }
         });
     } catch (e) {
-        return NextResponse.json({ error: "Database issue" }, { status: 500 });
+        return NextResponse.json({ error: e.message }, { status: 500 });
     }
     
     if (!user) return NextResponse.json(
@@ -43,22 +45,25 @@ export async function GET(request) {
 
     let afsFailed = false
     // Retrieve flight info
-    for (const booking of user.bookings) {
-        if (booking.type === "FLIGHT") {
-            try {
-                booking["flight"] = await axios.get(apiUrl, {
-                    params: {
-                        lastName: user.lastName,
-                        bookingReference: booking.flightReference
-                    },
-                    headers: { "x-api-key": process.env.AFS_API_KEY }
-                });
-            } catch (e) { afsFailed = true }
-        }
-    }
+    Promise.all(user.itineraries.map((itinerary => {
+        itinerary.bookings.map(booking => {
+            if (booking.type === "FLIGHT") {
+                try {
+                    booking["flight"] = axios.get(apiUrl, {
+                        params: {
+                            lastName: user.lastName,
+                            bookingReference: booking.flightReference
+                        },
+                        headers: { "x-api-key": process.env.AFS_API_KEY }
+                    });
+                } catch (e) { afsFailed = true }
+            }
+        })
+    })));
     
     return NextResponse.json({
         bookings: user.bookings,
+        itineraries: user.itineraries,
         afsFailed,
         tokenUpdates: tokenType==="refresh"? updateTokens(uid):null
     });

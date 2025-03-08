@@ -32,7 +32,7 @@ const _verfiyToken = (token, secret) => {
     } catch (e) { return null; }
 }
 
-export function verifyACCESSToken(token) {
+export function verifyAccessToken(token) {
     return _verfiyToken(token, process.env.JWT_SECRET_ACCESS);
 }
 
@@ -47,7 +47,7 @@ export async function verify(request) {
     const authorization = request.headers.get("authorization");
 
     if (authorization) {
-        const payload = verifyACCESSToken(authorization.replace("Bearer ", ""));
+        const payload = verifyAccessToken(authorization.replace("Bearer ", ""));
 
         if (payload) return {"accessToken": payload};
     }

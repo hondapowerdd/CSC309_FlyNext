@@ -125,8 +125,8 @@ export async function PATCH(request, { params }) {
         await database.Booking.updateMany({
             where: {
                 id: { in: bookingIds },
-                data: { status: "CANCELED" }
-            }
+            },
+            data: { status: "CANCELED" }
         });
         for (const booking of bookingsToDelete) {
             await database.RoomAvailability.updateMany({
@@ -142,7 +142,7 @@ export async function PATCH(request, { params }) {
         }
     }
     catch (e) {
-        return NextResponse.json({ error: "Database issue" }, { status: 500 });
+        return NextResponse.json({ error: e.message }, { status: 500 });
     }
 
     return NextResponse.json({message: "Booking(s) deleted", tokenUpdates: tokenType==="refresh"? updateTokens(uid):null});

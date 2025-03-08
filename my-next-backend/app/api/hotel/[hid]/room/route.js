@@ -119,7 +119,6 @@ export async function POST(request, { params }) {
         }
 
         for (let roomImgName of (await Promise.all(roomImgNames))) {
-            console.log(roomImgName);
             await database.roomImage.create({ data: {
                 roomId: roomId,
                 imageUrl: roomImgName
@@ -183,7 +182,7 @@ export async function PATCH(request, { params }) {
         });
     }
     catch (e) {
-        return NextResponse.json({ error: e.message }, { status: 500 });
+        return NextResponse.json({ error: "Database issue" }, { status: 500 });
     }
 
     return NextResponse.json({
