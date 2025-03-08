@@ -1,0 +1,201 @@
+{
+    "info": {
+        "name": "My API Collection",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Flight Search - Basic",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/flights_search/flights?origin=Toronto&destination=Zurich&date=2024-11-17",
+                    "protocol": "http",
+                    "host": [ "localhost" ],
+                    "port": "3000",
+                    "path": [ "api", "flights_search", "flights" ],
+                    "query": [
+                        {
+                            "key": "origin",
+                            "value": "Toronto"
+                        },
+                        {
+                            "key": "destination",
+                            "value": "Zurich"
+                        },
+                        {
+                            "key": "date",
+                            "value": "2024-11-17"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Flight Search - With ID",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/flights_search/flights?origin=Toronto&destination=Zurich&date=2024-11-17&id=bd7ee4df-004d-4c95-abda-633d276a5842",
+                    "protocol": "http",
+                    "host": [ "localhost" ],
+                    "port": "3000",
+                    "path": [ "api", "flights_search", "flights" ],
+                    "query": [
+                        {
+                            "key": "origin",
+                            "value": "Toronto"
+                        },
+                        {
+                            "key": "destination",
+                            "value": "Zurich"
+                        },
+                        {
+                            "key": "date",
+                            "value": "2024-11-17"
+                        },
+                        {
+                            "key": "id",
+                            "value": "bd7ee4df-004d-4c95-abda-633d276a5842"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Flight Search - With Return Date",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/flights_search/flights?origin=Toronto&destination=Zurich&date=2024-11-17&returnDate=2024-11-18",
+                    "protocol": "http",
+                    "host": [ "localhost" ],
+                    "port": "3000",
+                    "path": [ "api", "flights_search", "flights" ],
+                    "query": [
+                        {
+                            "key": "origin",
+                            "value": "Toronto"
+                        },
+                        {
+                            "key": "destination",
+                            "value": "Zurich"
+                        },
+                        {
+                            "key": "date",
+                            "value": "2024-11-17"
+                        },
+                        {
+                            "key": "returnDate",
+                            "value": "2024-11-18"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Auto-complete",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/auto-complete?query=Winnipeg",
+                    "protocol": "http",
+                    "host": [ "localhost" ],
+                    "port": "3000",
+                    "path": [ "api", "auto-complete" ],
+                    "query": [
+                        {
+                            "key": "query",
+                            "value": "Winnipeg"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Flight Booking",
+            "request": {
+                "method": "POST",
+                "url": "http://localhost:3000/api/book/flight",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"email\": \"customer@example.com\",\n  \"passportNumber\": \"123239934\",\n  \"flightId\": \"ee372818-cd33-4886-9088-d601947777a2\",\n  \"itineraryId\": \"itinerary_1\"\n}"
+                }
+            }
+        },
+        {
+            "name": "Hotel Booking",
+            "request": {
+                "method": "POST",
+                "url": "http://localhost:3000/api/book/hotel",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"userId\": \"customer_1\",\n  \"hotelId\": \"hotel_1\",\n  \"roomId\": \"room_1\",\n  \"checkInDate\": \"2020-12-11\",\n  \"checkOutDate\": \"2020-12-14\"\n}"
+                }
+            }
+        },
+        {
+            "name": "Checkout",
+            "request": {
+                "method": "POST",
+                "url": "http://localhost:3000/api/book/checkout",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"userId\": \"customer_1\",\n  \"cardNumber\": \"4111111111111111\",\n  \"expiryDate\": \"12/25\",\n  \"cvv\": \"123\",\n  \"totalAmount\": 100,\n  \"itineraryId\": \"itinerary_1\"\n}"
+                }
+            }
+        },
+        {
+            "name": "Flight Suggestions",
+            "request": {
+                "method": "POST",
+                "url": "http://localhost:3000/api/suggestion/flights",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"origin\": \"Toronto\",\n  \"return_on_checkout\": true,\n  \"hotelId\": \"hotel_1\",\n  \"checkInDate\": \"2024-11-20\",\n  \"checkOutDate\": \"2024-11-25\"\n}"
+                }
+            }
+        },
+        {
+            "name": "Hotel Suggestions",
+            "request": {
+                "method": "POST",
+                "url": "http://localhost:3000/api/suggestion/hotels",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"city\": \"New York\",\n  \"checkIn\": \"2024-11-20\",\n  \"checkOut\": \"2024-11-25\"\n}"
+                }
+            }
+        }
+    ]
+}

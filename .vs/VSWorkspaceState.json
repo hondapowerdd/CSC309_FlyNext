@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\my-next-backend",
+    "\\my-next-backend\\app",
+    "\\my-next-backend\\app\\api",
+    "\\my-next-backend\\app\\api\\account",
+    "\\my-next-backend\\app\\api\\book",
+    "\\my-next-backend\\app\\api\\book\\checkout",
+    "\\my-next-backend\\src"
+  ],
+  "SelectedNode": "\\my-next-backend\\app\\api\\book\\checkout\\route.js",
+  "PreviewInSolutionExplorer": false
+}

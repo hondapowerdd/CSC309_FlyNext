@@ -1,0 +1,181 @@
+openapi: 3.0.0
+info:
+  title: My API Collection
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/flights_search/flights:
+    get:
+      tags:
+        - default
+      summary: Flight Search - With Return Date
+      parameters:
+        - name: origin
+          in: query
+          schema:
+            type: string
+          example: Toronto
+        - name: destination
+          in: query
+          schema:
+            type: string
+          example: Zurich
+        - name: date
+          in: query
+          schema:
+            type: string
+          example: '2024-11-17'
+        - name: returnDate
+          in: query
+          schema:
+            type: string
+          example: '2024-11-18'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/auto-complete:
+    get:
+      tags:
+        - default
+      summary: Auto-complete
+      parameters:
+        - name: query
+          in: query
+          schema:
+            type: string
+          example: Winnipeg
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/book/flight:
+    post:
+      tags:
+        - default
+      summary: Flight Booking
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+              example: >-
+                "{\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n 
+                \"email\": \"customer@example.com\",\n  \"passportNumber\":
+                \"123239934\",\n  \"flightId\":
+                \"ee372818-cd33-4886-9088-d601947777a2\",\n  \"itineraryId\":
+                \"itinerary_1\"\n}"
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/book/hotel:
+    post:
+      tags:
+        - default
+      summary: Hotel Booking
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+              example: >-
+                "{\n  \"userId\": \"customer_1\",\n  \"hotelId\":
+                \"hotel_1\",\n  \"roomId\": \"room_1\",\n  \"checkInDate\":
+                \"2020-12-11\",\n  \"checkOutDate\": \"2020-12-14\"\n}"
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/book/checkout:
+    post:
+      tags:
+        - default
+      summary: Checkout
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+              example: >-
+                "{\n  \"userId\": \"customer_1\",\n  \"cardNumber\":
+                \"4111111111111111\",\n  \"expiryDate\": \"12/25\",\n  \"cvv\":
+                \"123\",\n  \"totalAmount\": 100,\n  \"itineraryId\":
+                \"itinerary_1\"\n}"
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/suggestion/flights:
+    post:
+      tags:
+        - default
+      summary: Flight Suggestions
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+              example: >-
+                "{\n  \"origin\": \"Toronto\",\n  \"return_on_checkout\":
+                true,\n  \"hotelId\": \"hotel_1\",\n  \"checkInDate\":
+                \"2024-11-20\",\n  \"checkOutDate\": \"2024-11-25\"\n}"
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/suggestion/hotels:
+    post:
+      tags:
+        - default
+      summary: Hotel Suggestions
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+              example: >-
+                "{\n  \"city\": \"New York\",\n  \"checkIn\": \"2024-11-20\",\n 
+                \"checkOut\": \"2024-11-25\"\n}"
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
