@@ -1,6 +1,5 @@
 // mark notifications as read
 
-
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
@@ -25,3 +24,13 @@ export async function POST(req) {
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }
 }
+
+// ------------------------------------------------------------------------------------------
+// sample query
+// williammeng@HONDA-Book-Pro ~ % curl -X POST "http://localhost:3002/api/notifications/read" \
+//      -H "Content-Type: application/json" \
+//      -d '{"notificationId": "notif_1"}'
+
+// curl -X POST "http://localhost:3002/api/notifications/read" \
+//      -H "Content-Type: application/json" \
+//      -d '{"notificationId": "notif_2"}'
