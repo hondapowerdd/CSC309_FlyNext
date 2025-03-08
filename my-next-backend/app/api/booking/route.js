@@ -20,10 +20,17 @@ export async function GET(request) {
     try { // Retrieve user bookings
         user = await database.User.findUnique({
             where: { uid },
-            include: { bookings: {
-                room: true,
-                hotel: true
-            } }
+            include: {
+                itineraries: {
+                    includ: {
+                        bookings: {
+                            room: true,
+                            hotel: true,
+                        },
+                        invoices: true
+                    }
+                }
+            }
         });
     } catch (e) {
         return NextResponse.json({ error: "Database issue" }, { status: 500 });

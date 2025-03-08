@@ -8,7 +8,9 @@ import { nanoid } from 'nanoid';
 export async function POST(request) {
     // User Registration
   
-    const { email, password, firstName, lastName, phoneNumber } = (await request.json())["registration"];
+    const registration = (await request.json())["registration"];
+    if (!registration) return NextResponse.json({ error: 'Invalid registration information' }, { status: 400 });
+    const { email, password, firstName, lastName, phoneNumber } = registration;
 
     let user = {
         firstName: firstName,

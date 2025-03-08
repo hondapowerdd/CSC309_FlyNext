@@ -1,13 +1,13 @@
 import axios from "axios";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-//import { resolveTokens, updateTokens } from "@/auth/token";
+import { resolveTokens, updateTokens } from "@/auth/token";
 
 export const POST = async (req) => {
     try {
-       // const resolvedToken = await resolveTokens(req);
-        //const tokenType = resolvedToken["tokenType"];
-        //const tokenUid = resolvedToken["uid"];
+        const resolvedToken = await resolveTokens(req);
+        const tokenType = resolvedToken["tokenType"];
+        const tokenUid = resolvedToken["uid"];
 
         const { firstName, lastName, email, passportNumber, flightId, itineraryId } = await req.json();
 
@@ -18,6 +18,7 @@ export const POST = async (req) => {
         const user = await prisma.user.findFirst({
             where: { firstName, lastName, email }
         });
+
 
         if (!user) {
             return new Response(JSON.stringify({ error: "User not found" }), { status: 404 });
@@ -53,7 +54,7 @@ export const POST = async (req) => {
         return new Response(JSON.stringify({
             message: "Flight booking successful",
             flightBooking: response.data,
-            //tokenUpdates: tokenType === "refresh" ? updateTokens(tokenUid) : null
+            tokenUpdates: tokenType === "refresh" ? updateTokens(tokenUid) : null
         }), {
             status: 200,
             headers: { "Content-Type": "application/json" },

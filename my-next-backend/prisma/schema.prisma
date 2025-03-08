@@ -20,16 +20,15 @@ datasource db {
 }
 
 model User {
-  id          String  @id @default(uuid())
-  uid         String  @unique
-  firstName   String?
-  lastName    String?
-  email       String  @unique
-  password    String
-  profilePic  String?
-  phoneNumber String?
+  id             String  @id @default(uuid())
+  uid            String  @unique
+  firstName      String?
+  lastName       String?
+  email          String  @unique
+  password       String
+  profilePic     String?
+  phoneNumber    String?
   passportNumber String? @unique
-
 
   role String @default("USER")
   // role contains: USER, HOTEL_OWNER, VISITOR
@@ -64,7 +63,7 @@ model UserPreferences {
 
 model Hotel {
   id         String   @id @default(uuid())
-  hid        String  @unique
+  hid        String   @unique
   name       String
   logo       String?
   address    String   @default("UNKNOWN")
@@ -100,20 +99,21 @@ model Room {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  hotelId  String
-  hotel    Hotel       @relation(fields: [hotelId], references: [id])
-  images   RoomImage[]
-  bookings Booking[]
+  hotelId          String
+  hotel            Hotel              @relation(fields: [hotelId], references: [id])
+  images           RoomImage[]
+  bookings         Booking[]
   roomAvailability RoomAvailability[]
 
   @@unique([hotelId, name, type])
 }
 
 model RoomAvailability {
-  roomId String
-  date DateTime
+  roomId       String
+  date         DateTime
   availability Int
-  room Room @relation(fields: [roomId], references: [id])
+  room         Room     @relation(fields: [roomId], references: [id])
+
   @@id([roomId, date])
 }
 
@@ -133,7 +133,7 @@ model Booking {
   status String @default("CONFIRMED")
   // status contains: CONFIRMED, CANCELED, PENDING
 
-   type String?  @default("HOTEL")
+  type String? @default("HOTEL")
   // type contains: HOTEL, FLIGHT
 
   createdAt DateTime @default(now())
@@ -174,21 +174,24 @@ model Payment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId      String
-  user        User      @relation(fields: [userId], references: [id])
-  itineraryId String
-  itinerary   Itinerary @relation(fields: [itineraryId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  itineraryId String?
+  itinerary   Itinerary? @relation(fields: [itineraryId], references: [id])
 }
 
 model Invoice {
   id        String   @id @default(uuid())
   pdfUrl    String
   createdAt DateTime @default(now())
+  amount    Float
 
-  userId      String
-  user        User      @relation(fields: [userId], references: [id])
-  itineraryId String
-  itinerary   Itinerary @relation(fields: [itineraryId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  itineraryId String?
+  itinerary   Itinerary? @relation(fields: [itineraryId], references: [id])
 }
 
 model Notification {
