@@ -33,11 +33,11 @@ const _verfiyToken = (token, secret) => {
 }
 
 export function verifyACCESSToken(token) {
-    return _verfiyToken(token, process.env.JWT_SECRET_access);
+    return _verfiyToken(token, process.env.JWT_SECRET_ACCESS);
 }
 
 export function verifyRefreshToken(token) {
-    return _verfiyToken(token, process.env.JWT_SECRET_refresh);
+    return _verfiyToken(token, process.env.JWT_SECRET_REFRESH);
 }
 
 export async function verify(request) {

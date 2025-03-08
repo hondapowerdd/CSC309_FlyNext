@@ -24,6 +24,10 @@ export async function GET(req) {
 
         // log the tokenUid
         console.log("uid: ", uid);
+        console.log("tokenType: ", tokenType);
+        return NextResponse.json({ uid });
+
+        // ---------------------------------------------------------------------
 
         // use tokenUid to find the userId
         // const uid = tokenUid;
