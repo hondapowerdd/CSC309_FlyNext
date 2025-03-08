@@ -1,4 +1,6 @@
-const { PrismaClient } = require("@prisma/client");
+// const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
+import { encrypt } from "../src/auth/encryption.js";
 
 const prisma = new PrismaClient();
 
@@ -36,7 +38,7 @@ async function main() {
                 firstName: "John",
                 lastName: "Doe",
                 email: "owner@example.com",
-                password: "hashed_password",
+                password: encrypt("123456"),
                 role: "ADMIN",
             },
         });
@@ -51,7 +53,7 @@ async function main() {
                 firstName: "Jane",
                 lastName: "Smith",
                 email: "customer@example.com",
-                password: "hashed_password",
+                password: encrypt("123456"),
                 role: "CUSTOMER",
             },
         });
@@ -66,7 +68,7 @@ async function main() {
                 firstName: "Alice",
                 lastName: "Johnson",
                 email: "vistor@example.com",
-                password: "hashed_password",
+                password: encrypt("123456"),
                 role: "VISITOR",
             },
         });
