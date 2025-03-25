@@ -668,7 +668,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"userId\": \"customer_1\",\n  \"cardNumber\": \"4111111111111111\",\n  \"expiryDate\": \"12/25\",\n  \"cvv\": \"123\",\n  \"totalAmount\": 100,\n  \"itineraryId\": \"itinerary_1\"\n}"
+							"raw": "{\n  \"userId\": \"customer_1\",\n  \"cardNumber\": \"4111111111111111\",\n  \"expiryDate\": \"12/25\",\n  \"cvv\": \"123\",\n  \"totalAmount\": 100,\n  \"itineraryId\": \"itinerary_1\",\n  \"bookingIds\": [\"booking_1\"]\n}"
 						},
 						"url": "http://localhost:3000/api/book/checkout"
 					},

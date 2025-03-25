@@ -47,6 +47,7 @@ export const POST = async (req) => {
                 userId: user.id,
                 itineraryId: itineraryId,
                 flightReference: bookingReference,
+                status: "PENDING",
                 type: "FLIGHT"
             }
         });

@@ -68,7 +68,7 @@ export const POST = async (req) => {
                 roomId,
                 checkInDate: checkIn,
                 checkOutDate: checkOut,
-                status: "CONFIRMED",
+                status: "PENDING",
             }
         });
 
