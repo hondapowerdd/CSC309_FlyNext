@@ -1,7 +1,7 @@
 export default function Navbar() {
     return (
         <nav className="bg-blue-900 text-white flex justify-between items-center px-6 py-4">
-            <div className="text-xl font-bold">Booking.com</div>
+            <div className="text-xl font-bold">BookShit.com</div>
             <div className="flex gap-4">
                 <button>CAD</button>
                 <button>🌐</button>
