@@ -11,14 +11,7 @@ interface AuthContextInterface {
 	setRefreshToken: SetState<string | null>;
 }
 
-export const AuthContext = createContext<AuthContextInterface>({
-	uid: null,
-	setUid: () => {},
-	accessToken: null,
-	setAccessToken: () => {},
-	refreshToken: null,
-	setRefreshToken: () => {},
-});
+export const AuthContext = createContext<AuthContextInterface | null>(null);
 
 interface AuthProviderProps {
 	children: ReactNode;
