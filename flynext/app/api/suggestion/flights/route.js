@@ -3,8 +3,7 @@
 // Both suggestions must have a link to take me to the main hotel / flight
 // search page with pre - filled inputs, while preserving my current, in progress order.
 
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import prisma from "@/db/database";
 
 export const POST = async (req) => {
     try {

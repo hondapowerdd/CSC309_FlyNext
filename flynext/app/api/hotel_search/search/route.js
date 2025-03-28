@@ -4,10 +4,9 @@
 // information, starting price, and a location pinpoint on a map. The results
 // should only reflect available rooms.
 
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
+import prisma from "@/db/database";
 
 export async function GET(req) {
     try {

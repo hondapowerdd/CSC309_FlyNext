@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import prisma from "@/db/database";
 import { validateCardNumber, validateExpiryDate, validateCVV } from "../validate_card/validate_card";
 import { resolveTokens, updateTokens } from "@/auth/token";
 

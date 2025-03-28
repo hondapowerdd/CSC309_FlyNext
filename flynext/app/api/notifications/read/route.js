@@ -1,11 +1,10 @@
 // mark notifications as read
 
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 import { resolveTokens, updateTokens } from "@/auth/token";
 
-const prisma = new PrismaClient();
+import prisma from "@/db/database";
 
 export async function POST(req) {
     try {

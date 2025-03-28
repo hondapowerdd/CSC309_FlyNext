@@ -1,8 +1,6 @@
 // As a visitor, I want to view detailed hotel information, including room types, amenities, and pricing.
 
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "@/db/database";
 
 export async function GET(req, res) {
     try {

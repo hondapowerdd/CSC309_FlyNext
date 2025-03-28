@@ -6,12 +6,11 @@
 // 3. As a user or hotel owner, I want to see the number of unread notifications as a badge and have it updated as I read them.
 //
 
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 import { resolveTokens, updateTokens } from "@/auth/token";
 
-const prisma = new PrismaClient();
+import prisma from "@/db/database";
 
 export async function GET(req) {
     try {
