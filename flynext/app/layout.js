@@ -1,8 +1,7 @@
 "use client"; // Convert layout.js into a client component
 
 import "./globals.css";
-
-import { useEffect } from "react";
+import Header from "./components/Header";
 
 
 // export default function RootLayout({ children }) {
@@ -14,13 +13,13 @@ import { useEffect } from "react";
 // }
 
 export default function RootLayout({ children }) {
-    useEffect(() => {
-        fetch("/grid").catch(() => {}); // Preload /grid on server start
-    }, []);
 
     return (
         <html lang="en">
-        <body>{children}</body>
+        <body>
+            <Header />
+            {children}
+        </body>
         </html>
     );
 }
