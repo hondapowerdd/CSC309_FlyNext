@@ -18,7 +18,7 @@ export default ({ close }: { close: () => void }) => {
 		if (submitDisabled !== newStatus) setSubmitDisabled(newStatus);
 	}, [email, password, phoneNumber]);
 
-	const auth = useContext(AuthContext)!;
+	const { setUid, setAccessToken, setRefreshToken } = useContext(AuthContext)!;
 
 	const submit = async (e: FormEvent) => {
 		e.preventDefault();
@@ -45,12 +45,12 @@ export default ({ close }: { close: () => void }) => {
 					return setSubmitted(true);
 				}
 				setRes(`Please carefully record the following unique identifier for future login:\n${resContent.uid}`);
-				auth.setUid(resContent.uid);
-				auth.setAccessToken(resContent.accessToken);
-				auth.setRefreshToken(resContent.refreshToken);
+				setUid(resContent.uid);
+				setAccessToken(resContent.toekens.accessToken);
+				setRefreshToken(resContent.toekens.refreshToken);
 				setSubmitted(true);
 			});
-		})
+		});
 		// .catch(e => {
 		// 	console.log(e);
 		// });
