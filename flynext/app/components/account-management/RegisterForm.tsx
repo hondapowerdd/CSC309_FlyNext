@@ -45,9 +45,14 @@ export default ({ close }: { close: () => void }) => {
 					return setSubmitted(true);
 				}
 				setRes(`Please carefully record the following unique identifier for future login:\n${resContent.uid}`);
-				setUid(resContent.uid);
-				setAccessToken(resContent.toekens.accessToken);
-				setRefreshToken(resContent.toekens.refreshToken);
+				const cookies = {
+                    uid: resContent.uid,
+                    ...resContent.tokens
+                }
+				setUid(cookies.uid);
+				setAccessToken(cookies.accessToken);
+				setRefreshToken(cookies.refreshToken);
+                document.cookie = Object.keys(cookies).map(k => `${k}=${cookies[k]};`).join("");
 				setSubmitted(true);
 			});
 		});

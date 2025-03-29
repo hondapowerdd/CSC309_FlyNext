@@ -29,9 +29,14 @@ export default ({ close }: { close: () => void }) => {
 			res.json()
 			.then(resContent => {
 				if (!res.ok) return setMessage(resContent.error);
+                const cookies = {
+                    uid,
+                    ...resContent.tokens
+                }
 				auth.setUid(uid);
-				auth.setAccessToken(resContent.tokens.accessToken);
-				auth.setRefreshToken(resContent.tokens.refreshToken);
+				auth.setAccessToken(cookies.accessToken);
+				auth.setRefreshToken(cookies.refreshToken);
+                document.cookie = Object.keys(cookies).map(k => `${k}=${cookies[k]};`).join("");
                 close();
 			});
 		})
