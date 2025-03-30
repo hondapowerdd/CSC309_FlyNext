@@ -5,25 +5,19 @@ import LoginForm from '../account-management/LoginForm';
 import AccountDropdown from '../account-management/AccountDropdown';
 import { useState, useContext } from 'react';
 import { AuthContext } from "@/frontend/contexts/auth";
-import { useRouter, usePathname } from 'next/navigation';
+import Navigator from './Navigator';
 
 export default () => {
     const { uid } = useContext(AuthContext)!;
-    const router = useRouter();
-    const pathname = usePathname();
+    
 
     const [showRegForm, setShowRegForm] = useState(false);
     const [showLogForm, setShowLogForm] = useState(false);
     const [showDropdn, setshowDropdn] = useState(false);
 
-    const getButtonClass = (targetPath: string) =>
-        pathname === targetPath
-            ? "px-4 py-1 rounded-full bg-white text-blue-900 font-semibold"
-            : "px-4 py-1 rounded-full hover:bg-white hover:text-blue-900";
-
     return (
         <>
-            <nav className="relative bg-blue-900 text-white flex justify-between items-center px-6 py-4">
+            <header className="relative bg-blue-900 text-white flex justify-between items-center px-6 py-4">
                 <div className="text-xl font-bold">FlyNext.com</div>
                 <div className="flex gap-4">
                     {
@@ -44,29 +38,9 @@ export default () => {
                         </>
                     }
                 </div>
-            </nav>
+            </header>
 
-            {/* Search type bar */}
-            <div className="bg-blue-900 text-white flex justify-center gap-4 py-2">
-                <button
-                    className={getButtonClass('/hotel')}
-                    onClick={() => router.push('/hotel')}
-                >
-                    Hotel
-                </button>
-                <button
-                    className={getButtonClass('/flight_search')}
-                    onClick={() => router.push('/flight_search')}
-                >
-                    Flights
-                </button>
-                <button
-                    className={getButtonClass('/hotel_flight')}
-                    onClick={() => router.push('/hotel_flight')}
-                >
-                    Hotel + Flights
-                </button>
-            </div>
+            <Navigator />
 
             {
                 showRegForm &&
