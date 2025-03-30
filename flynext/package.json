@@ -20,6 +20,7 @@
     "next": "15.2.0",
     "postman-to-openapi": "^1.7.3",
     "react": "^19.0.0",
+    "react-datepicker": "^8.2.1",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
