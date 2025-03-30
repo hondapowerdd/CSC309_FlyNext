@@ -2,15 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\api",
-    "\\app\\api\\book",
-    "\\app\\api\\hotel\\[hid]",
-    "\\app\\api\\hotel\\[hid]\\booking",
-    "\\app\\api\\hotel\\[hid]\\room",
-    "\\app\\api\\hotel_search",
-    "\\app\\api\\hotel_search\\availability",
-    "\\prisma"
+    "\\app\\components\\flights",
+    "\\app\\flight_search",
+    "\\app\\flight_search\\results"
   ],
-  "SelectedNode": "\\app\\api\\book\\checkout\\route.js",
+  "SelectedNode": "\\app\\page.js",
   "PreviewInSolutionExplorer": false
 }

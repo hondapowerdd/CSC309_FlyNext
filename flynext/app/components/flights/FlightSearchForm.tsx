@@ -6,17 +6,24 @@ import { useRouter } from "next/navigation";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+interface SuggestionItem {
+    type: string;
+    name: string;
+    country: string;
+    code?: string;
+}
+
 export default function FlightSearchForm() {
     const router = useRouter();
 
     const [origin, setOrigin] = useState("");
     const [destination, setDestination] = useState("");
-    const [departureDate, setDepartureDate] = useState(new Date());
-    const [returnDate, setReturnDate] = useState(new Date());
+    const [departureDate, setDepartureDate] = useState<Date | null>(new Date());
+    const [returnDate, setReturnDate] = useState<Date | null>(new Date());
     const [showSuggestionsOrigin, setShowSuggestionsOrigin] = useState(false);
     const [showSuggestionsDestination, setShowSuggestionsDestination] = useState(false);
-    const [suggestionsOrigin, setSuggestionsOrigin] = useState([]);
-    const [suggestionsDestination, setSuggestionsDestination] = useState([]);
+    const [suggestionsOrigin, setSuggestionsOrigin] = useState<SuggestionItem[]>([]);
+    const [suggestionsDestination, setSuggestionsDestination] = useState<SuggestionItem[]>([]);
     const [isRoundTrip, setIsRoundTrip] = useState(false);
 
     useEffect(() => {
@@ -44,9 +51,10 @@ export default function FlightSearchForm() {
     }, [destination]);
 
     const handleSearch = () => {
+        if (!departureDate) return;
         const base = "/flight_search/results";
         const query = `?origin=${origin}&destination=${destination}&date=${departureDate.toISOString().split("T")[0]}`;
-        const returnQ = isRoundTrip ? `&returnDate=${returnDate.toISOString().split("T")[0]}` : "";
+        const returnQ = isRoundTrip && returnDate ? `&returnDate=${returnDate.toISOString().split("T")[0]}` : "";
         router.push(`${base}${query}${returnQ}`);
     };
 
@@ -66,7 +74,7 @@ export default function FlightSearchForm() {
                     />
                     {showSuggestionsOrigin && suggestionsOrigin.length > 0 && (
                         <ul className="absolute z-10 bg-white border mt-1 w-full max-h-40 overflow-y-auto rounded shadow">
-                            {suggestionsOrigin.map((item, idx) => (
+                            {suggestionsOrigin.map((item: SuggestionItem, idx) => (
                                 <li
                                     key={idx}
                                     className="px-3 py-2 hover:bg-blue-100 cursor-pointer"
@@ -90,7 +98,7 @@ export default function FlightSearchForm() {
                     />
                     {showSuggestionsDestination && suggestionsDestination.length > 0 && (
                         <ul className="absolute z-10 bg-white border mt-1 w-full max-h-40 overflow-y-auto rounded shadow">
-                            {suggestionsDestination.map((item, idx) => (
+                            {suggestionsDestination.map((item: SuggestionItem, idx) => (
                                 <li
                                     key={idx}
                                     className="px-3 py-2 hover:bg-blue-100 cursor-pointer"
