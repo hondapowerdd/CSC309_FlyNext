@@ -50,6 +50,8 @@ export default function FlightSearchForm() {
         router.push(`${base}${query}${returnQ}`);
     };
 
+    // @ts-ignore
+    // @ts-ignore
     return (
         <div className="w-full bg-white p-6 rounded-md shadow-md">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
