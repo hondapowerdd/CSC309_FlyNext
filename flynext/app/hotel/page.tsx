@@ -1,13 +1,14 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { DateRange } from "react-date-range";
-import "react-date-range/dist/styles.css"; // main CSS
-import "react-date-range/dist/theme/default.css"; // theme CSS
-
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 
 export default function HotelSearchPage() {
+    const router = useRouter();
     const [showCalendar, setShowCalendar] = useState(false);
     const [dateRange, setDateRange] = useState([
         {
@@ -17,7 +18,32 @@ export default function HotelSearchPage() {
         },
     ]);
 
+    const [city, setCity] = useState("");
     const [roomType, setRoomType] = useState("single");
+    const [hotelName, setHotelName] = useState("");
+    const [starRating, setStarRating] = useState("");
+    const [minPrice, setMinPrice] = useState("");
+    const [maxPrice, setMaxPrice] = useState("");
+    const [results, setResults] = useState<any[]>([]);
+
+    const checkInDate = format(dateRange[0].startDate, "yyyy-MM-dd");
+    const checkOutDate = format(dateRange[0].endDate, "yyyy-MM-dd");
+
+    const searchHotels = async () => {
+        const params = new URLSearchParams({
+            city,
+            checkInDate,
+            checkOutDate,
+            name: hotelName,
+            starRating,
+            minPrice,
+            maxPrice,
+        });
+
+        const res = await fetch(`http://localhost:3000/api/hotel_search/search?${params}`);
+        const data = await res.json();
+        setResults(data);
+    };
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -27,53 +53,112 @@ export default function HotelSearchPage() {
             </div>
 
             {/* Search Bar */}
-            <div className="bg-white shadow-md rounded-lg p-4 mt-6 mx-4 flex flex-wrap md:flex-nowrap gap-4 items-center">
-                {/* Destination */}
-                <input
-                    type="text"
-                    placeholder="Where are you going?"
-                    className="flex-1 border p-2 rounded min-w-[200px]"
-                />
+            <div className="bg-white shadow-md rounded-lg p-4 mt-6 mx-4 space-y-4">
+                {/* Line 1: City + Dates + Hotel Name */}
+                <div className="flex flex-wrap gap-4">
+                    <input
+                        type="text"
+                        placeholder="Where are you going?"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        className="flex-1 border p-2 rounded min-w-[200px]"
+                    />
 
-                {/* Date Picker */}
-                <div className="relative flex-1 min-w-[200px]">
-                    <div
-                        onClick={() => setShowCalendar(!showCalendar)}
-                        className="border p-2 rounded cursor-pointer"
-                    >
-                        {`${format(dateRange[0].startDate, "yyyy/MM/dd")} - ${format(
-                            dateRange[0].endDate,
-                            "yyyy/MM/dd"
-                        )}`}
-                    </div>
-                    {showCalendar && (
-                        <div className="absolute z-10 mt-2">
-                            <DateRange
-                                editableDateInputs={true}
-                                onChange={(item) => setDateRange([item.selection])}
-                                moveRangeOnFirstSelection={false}
-                                ranges={dateRange}
-                            />
+                    <div className="relative flex-1 min-w-[200px]">
+                        <div
+                            onClick={() => setShowCalendar(!showCalendar)}
+                            className="border p-2 rounded cursor-pointer"
+                        >
+                            {`${format(dateRange[0].startDate, "yyyy/MM/dd")} - ${format(
+                                dateRange[0].endDate,
+                                "yyyy/MM/dd"
+                            )}`}
                         </div>
-                    )}
+                        {showCalendar && (
+                            <div className="absolute z-10 mt-2">
+                                <DateRange
+                                    editableDateInputs={true}
+                                    onChange={(item) => setDateRange([item.selection])}
+                                    moveRangeOnFirstSelection={false}
+                                    ranges={dateRange}
+                                />
+                            </div>
+                        )}
+                    </div>
+
+                    <input
+                        type="text"
+                        placeholder="Hotel name"
+                        value={hotelName}
+                        onChange={(e) => setHotelName(e.target.value)}
+                        className="flex-1 border p-2 rounded min-w-[150px]"
+                    />
                 </div>
 
-                {/* Room Type */}
-                <select
-                    className="flex-1 border p-2 rounded min-w-[200px]"
-                    value={roomType}
-                    onChange={(e) => setRoomType(e.target.value)}
-                >
-                    <option value="single">Single</option>
-                    <option value="double">Double</option>
-                    <option value="suite">Suite</option>
-                    <option value="family">Family</option>
-                </select>
+                {/* Line 2: Star rating + price + room type + search */}
+                <div className="flex flex-wrap gap-4 items-center">
+                    <input
+                        type="number"
+                        placeholder="Star rating (e.g. 5)"
+                        value={starRating}
+                        onChange={(e) => setStarRating(e.target.value)}
+                        className="flex-1 border p-2 rounded min-w-[150px]"
+                    />
 
-                {/* Search Button */}
-                <button className="bg-blue-600 text-white px-4 py-2 rounded min-w-[100px]">
-                    Search!
-                </button>
+                    <input
+                        type="number"
+                        placeholder="Min price"
+                        value={minPrice}
+                        onChange={(e) => setMinPrice(e.target.value)}
+                        className="flex-1 border p-2 rounded min-w-[100px]"
+                    />
+
+                    <input
+                        type="number"
+                        placeholder="Max price"
+                        value={maxPrice}
+                        onChange={(e) => setMaxPrice(e.target.value)}
+                        className="flex-1 border p-2 rounded min-w-[100px]"
+                    />
+
+                    <select
+                        className="flex-1 border p-2 rounded min-w-[150px]"
+                        value={roomType}
+                        onChange={(e) => setRoomType(e.target.value)}
+                    >
+                        <option value="single">Single</option>
+                        <option value="double">Double</option>
+                        <option value="suite">Suite</option>
+                        <option value="family">Family</option>
+                    </select>
+
+                    <button
+                        className="bg-blue-600 text-white px-4 py-2 rounded min-w-[100px]"
+                        onClick={searchHotels}
+                    >
+                        Search!
+                    </button>
+                </div>
+            </div>
+
+            {/* Result cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 mt-8">
+                {results.map((hotel, idx) => (
+                    <div
+                        key={idx}
+                        className="bg-white p-4 shadow rounded-lg cursor-pointer hover:bg-gray-100"
+                        onClick={() =>
+                            router.push(
+                                `/hotel/${hotel.id}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+                            )
+                        }
+                    >
+                        <h2 className="text-lg font-bold mb-2">{hotel.name}</h2>
+                        <p className="text-sm text-gray-600">City: {hotel.city}</p>
+                        <p className="text-sm">⭐ Star Rating: {hotel.starRating}</p>
+                        <p className="text-sm">💰 Price: ${hotel.price}</p>
+                    </div>
+                ))}
             </div>
         </div>
     );
