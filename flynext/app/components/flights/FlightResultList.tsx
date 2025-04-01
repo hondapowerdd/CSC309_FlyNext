@@ -11,29 +11,16 @@ interface Flight {
     duration: number;
     price: number;
     currency: string;
-    airline: {
-        code: string;
-        name: string;
-    };
-    origin: {
-        code: string;
-        name: string;
-        city: string;
-        country: string;
-    };
-    destination: {
-        code: string;
-        name: string;
-        city: string;
-        country: string;
-    };
+    airline: { code: string; name: string };
+    origin: { code: string; name: string; city: string; country: string };
+    destination: { code: string; name: string; city: string; country: string };
 }
 
 interface FlightGroup {
     flights: Flight[];
 }
 
-interface FlightResultListProps {
+interface Props {
     outboundFlights: FlightGroup[];
     returnFlights: FlightGroup[];
     origin: string;
@@ -47,68 +34,70 @@ export default function FlightResultList({
     origin,
     destination,
     date,
-}: FlightResultListProps) {
-    const [details, setDetails] = useState<{ [id: string]: any }>({});
+}: Props) {
+    const [details, setDetails] = useState<{ [key: string]: any }>({});
 
     const fetchDetails = async (flightId: string) => {
-        if (!details[flightId]) {
-            try {
-                const res = await axios.get(
-                    `/api/flights_search/flights?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&date=${date}&id=${flightId}`
-                );
-                setDetails((prev) => ({ ...prev, [flightId]: res.data }));
-            } catch (err) {
-                console.error("Failed to load flight detail", err);
-            }
+        try {
+            const res = await axios.get(`/api/flights_search/flights?origin=${origin}&destination=${destination}&date=${date}&id=${flightId}`);
+            setDetails((prev) => ({ ...prev, [flightId]: res.data }));
+        } catch (err) {
+            console.error("Failed to fetch details:", err);
         }
     };
 
-    const renderFlights = (flightsData: FlightGroup[], label: string) => (
-        <div className="mb-6">
-            <h2 className="text-xl font-semibold mb-4">{label}</h2>
-            {flightsData.map((group, index) => (
-                <div key={index} className="border p-4 rounded mb-4 shadow">
-                    {group.flights.map((flight) => (
-                        <div key={flight.id} className="mb-4 border-b pb-4">
-                            <div className="font-bold mb-1">
-                                {flight.flightNumber} - {flight.airline.name}
-                            </div>
-                            <div>From: {flight.origin.name} ({flight.origin.code}), {flight.origin.city}, {flight.origin.country}</div>
-                            <div>To: {flight.destination.name} ({flight.destination.code}), {flight.destination.city}, {flight.destination.country}</div>
-                            <div>Departure: {new Date(flight.departureTime).toLocaleString()}</div>
-                            <div>Arrival: {new Date(flight.arrivalTime).toLocaleString()}</div>
-                            <div>Duration: {Math.floor(flight.duration / 60)}h {flight.duration % 60}m</div>
-                            <div>Price: {flight.price} {flight.currency}</div>
-                            <button
-                                className="mt-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                                onClick={() => fetchDetails(flight.id)}
-                            >
-                                Detail
-                            </button>
+    const renderFlightGroup = (group: FlightGroup, index: number) => {
+        const first = group.flights[0];
+        const last = group.flights[group.flights.length - 1];
+        const totalDuration = group.flights.reduce((sum, f) => sum + f.duration, 0);
+        const flightId = first.id;
+        const info = details[flightId];
 
-                            {details[flight.id] && (
-                                <div className="mt-2 ml-4 p-2 border rounded bg-gray-100">
-                                    <div><strong>Departure Time:</strong> {new Date(details[flight.id].departureTime).toLocaleString()}</div>
-                                    <div><strong>Arrival Time:</strong> {new Date(details[flight.id].arrivalTime).toLocaleString()}</div>
-                                    <div><strong>Duration:</strong> {Math.floor(details[flight.id].duration / 60)}h {details[flight.id].duration % 60}m</div>
-                                    <div><strong>Layovers:</strong> {details[flight.id].layovers}</div>
-                                </div>
-                            )}
-                        </div>
-                    ))}
+        return (
+            <div key={index} className="border rounded p-4 mb-4 shadow">
+                {group.flights.map((flight) => (
+                    <div key={flight.id} className="mb-2">
+                        <div className="font-semibold">{flight.flightNumber} - {flight.airline.name}</div>
+                        <div>{flight.origin.city} ({flight.origin.code}) → {flight.destination.city} ({flight.destination.code})</div>
+                        <div>Departure: {new Date(flight.departureTime).toLocaleString()}</div>
+                        <div>Arrival: {new Date(flight.arrivalTime).toLocaleString()}</div>
+                        <div>Price: {flight.price} {flight.currency}</div>
+                    </div>
+                ))}
+
+                <div className="text-right">
+                    <button
+                        className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                        onClick={() => fetchDetails(flightId)}
+                    >
+                        Detail
+                    </button>
                 </div>
-            ))}
-        </div>
-    );
+
+                {info && (
+                    <div className="mt-4 bg-gray-100 p-3 rounded">
+                        <div><strong>Departure Time:</strong> {new Date(info.departureTime).toLocaleString()}</div>
+                        <div><strong>Arrival Time:</strong> {new Date(info.arrivalTime).toLocaleString()}</div>
+                        <div><strong>Duration:</strong> {Math.floor(info.duration / 60)}h {info.duration % 60}m</div>
+                        <div><strong>Layovers:</strong> {info.layovers}</div>
+                    </div>
+                )}
+            </div>
+        );
+    };
 
     return (
         <div>
-            {outboundFlights.length === 0 && returnFlights.length === 0 ? (
-                <p>No flights found.</p>
-            ) : (
+            {outboundFlights.length > 0 && (
                 <>
-                    {outboundFlights.length > 0 && renderFlights(outboundFlights, "Outbound Flights")}
-                    {returnFlights.length > 0 && renderFlights(returnFlights, "Return Flights")}
+                    <h2 className="text-xl font-bold mb-2">Outbound Flights</h2>
+                    {outboundFlights.map(renderFlightGroup)}
+                </>
+            )}
+            {returnFlights.length > 0 && (
+                <>
+                    <h2 className="text-xl font-bold mt-6 mb-2">Return Flights</h2>
+                    {returnFlights.map(renderFlightGroup)}
                 </>
             )}
         </div>

@@ -77,23 +77,23 @@ export const GET = async (req) => {
 
         // If requesting flight details
         if (flightId) {
-            const findFlight = (flights) =>
-                flights.flatMap(flightGroup => flightGroup.flights || []).find(f => f.id === flightId);
+            const allGroups = [...outboundFlights, ...returnFlights];
 
-            const foundOutboundFlight = findFlight(outboundFlights);
-            const foundReturnFlight = findFlight(returnFlights);
-            const foundFlight = foundOutboundFlight || foundReturnFlight;
+            const matchingGroup = allGroups.find(group =>
+                group.flights.some(flight => flight.id === flightId)
+            );
 
-            if (foundFlight) {
-                const parentFlightGroup = [...outboundFlights, ...returnFlights].find(group =>
-                    group.flights.some(f => f.id === flightId)
-                );
-                const layovers = parentFlightGroup ? parentFlightGroup.flights.length - 1 : 0;
+            if (matchingGroup) {
+                const flights = matchingGroup.flights;
+                const departureTime = flights[0].departureTime;
+                const arrivalTime = flights[flights.length - 1].arrivalTime;
+                const duration = flights.reduce((sum, flight) => sum + (flight.duration || 0), 0);
+                const layovers = flights.length - 1;
 
                 return new Response(JSON.stringify({
-                    departureTime: foundFlight.departureTime,
-                    arrivalTime: foundFlight.arrivalTime,
-                    duration: foundFlight.duration,
+                    departureTime,
+                    arrivalTime,
+                    duration,
                     layovers,
                 }), { status: 200, headers: { "Content-Type": "application/json" } });
             }
