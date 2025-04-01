@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+// @ts-ignore
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -78,7 +79,7 @@ export default function HotelSearchPage() {
                             <div className="absolute z-10 mt-2">
                                 <DateRange
                                     editableDateInputs={true}
-                                    onChange={(item) => setDateRange([item.selection])}
+                                    onChange={(item: { selection: { startDate: Date; endDate: Date; key: string; }; }) => setDateRange([item.selection])}
                                     moveRangeOnFirstSelection={false}
                                     ranges={dateRange}
                                 />

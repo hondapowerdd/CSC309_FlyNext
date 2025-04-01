@@ -11,6 +11,7 @@ import { NextResponse } from "next/server";
 import { resolveTokens, updateTokens } from "@/auth/token";
 
 import prisma from "@/db/database";
+import {cookies} from "next/headers";
 
 export async function GET(req) {
     try {
@@ -19,7 +20,13 @@ export async function GET(req) {
         // const tokenType = resolvedToken["tokenType"];
         // const tokenUid = resolvedToken["uid"];
 
-        const { uid, tokenType } = await resolveTokens(req);
+        // const { _, tokenType } = await resolveTokens(req);
+
+        const { searchParams } = new URL(req.url);
+        // const uid = searchParams.get("uid");
+
+        const cookieStore = await cookies();
+        const uid = cookieStore.get("uid")?.value || "";
 
         // log the tokenUid
         // console.log("uid: ", uid);
@@ -38,7 +45,8 @@ export async function GET(req) {
         const userId = userid.id;
         // console.log("userId: ", userId);
 
-        const { searchParams } = new URL(req.url);
+        // const { searchParams } = new URL(req.url);
+
         // const userId = searchParams.get("userId");
         const unreadOnly = searchParams.get("unreadOnly") === "true"; // Only unread notifications
         // const type = searchParams.get("type"); // Filter by type
@@ -66,7 +74,7 @@ export async function GET(req) {
 
         return NextResponse.json({
             notifications,
-            tokenUpdates: tokenType==="refresh"? updateTokens(uid):null
+            // tokenUpdates: tokenType==="refresh"? updateTokens(uid):null
         });
 
     } catch (error) {
