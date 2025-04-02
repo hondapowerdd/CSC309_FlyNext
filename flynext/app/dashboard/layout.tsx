@@ -18,8 +18,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
             : "px-4 py-1 rounded-full hover:bg-white hover:text-blue-900 transition-colors duration-200";
 
     return (
-        <html lang="en">
-        <body>
+        <>
             <div className="border-t border-blue-200/50">
                 <nav className="bg-blue-900 text-white flex justify-center gap-4 py-2">
                     <button
@@ -29,15 +28,14 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
                         Profile
                     </button>
                     <button
-                        className={getButtonClass('/profile/order-history')}
-                        onClick={() => router.push('/profile/order-history')}
+                        className={getButtonClass('/dashboard/booking-history')}
+                        onClick={() => router.push('/dashboard/booking-history')}
                     >
-                        Order History
+                        Booking History
                     </button>
                 </nav>
             </div>
             {children}
-        </body>
-        </html>
+        </>
     );
 }
