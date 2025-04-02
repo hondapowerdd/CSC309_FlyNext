@@ -8,6 +8,8 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 
+import NewHotelForm from "APP/components/hotel-management/NewHotelForm";
+
 export default function HotelSearchPage() {
     const router = useRouter();
     const [showCalendar, setShowCalendar] = useState(false);
@@ -26,6 +28,8 @@ export default function HotelSearchPage() {
     const [minPrice, setMinPrice] = useState("");
     const [maxPrice, setMaxPrice] = useState("");
     const [results, setResults] = useState<any[]>([]);
+
+    const [newHotes, setNewHotel] = useState(false);
 
     const checkInDate = format(dateRange[0].startDate, "yyyy-MM-dd");
     const checkOutDate = format(dateRange[0].endDate, "yyyy-MM-dd");
@@ -50,7 +54,19 @@ export default function HotelSearchPage() {
         <div className="min-h-screen bg-gray-100">
             <div className="bg-blue-800 text-white py-4 px-6 border-t border-b border-white/30">
                 <h1 className="text-2xl font-bold">Search Hotel</h1>
-                <p className="text-sm mt-1">search hotel around the world</p>
+                <div className="flex flex-row gap-x-4 items-center mt-2">
+                    <span className="text-sm">search hotel around the world.</span>
+                    <span className="text-sm">
+                        Don't see your property?{" "}
+                        <button 
+                            onClick={() => setNewHotel(true)}
+                            className="underline hover:text-blue-200 transition-colors cursor-pointer"
+                        >Add</button>
+                        {" it to our database!"}
+                    </span>
+
+                    {newHotes && <NewHotelForm close={() => setNewHotel(false)}/>}
+                </div>
             </div>
 
             {/* Search Bar */}
