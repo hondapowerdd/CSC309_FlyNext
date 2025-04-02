@@ -21,7 +21,7 @@ export default () => {
         <>
             <header className="relative bg-blue-900 text-white flex justify-between items-center px-6 py-4">
                 <button
-                    className="text-xl font-bold hover:underline"
+                    className="text-xl font-bold"
                     onClick={() => router.push('/')}
                 >
                     FlyNext.com
@@ -47,7 +47,7 @@ export default () => {
                         !uid &&
                         <>
                             <button className="border px-3 py-1 rounded" onClick={() => setShowRegForm(true)}>Register</button>
-                            <button className="border px-3 py-1 rounded" onClick={() => setShowLogin(true)}>Login</button>
+                            <button id="login-btn" className="border px-3 py-1 rounded" onClick={() => setShowLogin(true)}>Login</button>
                             <button
                                 className="border px-3 py-1 rounded"
                                 onClick={() => router.push('/notification')}

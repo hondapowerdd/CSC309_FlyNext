@@ -1,14 +1,20 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useContext } from "react";
 // @ts-ignore
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
+import { AuthContext } from "@/frontend/contexts/auth";
+
+import NewHotelForm from "APP/components/hotel-management/NewHotelForm";
+import { tr } from "date-fns/locale";
 
 export default function HotelSearchPage() {
+    const { uid } = useContext(AuthContext)!;
+
     const router = useRouter();
     const [showCalendar, setShowCalendar] = useState(false);
     const [dateRange, setDateRange] = useState([
@@ -27,6 +33,8 @@ export default function HotelSearchPage() {
     const [maxPrice, setMaxPrice] = useState("");
     const [results, setResults] = useState<any[]>([]);
 
+    const [newHotes, setNewHotel] = useState(false);
+
     const checkInDate = format(dateRange[0].startDate, "yyyy-MM-dd");
     const checkOutDate = format(dateRange[0].endDate, "yyyy-MM-dd");
 
@@ -41,16 +49,31 @@ export default function HotelSearchPage() {
             maxPrice,
         });
 
-        const res = await fetch(`http://localhost:3000/api/hotel_search/search?${params}`);
+        const res = await fetch(`api/hotel_search/search?${params}`);
         const data = await res.json();
         setResults(data);
     };
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <div className="bg-blue-900 text-white py-4 px-6">
+            <div className="bg-blue-800 text-white py-4 px-6 border-t border-b border-white/30">
                 <h1 className="text-2xl font-bold">Search Hotel</h1>
-                <p className="text-sm mt-1">search hotel around the world</p>
+                <div className="flex flex-row gap-x-4 items-center mt-2">
+                    <span className="text-sm">search hotel around the world.</span>
+                    <span className="text-sm-2">
+                        Don't see your property?{" "}
+                        <button 
+                            onClick={() => {
+                                if (uid) setNewHotel(true);
+                                else document.getElementById("login-btn")?.click();
+                            }}
+                            className="underline hover:text-blue-200 transition-colors cursor-pointer"
+                        >Add</button>
+                        {" it to our database!"}
+                    </span>
+
+                    {newHotes && <NewHotelForm close={() => setNewHotel(false)}/>}
+                </div>
             </div>
 
             {/* Search Bar */}
