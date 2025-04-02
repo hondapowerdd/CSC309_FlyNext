@@ -3,14 +3,18 @@
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "@/frontend/contexts/auth";
+import { useRouter } from "next/navigation";
 
 interface Props {
     flightIds: string[];
     onClose: () => void;
+    destinationCity: string;      // 🆕 add
+    arrivalTime: string;          // 🆕 add
 }
 
-export default function FlightBookingForm({ flightIds, onClose }: Props) {
+export default function FlightBookingForm({ flightIds, onClose, destinationCity, arrivalTime }: Props) {
     const { accessToken } = useContext(AuthContext);
+    const router = useRouter();
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -49,8 +53,6 @@ export default function FlightBookingForm({ flightIds, onClose }: Props) {
     }, [accessToken]);
 
     const handleSubmit = async () => {
-        console.log("[DEBUG] AccessToken:", accessToken);
-
         if (passportNumber.length !== 9) {
             setPassportError("Passport has to be 9 digits");
             return;
@@ -93,7 +95,32 @@ export default function FlightBookingForm({ flightIds, onClose }: Props) {
             });
             console.log("Created bookings:", res.data.bookings);
             setMessage("Booking successful!");
-            setTimeout(onClose, 1500);
+
+            const itinCheck = await axios.get(`/api/itineraries/${itineraryId}`, {
+                headers: { Authorization: `Bearer ${accessToken}` },
+            });
+
+            const bookings = itinCheck.data.bookings;
+            const hasHotelBooking = bookings.some((b: any) => b.type === "HOTEL");
+
+            if (!hasHotelBooking) {
+                const city = destinationCity ?? "";
+                const checkIn = new Date(arrivalTime);
+                const formattedCheckIn = checkIn.toISOString().split("T")[0];
+
+                const shouldRedirect = window.confirm(
+                    "Booking successful!\nWe found you have not booked a hotel yet.\nDo you want to find one now?"
+                );
+
+                if (shouldRedirect) {
+                    localStorage.setItem("activeItineraryId", itineraryId);
+                    router.push(`/hotel?city=${encodeURIComponent(city)}&checkInDate=${formattedCheckIn}`);
+                } else {
+                    setTimeout(onClose, 1500);
+                }
+            } else {
+                setTimeout(onClose, 1500);
+            }
         } catch (err: any) {
             console.error("Booking failed", err);
             setMessage(err?.response?.data?.error || "Booking failed.");
@@ -110,9 +137,7 @@ export default function FlightBookingForm({ flightIds, onClose }: Props) {
                 <input value={passportNumber} onChange={(e) => setPassportNumber(e.target.value)} placeholder="Passport Number" className="border p-2 rounded bg-gray-100" />
             </div>
 
-            {passportError && (
-                <p className="text-red-600 text-sm">{passportError}</p>
-            )}
+            {passportError && <p className="text-red-600 text-sm">{passportError}</p>}
 
             <label className="block font-medium mb-1">Select Itinerary</label>
             <select className="w-full border px-3 py-2 rounded" value={selectedItinerary} onChange={(e) => setSelectedItinerary(e.target.value)} disabled={createItinerary}>
@@ -134,6 +159,7 @@ export default function FlightBookingForm({ flightIds, onClose }: Props) {
                 <button onClick={handleSubmit} className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Confirm Booking</button>
                 <button onClick={onClose} className="border px-4 py-2 rounded">Cancel</button>
             </div>
+
             {message && <p className="mt-2 text-red-600 text-sm">{message}</p>}
         </div>
     );
