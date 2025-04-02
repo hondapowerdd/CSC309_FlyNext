@@ -15,7 +15,7 @@ export default () => {
 
     const [showRegForm, setShowRegForm] = useState(false);
     const { showLogin, setShowLogin } = useShowLogin();
-    const [showDropdn, setshowDropdn] = useState(false);
+    const [showDropdn, setShowDropdn] = useState(false);
 
     return (
         <>
@@ -28,33 +28,45 @@ export default () => {
                 </button>
                 <div className="flex gap-4">
                     {
-                        uid &&
-                        <>
-                            <button className="border px-3 py-1 rounded" onClick={() => setshowDropdn(true)}>{uid}</button>
-                            {
-                                showDropdn &&
-                                <AccountDropdown close={() => setshowDropdn(false)} />
-                            }
-                            <button
-                                className="border px-3 py-1 rounded"
-                                onClick={() => router.push('/notification')}
-                            >
-                                🔔
-                            </button>
-                        </>
-                    }
-                    {
-                        !uid &&
-                        <>
-                            <button className="border px-3 py-1 rounded" onClick={() => setShowRegForm(true)}>Register</button>
-                            <button id="login-btn" className="border px-3 py-1 rounded" onClick={() => setShowLogin(true)}>Login</button>
-                            <button
-                                className="border px-3 py-1 rounded"
-                                onClick={() => router.push('/notification')}
-                            >
-                                🔔
-                            </button>
-                        </>
+                        uid ? (
+                            <>
+                                <button 
+                                    className="border px-3 py-1 rounded" 
+                                    onClick={() => setShowDropdn(true)}
+                                >
+                                    {uid}
+                                </button>
+                                {showDropdn && <AccountDropdown close={() => setShowDropdn(false)} />}
+                                <button
+                                    className="border px-3 py-1 rounded"
+                                    onClick={() => router.push('/notification')}
+                                >
+                                    🔔
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <button 
+                                    className="border px-3 py-1 rounded" 
+                                    onClick={() => setShowRegForm(true)}
+                                >
+                                    Register
+                                </button>
+                                <button 
+                                    id="login-btn" 
+                                    className="border px-3 py-1 rounded" 
+                                    onClick={() => setShowLogin(true)}
+                                >
+                                    Login
+                                </button>
+                                <button
+                                    className="border px-3 py-1 rounded"
+                                    onClick={() => router.push('/notification')}
+                                >
+                                    🔔
+                                </button>
+                            </>
+                        )
                     }
                 </div>
             </header>

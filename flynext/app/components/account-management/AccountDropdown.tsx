@@ -1,9 +1,11 @@
 import { useContext, useEffect, useRef } from 'react';
 import { AuthContext } from "@/frontend/contexts/auth";
+import { useRouter } from 'next/navigation';
 
 export default ({ close }: { close: () => void }) => {
     const { setUid, setAccessToken, setRefreshToken } = useContext(AuthContext)!;
 
+    const router = useRouter();
     const dpdn = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -13,7 +15,7 @@ export default ({ close }: { close: () => void }) => {
     return (
         <div
             ref={dpdn}
-            className="absolute right--1 mt-9 w-29 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
+            className="absolute right--0 mt-9 w-28 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
             role="menu"
             tabIndex={0}
             onBlur={({ target, relatedTarget }) => {
@@ -23,11 +25,11 @@ export default ({ close }: { close: () => void }) => {
         >
             <div className="py-1" role="none">
             <button
-                onClick={close}
+                onClick={() => router.push('/dashboard')}
                 className="block w-full px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100 text-left"
                 role="menuitem"
             >
-                Profile
+                Dashboard
             </button>
             <button
                 onClick={() => {
