@@ -21,7 +21,7 @@ export default () => {
         <>
             <header className="relative bg-blue-900 text-white flex justify-between items-center px-6 py-4">
                 <button
-                    className="text-xl font-bold hover:underline"
+                    className="text-xl font-bold"
                     onClick={() => router.push('/')}
                 >
                     FlyNext.com

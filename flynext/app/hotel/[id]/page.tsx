@@ -40,13 +40,13 @@ export default function HotelDetailPage({ params }: { params: { id: string } }) 
         const fetchHotelData = async () => {
             try {
                 const infoRes = await fetch(
-                    `http://localhost:3000/api/hotel_search/information?hotelId=${hotelId}`
+                    `api/hotel_search/information?hotelId=${hotelId}`
                 );
                 const hotelData = await infoRes.json();
                 setHotel(hotelData);
 
                 const availabilityRes = await fetch(
-                    `http://localhost:3000/api/hotel_search/availability?hotelId=${hotelId}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+                    `api/hotel_search/availability?hotelId=${hotelId}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
                 );
                 const availabilityData = await availabilityRes.json();
                 setAvailability(availabilityData.availabilityByRoomType || []);
