@@ -1,7 +1,10 @@
 ﻿"use client";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "@/frontend/contexts/auth";
+import { useShowLogin } from "@/frontend/contexts/showLogin";
+import FlightBookingForm from "./FlightBookingForm";
 
 interface Flight {
     id: string;
@@ -36,6 +39,11 @@ export default function FlightResultList({
     date,
 }: Props) {
     const [details, setDetails] = useState<{ [key: string]: any }>({});
+    const [bookingFlightIds, setBookingFlightIds] = useState<string[] | null>(null);
+    const [showLoginPrompt, setShowLoginPrompt] = useState<string | null>(null);
+
+    const { uid } = useContext(AuthContext);
+    const { setShowLogin } = useShowLogin();
 
     const fetchDetails = async (flightId: string) => {
         try {
@@ -46,6 +54,14 @@ export default function FlightResultList({
         }
     };
 
+    const handleBooking = (flights: Flight[]) => {
+        if (!uid) {
+            setShowLoginPrompt(flights[0].id);
+            return;
+        }
+        setBookingFlightIds(flights.map((f) => f.id));
+    };
+
     const renderFlightGroup = (group: FlightGroup, index: number) => {
         const first = group.flights[0];
         const last = group.flights[group.flights.length - 1];
@@ -54,7 +70,7 @@ export default function FlightResultList({
         const info = details[flightId];
 
         return (
-            <div key={index} className="border rounded p-4 mb-4 shadow">
+            <div key={index} className="border rounded p-4 mb-4 shadow relative">
                 {group.flights.map((flight) => (
                     <div key={flight.id} className="mb-2">
                         <div className="font-semibold">{flight.flightNumber} - {flight.airline.name}</div>
@@ -65,14 +81,39 @@ export default function FlightResultList({
                     </div>
                 ))}
 
-                <div className="text-right">
+                <div className="text-right flex gap-4 justify-end">
                     <button
                         className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                         onClick={() => fetchDetails(flightId)}
                     >
                         Detail
                     </button>
+                    <button
+                        className="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                        onClick={() => handleBooking(group.flights)}
+                    >
+                        Booking
+                    </button>
                 </div>
+
+                {showLoginPrompt === flightId && (
+                    <div className="mt-2 text-sm text-red-600 flex items-center justify-end gap-3">
+                        You must login first.
+                        <button
+                            className="underline text-blue-700"
+                            onClick={() => setShowLogin(true)}
+                        >
+                            Login
+                        </button>
+                    </div>
+                )}
+
+                {bookingFlightIds && uid && (
+                    <FlightBookingForm
+                        flightIds={bookingFlightIds}
+                        onClose={() => setBookingFlightIds(null)}
+                    />
+                )}
 
                 {info && (
                     <div className="mt-4 bg-gray-100 p-3 rounded">

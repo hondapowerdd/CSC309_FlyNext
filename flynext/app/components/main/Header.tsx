@@ -7,13 +7,14 @@ import { useState, useContext } from 'react';
 import { AuthContext } from "@/frontend/contexts/auth";
 import Navigator from './Navigator';
 import { useRouter } from 'next/navigation';
+import { useShowLogin } from "@/frontend/contexts/showLogin";
 
 export default () => {
     const { uid } = useContext(AuthContext)!;
     const router = useRouter();
 
     const [showRegForm, setShowRegForm] = useState(false);
-    const [showLogForm, setShowLogForm] = useState(false);
+    const { showLogin, setShowLogin } = useShowLogin();
     const [showDropdn, setshowDropdn] = useState(false);
 
     return (
@@ -41,7 +42,7 @@ export default () => {
                         !uid &&
                         <>
                             <button className="border px-3 py-1 rounded" onClick={() => setShowRegForm(true)}>Register</button>
-                            <button className="border px-3 py-1 rounded" onClick={() => setShowLogForm(true)}>Login</button>
+                            <button className="border px-3 py-1 rounded" onClick={() => setShowLogin(true)}>Login</button>
                             <button
                                 className="border px-3 py-1 rounded"
                                 onClick={() => router.push('/notification')}
@@ -66,16 +67,16 @@ export default () => {
                 </div>
             }
 
-            {
-                showLogForm &&
+            {showLogin && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center">
                     <div
                         className="absolute inset-0 bg-black/50"
-                        onClick={() => setShowLogForm(false)}
+                        onClick={() => setShowLogin(false)}
                     ></div>
-                    <LoginForm close={() => setShowLogForm(false)} />
+                    <LoginForm close={() => setShowLogin(false)} />
                 </div>
-            }
+            )}
+
         </>
     );
 };

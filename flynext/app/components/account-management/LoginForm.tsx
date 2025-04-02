@@ -38,6 +38,7 @@ export default ({ close }: { close: () => void }) => {
 				auth.setRefreshToken(cookies.refreshToken);
                 document.cookie = Object.keys(cookies).map(k => `${k}=${cookies[k]};`).join("");
                 close();
+                window.location.reload();
 			});
 		})
         .catch(resContent => setMessage(resContent.error));
