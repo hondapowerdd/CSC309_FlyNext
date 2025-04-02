@@ -48,7 +48,7 @@ export default function HotelSearchPage() {
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <div className="bg-blue-900 text-white py-4 px-6">
+            <div className="bg-blue-800 text-white py-4 px-6 border-t border-b border-white/30">
                 <h1 className="text-2xl font-bold">Search Hotel</h1>
                 <p className="text-sm mt-1">search hotel around the world</p>
             </div>
