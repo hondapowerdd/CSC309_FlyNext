@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import {useParams, useSearchParams} from "next/navigation";
 
 interface Room {
     id: string;
@@ -26,11 +26,13 @@ interface AvailabilityEntry {
     availabilityByDate: Record<string, number>;
 }
 
-export default function HotelDetailPage({ params }: { params: { id: string } }) {
+export default function HotelDetailPage() {
+    const params = useParams();
     const searchParams = useSearchParams();
-    const checkInDate = searchParams.get("checkInDate") || "";
-    const checkOutDate = searchParams.get("checkOutDate") || "";
-    const hotelId = params.id;
+
+    const hotelId = params.hid as string;
+    const checkInDate = searchParams.get('checkInDate') || '';
+    const checkOutDate = searchParams.get('checkOutDate') || '';
 
     const [hotel, setHotel] = useState<Hotel | null>(null);
     const [availability, setAvailability] = useState<AvailabilityEntry[]>([]);
@@ -40,13 +42,13 @@ export default function HotelDetailPage({ params }: { params: { id: string } }) 
         const fetchHotelData = async () => {
             try {
                 const infoRes = await fetch(
-                    `api/hotel_search/information?hotelId=${hotelId}`
+                    `../api/hotel_search/information?hotelId=${hotelId}`
                 );
                 const hotelData = await infoRes.json();
                 setHotel(hotelData);
 
                 const availabilityRes = await fetch(
-                    `api/hotel_search/availability?hotelId=${hotelId}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+                    `../api/hotel_search/availability?hotelId=${hotelId}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
                 );
                 const availabilityData = await availabilityRes.json();
                 setAvailability(availabilityData.availabilityByRoomType || []);

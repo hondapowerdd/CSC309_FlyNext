@@ -12,7 +12,7 @@ export async function GET(req, res) {
         }
 
         const hotel = await prisma.hotel.findUnique({
-            where: { id: hotelId },
+            where: { hid: hotelId },
             include: {
                 rooms: {
                     select: {

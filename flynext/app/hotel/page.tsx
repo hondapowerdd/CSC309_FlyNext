@@ -174,7 +174,7 @@ export default function HotelSearchPage() {
                             className="bg-white p-4 shadow rounded-lg cursor-pointer hover:bg-gray-100"
                             onClick={() =>
                                 router.push(
-                                    `/hotel/${hotel.id}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+                                    `/hotel/${hotel.hid}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
                                 )
                             }
                         >
