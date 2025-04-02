@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 import { cookies } from 'next/headers';
 
 const _generateToken = (object, secret, expiration) => {
-    console.log(object);
     // Generate a token given a secret and the specified expiration period
     return jwt.sign(object, secret, { expiresIn: expiration });
 }

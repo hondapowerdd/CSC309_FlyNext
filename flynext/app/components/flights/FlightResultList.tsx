@@ -39,7 +39,12 @@ export default function FlightResultList({
     date,
 }: Props) {
     const [details, setDetails] = useState<{ [key: string]: any }>({});
-    const [bookingFlightIds, setBookingFlightIds] = useState<string[] | null>(null);
+    const [activeFlightGroup, setActiveFlightGroup] = useState<{
+        flightIds: string[];
+        destinationCity: string;
+        arrivalTime: string;
+        groupKey: string;
+    } | null>(null);
     const [showLoginPrompt, setShowLoginPrompt] = useState<string | null>(null);
 
     const { uid } = useContext(AuthContext);
@@ -47,7 +52,9 @@ export default function FlightResultList({
 
     const fetchDetails = async (flightId: string) => {
         try {
-            const res = await axios.get(`/api/flights_search/flights?origin=${origin}&destination=${destination}&date=${date}&id=${flightId}`);
+            const res = await axios.get(
+                `/api/flights_search/flights?origin=${origin}&destination=${destination}&date=${date}&id=${flightId}`
+            );
             setDetails((prev) => ({ ...prev, [flightId]: res.data }));
         } catch (err) {
             console.error("Failed to fetch details:", err);
@@ -59,7 +66,16 @@ export default function FlightResultList({
             setShowLoginPrompt(flights[0].id);
             return;
         }
-        setBookingFlightIds(flights.map((f) => f.id));
+
+        const destinationCity = flights[flights.length - 1].destination.city;
+        const arrivalTime = flights[flights.length - 1].arrivalTime;
+
+        setActiveFlightGroup({
+            flightIds: flights.map((f) => f.id),
+            destinationCity,
+            arrivalTime,
+            groupKey: flights[0].id,
+        });
     };
 
     const renderFlightGroup = (group: FlightGroup, index: number) => {
@@ -108,10 +124,12 @@ export default function FlightResultList({
                     </div>
                 )}
 
-                {bookingFlightIds && uid && (
+                {activeFlightGroup?.groupKey === flightId && (
                     <FlightBookingForm
-                        flightIds={bookingFlightIds}
-                        onClose={() => setBookingFlightIds(null)}
+                        flightIds={activeFlightGroup.flightIds}
+                        destinationCity={activeFlightGroup.destinationCity}
+                        arrivalTime={activeFlightGroup.arrivalTime}
+                        onClose={() => setActiveFlightGroup(null)}
                     />
                 )}
 

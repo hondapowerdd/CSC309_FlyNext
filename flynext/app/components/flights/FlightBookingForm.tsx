@@ -1,24 +1,21 @@
 ﻿"use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "@/frontend/contexts/auth";
+import { useRouter } from "next/navigation";
 
 interface Props {
     flightIds: string[];
     onClose: () => void;
+    destinationCity: string;      // 🆕 add
+    arrivalTime: string;          // 🆕 add
 }
 
-// Utility to read auth tokens directly from cookies
-const getAccessTokenFromCookie = (): string => {
-    const cookies = document.cookie.split(";").reduce((acc, cookie) => {
-        const [key, value] = cookie.trim().split("=");
-        acc[key] = value;
-        return acc;
-    }, {} as Record<string, string>);
-    return cookies["accessToken"] || "";
-};
+export default function FlightBookingForm({ flightIds, onClose, destinationCity, arrivalTime }: Props) {
+    const { accessToken } = useContext(AuthContext);
+    const router = useRouter();
 
-export default function FlightBookingForm({ flightIds, onClose }: Props) {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -30,17 +27,16 @@ export default function FlightBookingForm({ flightIds, onClose }: Props) {
     const [passportError, setPassportError] = useState("");
 
     useEffect(() => {
-        const accessToken = getAccessTokenFromCookie();
         const fetchUserAndItineraries = async () => {
             try {
-                const userRes = await axios.get("/api/user/profile", {
+                const userRes = await axios.get("/api/account/profile", {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 });
                 const user = userRes.data;
-                setFirstName(user.firstName);
-                setLastName(user.lastName);
-                setEmail(user.email);
-                setPassportNumber(user.passportNumber);
+                setFirstName(user.firstName ?? "");
+                setLastName(user.lastName ?? "");
+                setEmail(user.email ?? "");
+                setPassportNumber(user.passportNumber ?? "");
 
                 const itinRes = await axios.get("/api/itineraries", {
                     headers: { Authorization: `Bearer ${accessToken}` },
@@ -50,12 +46,13 @@ export default function FlightBookingForm({ flightIds, onClose }: Props) {
                 console.error("Failed to fetch user or itineraries", err);
             }
         };
-        fetchUserAndItineraries();
-    }, []);
+
+        if (accessToken) {
+            fetchUserAndItineraries();
+        }
+    }, [accessToken]);
 
     const handleSubmit = async () => {
-        const accessToken = getAccessTokenFromCookie();
-
         if (passportNumber.length !== 9) {
             setPassportError("Passport has to be 9 digits");
             return;
@@ -67,15 +64,13 @@ export default function FlightBookingForm({ flightIds, onClose }: Props) {
 
         if (createItinerary) {
             try {
-                const accessToken = getAccessTokenFromCookie();
-                console.log("[DEBUG] accessToken before POST /api/itineraries:", accessToken); // 👈 添加日志
-
                 const res = await axios.post("/api/itineraries", null, {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 });
                 itineraryId = res.data.id;
-            } catch (err) {
-                setMessage("Failed to create itinerary.");
+            } catch (err: any) {
+                console.error("Failed to create itinerary", err);
+                setMessage(err?.response?.data?.error || "Failed to create itinerary.");
                 return;
             }
         }
@@ -95,13 +90,40 @@ export default function FlightBookingForm({ flightIds, onClose }: Props) {
         };
 
         try {
-            const res = await axios.post("/api/book/flight", bookingPayload);
+            const res = await axios.post("/api/book/flight", bookingPayload, {
+                headers: { Authorization: `Bearer ${accessToken}` },
+            });
             console.log("Created bookings:", res.data.bookings);
             setMessage("Booking successful!");
-            setTimeout(onClose, 1500);
-        } catch (err) {
+
+            const itinCheck = await axios.get(`/api/itineraries/${itineraryId}`, {
+                headers: { Authorization: `Bearer ${accessToken}` },
+            });
+
+            const bookings = itinCheck.data.bookings;
+            const hasHotelBooking = bookings.some((b: any) => b.type === "HOTEL");
+
+            if (!hasHotelBooking) {
+                const city = destinationCity ?? "";
+                const checkIn = new Date(arrivalTime);
+                const formattedCheckIn = checkIn.toISOString().split("T")[0];
+
+                const shouldRedirect = window.confirm(
+                    "Booking successful!\nWe found you have not booked a hotel yet.\nDo you want to find one now?"
+                );
+
+                if (shouldRedirect) {
+                    localStorage.setItem("activeItineraryId", itineraryId);
+                    router.push(`/hotel?city=${encodeURIComponent(city)}&checkInDate=${formattedCheckIn}`);
+                } else {
+                    setTimeout(onClose, 1500);
+                }
+            } else {
+                setTimeout(onClose, 1500);
+            }
+        } catch (err: any) {
             console.error("Booking failed", err);
-            setMessage("Booking failed.");
+            setMessage(err?.response?.data?.error || "Booking failed.");
         }
     };
 
@@ -115,9 +137,7 @@ export default function FlightBookingForm({ flightIds, onClose }: Props) {
                 <input value={passportNumber} onChange={(e) => setPassportNumber(e.target.value)} placeholder="Passport Number" className="border p-2 rounded bg-gray-100" />
             </div>
 
-            {passportError && (
-                <p className="text-red-600 text-sm">{passportError}</p>
-            )}
+            {passportError && <p className="text-red-600 text-sm">{passportError}</p>}
 
             <label className="block font-medium mb-1">Select Itinerary</label>
             <select className="w-full border px-3 py-2 rounded" value={selectedItinerary} onChange={(e) => setSelectedItinerary(e.target.value)} disabled={createItinerary}>
@@ -139,6 +159,7 @@ export default function FlightBookingForm({ flightIds, onClose }: Props) {
                 <button onClick={handleSubmit} className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Confirm Booking</button>
                 <button onClick={onClose} className="border px-4 py-2 rounded">Cancel</button>
             </div>
+
             {message && <p className="mt-2 text-red-600 text-sm">{message}</p>}
         </div>
     );

@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { resolveTokens, updateTokens } from "@/auth/token";
 
 export async function PATCH(request, { params }) {
-    // Profile update
+    // cancell booking
 
     const { tokenType, tokenUid } = await resolveTokens(request);
     // const tokenType = resolvedToken["tokenType"];
@@ -49,7 +49,7 @@ export async function PATCH(request, { params }) {
     }
     
     return NextResponse.json({
-        message: "Profile update succeed",
+        message: "Booking cancelled",
         tokenUpdates: tokenType==="refresh"? updateTokens(uid):null
     });
 }
