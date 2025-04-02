@@ -47,7 +47,7 @@ export default () => {
                         !uid &&
                         <>
                             <button className="border px-3 py-1 rounded" onClick={() => setShowRegForm(true)}>Register</button>
-                            <button className="border px-3 py-1 rounded" onClick={() => setShowLogin(true)}>Login</button>
+                            <button id="login-btn" className="border px-3 py-1 rounded" onClick={() => setShowLogin(true)}>Login</button>
                             <button
                                 className="border px-3 py-1 rounded"
                                 onClick={() => router.push('/notification')}

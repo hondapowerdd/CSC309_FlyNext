@@ -18,7 +18,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         <ShowLoginProvider>
             <AuthProvider>
                 <Header />
-                    {children}
+                {children}
             </AuthProvider>
         </ShowLoginProvider>
         </body>

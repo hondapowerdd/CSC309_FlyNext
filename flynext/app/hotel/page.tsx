@@ -1,16 +1,20 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useContext } from "react";
 // @ts-ignore
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { format } from "date-fns";
+import { format, set } from "date-fns";
+import { AuthContext } from "@/frontend/contexts/auth";
 
 import NewHotelForm from "APP/components/hotel-management/NewHotelForm";
+import { tr } from "date-fns/locale";
 
 export default function HotelSearchPage() {
+    const { uid } = useContext(AuthContext)!;
+
     const router = useRouter();
     const [showCalendar, setShowCalendar] = useState(false);
     const [dateRange, setDateRange] = useState([
@@ -45,7 +49,7 @@ export default function HotelSearchPage() {
             maxPrice,
         });
 
-        const res = await fetch(`http://localhost:3000/api/hotel_search/search?${params}`);
+        const res = await fetch(`api/hotel_search/search?${params}`);
         const data = await res.json();
         setResults(data);
     };
@@ -56,10 +60,13 @@ export default function HotelSearchPage() {
                 <h1 className="text-2xl font-bold">Search Hotel</h1>
                 <div className="flex flex-row gap-x-4 items-center mt-2">
                     <span className="text-sm">search hotel around the world.</span>
-                    <span className="text-sm">
+                    <span className="text-sm-2">
                         Don't see your property?{" "}
                         <button 
-                            onClick={() => setNewHotel(true)}
+                            onClick={() => {
+                                if (uid) setNewHotel(true);
+                                else document.getElementById("login-btn")?.click();
+                            }}
                             className="underline hover:text-blue-200 transition-colors cursor-pointer"
                         >Add</button>
                         {" it to our database!"}
