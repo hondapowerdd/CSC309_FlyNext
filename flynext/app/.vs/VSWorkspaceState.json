@@ -1,8 +1,6 @@
 {
   "ExpandedNodes": [
     "",
-    "\\api\\account\\register",
-    "\\api\\[uid]",
     "\\components",
     "\\components\\flights",
     "\\notification"

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -15,6 +15,7 @@ interface SuggestionItem {
 
 export default function FlightSearchForm() {
     const router = useRouter();
+    const searchParams = useSearchParams();
 
     const [origin, setOrigin] = useState("");
     const [destination, setDestination] = useState("");
@@ -25,6 +26,18 @@ export default function FlightSearchForm() {
     const [suggestionsOrigin, setSuggestionsOrigin] = useState<SuggestionItem[]>([]);
     const [suggestionsDestination, setSuggestionsDestination] = useState<SuggestionItem[]>([]);
     const [isRoundTrip, setIsRoundTrip] = useState(false);
+
+    // ⭐ 从 URL 参数读取 city 和 date
+    useEffect(() => {
+        const city = searchParams.get("city");
+        const date = searchParams.get("date");
+
+        if (city) setDestination(city);
+        if (date) {
+            const parsed = new Date(date);
+            if (!isNaN(parsed.getTime())) setDepartureDate(parsed);
+        }
+    }, [searchParams]);
 
     useEffect(() => {
         const fetchSuggestions = async () => {
@@ -58,8 +71,6 @@ export default function FlightSearchForm() {
         router.push(`${base}${query}${returnQ}`);
     };
 
-    // @ts-ignore
-    // @ts-ignore
     return (
         <div className="w-full bg-white p-6 rounded-md shadow-md">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -111,25 +122,22 @@ export default function FlightSearchForm() {
                     )}
                 </div>
 
-                <div>
+                <div className="flex gap-2">
                     <DatePicker
                         selected={departureDate}
                         onChange={(date) => setDepartureDate(date)}
                         className="w-full p-2 border rounded"
                         placeholderText="Departure Date"
                     />
-                </div>
-
-                {isRoundTrip && (
-                    <div>
+                    {isRoundTrip && (
                         <DatePicker
                             selected={returnDate}
                             onChange={(date) => setReturnDate(date)}
                             className="w-full p-2 border rounded"
                             placeholderText="Return Date"
                         />
-                    </div>
-                )}
+                    )}
+                </div>
             </div>
 
             <div className="flex flex-wrap justify-between items-center mt-4 gap-2">
