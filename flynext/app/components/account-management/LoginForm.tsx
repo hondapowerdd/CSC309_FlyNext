@@ -36,8 +36,12 @@ export default ({ close }: { close: () => void }) => {
 				auth.setUid(uid);
 				auth.setAccessToken(cookies.accessToken);
 				auth.setRefreshToken(cookies.refreshToken);
-                document.cookie = Object.keys(cookies).map(k => `${k}=${cookies[k]};`).join("");
+                document.cookie = `uid=${uid}; path=/;`;
+                document.cookie = `accessToken=${cookies.accessToken}; path=/;`;
+                document.cookie = `refreshToken=${cookies.refreshToken}; path=/;`;
+
                 close();
+                window.location.reload();
 			});
 		})
         .catch(resContent => setMessage(resContent.error));

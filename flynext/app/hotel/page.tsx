@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+// @ts-ignore
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -78,7 +79,7 @@ export default function HotelSearchPage() {
                             <div className="absolute z-10 mt-2">
                                 <DateRange
                                     editableDateInputs={true}
-                                    onChange={(item) => setDateRange([item.selection])}
+                                    onChange={(item: { selection: { startDate: Date; endDate: Date; key: string; }; }) => setDateRange([item.selection])}
                                     moveRangeOnFirstSelection={false}
                                     ranges={dateRange}
                                 />
@@ -143,22 +144,26 @@ export default function HotelSearchPage() {
 
             {/* Result cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 mt-8">
-                {results.map((hotel, idx) => (
-                    <div
-                        key={idx}
-                        className="bg-white p-4 shadow rounded-lg cursor-pointer hover:bg-gray-100"
-                        onClick={() =>
-                            router.push(
-                                `/hotel/${hotel.id}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
-                            )
-                        }
-                    >
-                        <h2 className="text-lg font-bold mb-2">{hotel.name}</h2>
-                        <p className="text-sm text-gray-600">City: {hotel.city}</p>
-                        <p className="text-sm">⭐ Star Rating: {hotel.starRating}</p>
-                        <p className="text-sm">💰 Price: ${hotel.price}</p>
-                    </div>
-                ))}
+                {Array.isArray(results) && results.length > 0 ? (
+                    results.map((hotel, idx) => (
+                        <div
+                            key={idx}
+                            className="bg-white p-4 shadow rounded-lg cursor-pointer hover:bg-gray-100"
+                            onClick={() =>
+                                router.push(
+                                    `/hotel/${hotel.id}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+                                )
+                            }
+                        >
+                            <h2 className="text-lg font-bold mb-2">{hotel.name}</h2>
+                            <p className="text-sm text-gray-600">City: {hotel.city}</p>
+                            <p className="text-sm">⭐ Star Rating: {hotel.starRating}</p>
+                            <p className="text-sm">💰 Price: ${hotel.price}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p className="text-gray-500 col-span-full">No hotels found for your search.</p>
+                )}
             </div>
         </div>
     );

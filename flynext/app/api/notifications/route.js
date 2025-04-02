@@ -11,20 +11,19 @@ import { NextResponse } from "next/server";
 import { resolveTokens, updateTokens } from "@/auth/token";
 
 import prisma from "@/db/database";
+import {cookies} from "next/headers";
 
 export async function GET(req) {
     try {
+        // const { _, tokenType } = await resolveTokens(req);
 
-        // const resolvedToken = await resolveTokens(req);
-        // const tokenType = resolvedToken["tokenType"];
-        // const tokenUid = resolvedToken["uid"];
+        const { searchParams } = new URL(req.url);
+        // const uid = searchParams.get("uid");
+        const unreadOnly = searchParams.get("unreadOnly") === "true"; // Only unread notifications
 
-        const { uid, tokenType } = await resolveTokens(req);
 
-        // log the tokenUid
-        // console.log("uid: ", uid);
-        // console.log("tokenType: ", tokenType);
-        // return NextResponse.json({ uid });
+        const cookieStore = await cookies();
+        const uid = cookieStore.get("uid")?.value || "";
 
         // ---------------------------------------------------------------------
 
@@ -36,12 +35,6 @@ export async function GET(req) {
         });
 
         const userId = userid.id;
-        // console.log("userId: ", userId);
-
-        const { searchParams } = new URL(req.url);
-        // const userId = searchParams.get("userId");
-        const unreadOnly = searchParams.get("unreadOnly") === "true"; // Only unread notifications
-        // const type = searchParams.get("type"); // Filter by type
 
         if (!userId) {
             return NextResponse.json({ error: "Missing userId" }, { status: 400 });
@@ -53,10 +46,6 @@ export async function GET(req) {
             whereClause.isRead = false;
         }
 
-        // if (type) {
-        //     whereClause.type = type; // Filter by notification type
-        // }
-
         const notifications = await prisma.notification.findMany({
             where: whereClause,
             orderBy: { createdAt: "desc" },
@@ -66,7 +55,7 @@ export async function GET(req) {
 
         return NextResponse.json({
             notifications,
-            tokenUpdates: tokenType==="refresh"? updateTokens(uid):null
+            // tokenUpdates: tokenType==="refresh"? updateTokens(uid):null
         });
 
     } catch (error) {
