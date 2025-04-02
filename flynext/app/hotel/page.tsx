@@ -144,22 +144,26 @@ export default function HotelSearchPage() {
 
             {/* Result cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 mt-8">
-                {results.map((hotel, idx) => (
-                    <div
-                        key={idx}
-                        className="bg-white p-4 shadow rounded-lg cursor-pointer hover:bg-gray-100"
-                        onClick={() =>
-                            router.push(
-                                `/hotel/${hotel.id}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
-                            )
-                        }
-                    >
-                        <h2 className="text-lg font-bold mb-2">{hotel.name}</h2>
-                        <p className="text-sm text-gray-600">City: {hotel.city}</p>
-                        <p className="text-sm">⭐ Star Rating: {hotel.starRating}</p>
-                        <p className="text-sm">💰 Price: ${hotel.price}</p>
-                    </div>
-                ))}
+                {Array.isArray(results) && results.length > 0 ? (
+                    results.map((hotel, idx) => (
+                        <div
+                            key={idx}
+                            className="bg-white p-4 shadow rounded-lg cursor-pointer hover:bg-gray-100"
+                            onClick={() =>
+                                router.push(
+                                    `/hotel/${hotel.id}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+                                )
+                            }
+                        >
+                            <h2 className="text-lg font-bold mb-2">{hotel.name}</h2>
+                            <p className="text-sm text-gray-600">City: {hotel.city}</p>
+                            <p className="text-sm">⭐ Star Rating: {hotel.starRating}</p>
+                            <p className="text-sm">💰 Price: ${hotel.price}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p className="text-gray-500 col-span-full">No hotels found for your search.</p>
+                )}
             </div>
         </div>
     );
