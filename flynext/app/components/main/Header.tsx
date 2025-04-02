@@ -20,7 +20,12 @@ export default () => {
     return (
         <>
             <header className="relative bg-blue-900 text-white flex justify-between items-center px-6 py-4">
-                <div className="text-xl font-bold">FlyNext.com</div>
+                <button
+                    className="text-xl font-bold hover:underline"
+                    onClick={() => router.push('/')}
+                >
+                    FlyNext.com
+                </button>
                 <div className="flex gap-4">
                     {
                         uid &&
