@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { resolveTokens, updateTokens } from "@/auth/token";
 import { saveFilePublic } from "@/utils/io";
 import { join } from "path";
+import { use } from "react";
 
 export async function PATCH(request, { params }) {
     // Profile update
@@ -55,6 +56,53 @@ export async function PATCH(request, { params }) {
     
     return NextResponse.json({
         message: "Profile update succeed",
+        tokenUpdates: tokenType==="refresh"? updateTokens(uid):null
+    });
+}
+
+export async function GET(request, { params }) {
+    // Profile get
+
+    const resolvedToken = await resolveTokens(request);
+    const tokenType = resolvedToken["tokenType"];
+    const tokenUid = resolvedToken["uid"];
+
+    const { uid } = await params;
+
+    if (tokenUid !== uid) {
+        return NextResponse.json(
+            { error: "Invalid credential" },
+            { status: 401 },
+        );
+    }
+
+    // Use form data since we have images.
+    const form = await request.formData();
+
+    const profilePic = form.get("profilePic");
+    let profilePicName = undefined;
+    if (profilePic && profilePic.type && profilePic.type.startsWith('image/')) {
+        try {
+            profilePicName = await saveFilePublic(join('profiles', uid, 'profileImgs'), profilePic);
+        } catch (e) {
+            return NextResponse.json({ error: "Could not save the profile img" }, { status: 400 });
+        }
+    }
+
+    // Ignore illegal entries
+    Object.entries(user).forEach(([k, v]) => (!v || typeof v !== "string")  && delete user[k]);
+
+    let user;
+    try { // Update profile
+        user = await database.User.findUnique({
+            where: { uid: uid }
+        })
+    } catch (e) {
+        return NextResponse.json({ error: "User DNE" }, { status: 400 });
+    }
+    
+    return NextResponse.json({
+        profile: user,
         tokenUpdates: tokenType==="refresh"? updateTokens(uid):null
     });
 }
