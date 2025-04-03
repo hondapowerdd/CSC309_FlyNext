@@ -53,7 +53,7 @@ export default ({ close }: { close: () => void }) => {
 
             <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
 
-            <form className="space-y-4" onSubmit={submit}>
+            <form id="login" className="space-y-4" onSubmit={submit}>
                 {/* UID Field */}
                 <div>
                 <label htmlFor="uid" className="block text-sm font-medium text-gray-700">
