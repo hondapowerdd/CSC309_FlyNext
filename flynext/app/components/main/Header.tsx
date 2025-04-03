@@ -61,7 +61,10 @@ export default () => {
                                 </button>
                                 <button
                                     className="border px-3 py-1 rounded"
-                                    onClick={() => router.push('/notification')}
+                                    onClick={() => {
+                                        if (uid) router.push('/notification');
+                                        else setShowLogin(true);
+                                    }}
                                 >
                                     🔔
                                 </button>
