@@ -12,6 +12,14 @@ export const POST = async (req) => {
         if (!userId || !hotelId || !roomId || !checkInDate || !checkOutDate) {
             return new Response(JSON.stringify({ error: "Missing required hotel booking information" }), { status: 400 });
         }
+        console.log("Booking payload:", {
+            userId,
+            hotelId,
+            roomId,
+            checkInDate,
+            checkOutDate,
+        });
+
 
         const checkIn = new Date(checkInDate);
         const checkOut = new Date(checkOutDate);
