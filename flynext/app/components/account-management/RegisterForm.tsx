@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, FormEvent } from "react";
-import { AuthContext } from "@/frontend/contexts/auth";
+import { AuthContext, saveCookies } from "@/frontend/contexts/auth";
 
 export default ({ close }: { close: () => void }) => {
 	const [firstName, setFirstName] = useState("");
@@ -52,7 +52,7 @@ export default ({ close }: { close: () => void }) => {
 				setUid(cookies.uid);
 				setAccessToken(cookies.accessToken);
 				setRefreshToken(cookies.refreshToken);
-                document.cookie = Object.keys(cookies).map(k => `${k}=${cookies[k]};`).join("");
+                saveCookies(cookies);
 				setSubmitted(true);
 			});
 		});

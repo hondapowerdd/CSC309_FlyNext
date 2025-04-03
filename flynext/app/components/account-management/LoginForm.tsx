@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { AuthContext } from "@/frontend/contexts/auth";
+import { AuthContext, saveCookies } from "@/frontend/contexts/auth";
 
 export default ({ close }: { close: () => void }) => {
     const [uid, setUid] = useState('');
@@ -26,7 +26,6 @@ export default ({ close }: { close: () => void }) => {
 			}
 		)
 		.then(res => {
-            console.log(1);
 			res.json()
 			.then(resContent => {
 				if (!res.ok) return setMessage(resContent.error);
@@ -37,8 +36,7 @@ export default ({ close }: { close: () => void }) => {
 				auth.setUid(uid);
 				auth.setAccessToken(cookies.accessToken);
 				auth.setRefreshToken(cookies.refreshToken);
-                console.log(resContent.tokens);
-                document.cookie = Object.keys(cookies).map(k => `${k}=${cookies[k]};`).join("");
+                saveCookies(cookies);
                 close();
 			});
 		})
