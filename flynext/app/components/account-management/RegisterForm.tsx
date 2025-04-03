@@ -47,7 +47,7 @@ export default ({ close }: { close: () => void }) => {
 				setRes(`Please carefully record the following unique identifier for future login:\n${resContent.uid}`);
 				const cookies = {
                     uid: resContent.uid,
-                    ...resContent.tokens
+                    ...(resContent.tokens)
                 }
 				setUid(cookies.uid);
 				setAccessToken(cookies.accessToken);
