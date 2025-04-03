@@ -5,20 +5,18 @@ type SetState<T> = Dispatch<SetStateAction<T>>;
 
 interface AuthContextInterface {
 	uid: string;
-	setUid: SetState<string>;
 	accessToken: string;
-	setAccessToken: SetState<string>;
 	refreshToken: string;
-	setRefreshToken: SetState<string>;
+	login: (info: Record<string, string>) => void;
+	logout: () => void;
 }
 
 export const AuthContext = createContext<AuthContextInterface>({
 	uid: "",
-	setUid: () => {},
 	accessToken: "",
-	setAccessToken: () => {},
 	refreshToken: "",
-	setRefreshToken: () => {},
+	login: (_) => {},
+	logout: () => {}
 });
 
 type AuthCookies = {
@@ -67,9 +65,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
 	return (
 		<AuthContext.Provider value={{
-			uid, setUid,
-			accessToken, setAccessToken,
-			refreshToken, setRefreshToken
+			uid, accessToken, refreshToken,
+			login: (info) => {
+				setUid(info["uid"]);
+				setAccessToken(info["accessToken"]);
+				setRefreshToken(info["refreshToken"]);
+				saveCookies(info);
+			},
+			logout: () => {
+				setUid("");
+				setAccessToken("");
+				setRefreshToken("");
+				clearCookies(["uid", "accessToken", "refreshToken"]);
+			}
 		}}>
 			{children}
 		</AuthContext.Provider>

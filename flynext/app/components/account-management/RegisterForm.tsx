@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, FormEvent } from "react";
-import { AuthContext, saveCookies } from "@/frontend/contexts/auth";
+import { AuthContext } from "@/frontend/contexts/auth";
 
 export default ({ close }: { close: () => void }) => {
 	const [firstName, setFirstName] = useState("");
@@ -18,7 +18,7 @@ export default ({ close }: { close: () => void }) => {
 		if (submitDisabled !== newStatus) setSubmitDisabled(newStatus);
 	}, [email, password, phoneNumber]);
 
-	const { setUid, setAccessToken, setRefreshToken } = useContext(AuthContext)!;
+	const { login } = useContext(AuthContext)!;
 
 	const submit = async (e: FormEvent) => {
 		e.preventDefault();
@@ -45,14 +45,10 @@ export default ({ close }: { close: () => void }) => {
 					return setSubmitted(true);
 				}
 				setRes(`Please carefully record the following unique identifier for future login:\n${resContent.uid}`);
-				const cookies = {
+				login({
                     uid: resContent.uid,
                     ...(resContent.tokens)
-                }
-				setUid(cookies.uid);
-				setAccessToken(cookies.accessToken);
-				setRefreshToken(cookies.refreshToken);
-                saveCookies(cookies);
+                });
 				setSubmitted(true);
 			});
 		});

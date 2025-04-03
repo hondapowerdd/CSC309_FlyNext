@@ -1,9 +1,9 @@
 import { useContext, useEffect, useRef } from 'react';
-import { AuthContext, clearCookies } from "@/frontend/contexts/auth";
+import { AuthContext } from "@/frontend/contexts/auth";
 import { useRouter } from 'next/navigation';
 
 export default ({ close }: { close: () => void }) => {
-    const { setUid, setAccessToken, setRefreshToken } = useContext(AuthContext)!;
+    const { logout } = useContext(AuthContext)!;
 
     const router = useRouter();
     const dpdn = useRef<HTMLDivElement>(null);
@@ -33,10 +33,7 @@ export default ({ close }: { close: () => void }) => {
             </button>
             <button
                 onClick={() => {
-                    setUid("");
-                    setAccessToken("");
-                    setRefreshToken("");
-                    clearCookies(["uid", "accessToken", "refreshToken"]);
+                    logout();
                     close();
                 }}
                 className="block w-full px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-100 text-left"
