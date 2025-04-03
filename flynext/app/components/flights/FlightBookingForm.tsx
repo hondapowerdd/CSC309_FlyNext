@@ -8,13 +8,14 @@ import { useRouter } from "next/navigation";
 interface Props {
     flightIds: string[];
     onClose: () => void;
-    destinationCity: string;      // 🆕 add
-    arrivalTime: string;          // 🆕 add
+    destinationCity: string;
+    arrivalTime: string;
 }
 
 export default function FlightBookingForm({ flightIds, onClose, destinationCity, arrivalTime }: Props) {
     const { accessToken } = useContext(AuthContext);
     const router = useRouter();
+    console.error("[DEBUG] GET token for flights:", accessToken)
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -37,7 +38,6 @@ export default function FlightBookingForm({ flightIds, onClose, destinationCity,
                 setLastName(user.lastName ?? "");
                 setEmail(user.email ?? "");
                 setPassportNumber(user.passportNumber ?? "");
-
                 const itinRes = await axios.get("/api/itineraries", {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 });

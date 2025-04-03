@@ -1,10 +1,14 @@
 {
   "ExpandedNodes": [
     "",
-    "\\components",
+    "\\api",
+    "\\api\\book",
+    "\\api\\book\\checkout",
+    "\\api\\itineraries\\[id]",
     "\\components\\flights",
-    "\\notification"
+    "\\dashboard\\booking-history",
+    "\\flight_search\\results"
   ],
-  "SelectedNode": "\\components\\flights\\FlightBookingForm.tsx",
+  "SelectedNode": "\\api\\book\\checkout\\route.js",
   "PreviewInSolutionExplorer": false
 }
