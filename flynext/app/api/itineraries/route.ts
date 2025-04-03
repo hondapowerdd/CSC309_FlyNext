@@ -1,7 +1,8 @@
 ﻿import { resolveTokens } from "@/auth/token";
 import prisma from "@/db/database";
+import { NextResponse } from "next/server";
 
-export const GET = async (req: Request) => {
+export async function GET(req: NextResponse) {
     try {
         const { uid } = await resolveTokens(req);
 
@@ -12,7 +13,15 @@ export const GET = async (req: Request) => {
 
         const itineraries = await prisma.itinerary.findMany({
             where: { userId: user.id },
-            select: { id: true }, 
+            include: {
+                bookings: {
+                    include: {
+                        hotel: true,
+                        room: true,
+                    },
+                },
+            },
+            orderBy: { createdAt: "desc" },
         });
 
         return new Response(JSON.stringify(itineraries), {
@@ -20,38 +29,32 @@ export const GET = async (req: Request) => {
             headers: { "Content-Type": "application/json" },
         });
     } catch (err) {
-        console.error("GET /api/itineraries failed:", err);
-        return new Response(JSON.stringify({ error: "Unauthorized" }), {
-            status: 401,
-            headers: { "Content-Type": "application/json" },
-        });
+        console.error("[ITINERARIES] GET error:", err);
+        return new Response(JSON.stringify({ error: "Server error" }), { status: 500 });
     }
-};
+}
 
-export const POST = async (req: Request) => {
+export async function POST(req: Request) {
     try {
-        const { uid } = await resolveTokens(req);
+        const { uid, tokenType } = await resolveTokens(req);
+        if (!uid) {
+            console.warn("[POST itinerary] Invalid token:", uid);
+            return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+        }
 
         const user = await prisma.user.findUnique({ where: { uid } });
         if (!user) {
-            return new Response(JSON.stringify({ error: "User not found" }), { status: 404 });
+            return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
 
-        const newItinerary = await prisma.itinerary.create({
-            data: {
-                userId: user.id,
-            },
+        const itinerary = await prisma.itinerary.create({
+            data: { userId: user.id }
         });
 
-        return new Response(JSON.stringify(newItinerary), {
-            status: 201,
-            headers: { "Content-Type": "application/json" },
-        });
-    } catch (err) {
-        console.error("POST /api/itineraries failed:", err);
-        return new Response(JSON.stringify({ error: "Failed to create itinerary" }), {
-            status: 500,
-            headers: { "Content-Type": "application/json" },
-        });
+        return NextResponse.json(itinerary, { status: 201 });
+
+    } catch (err: any) {
+        console.error("[POST itinerary] Failed:", err);
+        return NextResponse.json({ error: "Server error" }, { status: 500 });
     }
-};
+}

@@ -78,9 +78,19 @@ export const POST = async (req) => {
             }
         }
 
+        const invoice = await prisma.invoice.create({
+            data: {
+                amount: totalAmount,
+                userId: userId,
+                itineraryId: itineraryId,
+                pdfUrl: `/invoices/${payment.id}.pdf`
+            }
+        });
+
         return new Response(JSON.stringify({
             message: "Booking confirmed",
             paymentId: payment.id,
+            invoiceId: invoice.id,
             tokenUpdates: tokenType === "refresh" ? updateTokens(tokenUid) : null
         }), {
             status: 200,
