@@ -7,6 +7,13 @@ import { AuthContext } from "@/frontend/contexts/auth";
 
 const bookingsPerPage = 5;
 
+type BookingType = {
+	id: string;
+	type: string;
+	status: string;
+	details: Record<string, string>;
+};
+
 const fetchBookings = async (accessToken: string) => {
 	await fetch('/api/booking', {
 		method: "GET",
@@ -19,7 +26,9 @@ const fetchBookings = async (accessToken: string) => {
 export default () => {
 	const { accessToken } = useContext(AuthContext)!;
 
-	const [bookings, setBookings] = useState([]);
+	// const [bookings, setBookings] = useState([]);
+	const [bookings, setBookings] = useState<BookingType[]>([]);
+
 	const [currentPage, setCurrentPage] = useState(1);
 
 	// fetch('/api/booking', {

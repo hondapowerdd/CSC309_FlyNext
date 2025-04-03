@@ -1,8 +1,8 @@
 ﻿import { resolveTokens } from "@/auth/token";
 import prisma from "@/db/database";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-export async function GET(req: NextResponse) {
+export async function GET(req: NextRequest) {
     try {
         const { uid } = await resolveTokens(req);
 
