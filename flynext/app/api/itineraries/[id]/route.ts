@@ -1,47 +1,4 @@
-﻿// import { NextRequest } from "next/server";
-// import prisma from "@/db/database";
-// import { resolveTokens } from "@/auth/token";
-//
-// export async function GET(req: NextRequest, context: { params: { id: string } }) {
-//     try {
-//         const { id: itineraryId } = context.params;
-//         const { uid } = await resolveTokens(req);
-//
-//         const user = await prisma.user.findUnique({
-//             where: { uid },
-//         });
-//
-//         if (!user) {
-//             return new Response(JSON.stringify({ error: "User not found" }), { status: 404 });
-//         }
-//
-//         const itinerary = await prisma.itinerary.findUnique({
-//             where: { id: itineraryId },
-//             include: {
-//                 bookings: true,
-//             },
-//         });
-//
-//         if (!itinerary) {
-//             return new Response(JSON.stringify({ error: "Itinerary not found" }), { status: 404 });
-//         }
-//
-//         if (itinerary.userId !== user.id) {
-//             return new Response(JSON.stringify({ error: "Unauthorized access to this itinerary" }), { status: 403 });
-//         }
-//
-//         return new Response(JSON.stringify(itinerary), {
-//             status: 200,
-//             headers: { "Content-Type": "application/json" },
-//         });
-//     } catch (err: any) {
-//         console.error("Failed to fetch itinerary:", err);
-//         return new Response(JSON.stringify({ error: "Internal server error" }), { status: 500 });
-//     }
-// }
-
-
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest } from "next/server";
 import prisma from "@/db/database";
 import { resolveTokens } from "@/auth/token";
 
@@ -55,7 +12,7 @@ export async function GET(req: NextRequest, context: { params: { id: string } })
         });
 
         if (!user) {
-            return NextResponse.json({ error: "User not found" }, { status: 404 });
+            return new Response(JSON.stringify({ error: "User not found" }), { status: 404 });
         }
 
         const itinerary = await prisma.itinerary.findUnique({
@@ -66,16 +23,19 @@ export async function GET(req: NextRequest, context: { params: { id: string } })
         });
 
         if (!itinerary) {
-            return NextResponse.json({ error: "Itinerary not found" }, { status: 404 });
+            return new Response(JSON.stringify({ error: "Itinerary not found" }), { status: 404 });
         }
 
         if (itinerary.userId !== user.id) {
-            return NextResponse.json({ error: "Unauthorized access to this itinerary" }, { status: 403 });
+            return new Response(JSON.stringify({ error: "Unauthorized access to this itinerary" }), { status: 403 });
         }
 
-        return NextResponse.json(itinerary);
-    } catch (err) {
+        return new Response(JSON.stringify(itinerary), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+        });
+    } catch (err: any) {
         console.error("Failed to fetch itinerary:", err);
-        return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+        return new Response(JSON.stringify({ error: "Internal server error" }), { status: 500 });
     }
 }
