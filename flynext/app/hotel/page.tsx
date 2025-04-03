@@ -54,6 +54,7 @@ export default function HotelSearchPage() {
         setResults(data);
     };
 
+    // @ts-ignore
     return (
         <div className="min-h-screen bg-gray-100">
             <div className="bg-blue-800 text-white py-4 px-6 border-t border-b border-white/30">
@@ -172,11 +173,17 @@ export default function HotelSearchPage() {
                         <div
                             key={idx}
                             className="bg-white p-4 shadow rounded-lg cursor-pointer hover:bg-gray-100"
-                            onClick={() =>
+                            onClick={() => {
+                                console.log("Hotel clicked", hotel.hid);
+                                if (!hotel?.hid) {
+                                    console.warn(`Hotel at index ${idx} has no hid`, hotel);
+                                    return;
+                                }
+
                                 router.push(
-                                    `/hotel/${hotel.hid}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
-                                )
-                            }
+                                    `../hotel/${hotel.hid}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+                                );
+                            }}
                         >
                             <h2 className="text-lg font-bold mb-2">{hotel.name}</h2>
                             <p className="text-sm text-gray-600">City: {hotel.city}</p>
@@ -188,6 +195,7 @@ export default function HotelSearchPage() {
                     <p className="text-gray-500 col-span-full">No hotels found for your search.</p>
                 )}
             </div>
+
         </div>
     );
 }

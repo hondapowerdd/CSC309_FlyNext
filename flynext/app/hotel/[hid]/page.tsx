@@ -31,6 +31,7 @@ export default function HotelDetailPage() {
     const searchParams = useSearchParams();
 
     const hotelId = params.hid as string;
+    // console.log(hotelId);
     const checkInDate = searchParams.get('checkInDate') || '';
     const checkOutDate = searchParams.get('checkOutDate') || '';
 
@@ -97,6 +98,26 @@ export default function HotelDetailPage() {
                     ))}
                 </div>
             </div>
+
+            {/*/!* Rooms *!/*/}
+            {/*{hotel?.rooms && Array.isArray(hotel.rooms) && hotel.rooms.length > 0 && (*/}
+            {/*    <div className="mb-10">*/}
+            {/*        <h2 className="text-2xl font-semibold mb-3">Rooms</h2>*/}
+            {/*        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">*/}
+            {/*            {hotel.rooms.map((room) => (*/}
+            {/*                <div key={room.id} className="border rounded p-4 shadow-sm bg-white">*/}
+            {/*                    <h3 className="text-lg font-bold mb-1">{room.name}</h3>*/}
+            {/*                    <p className="text-sm mb-1">Type: {room.type}</p>*/}
+            {/*                    <p className="text-sm mb-1">Amenities: {room.amenities}</p>*/}
+            {/*                    <p className="text-blue-600 font-semibold">*/}
+            {/*                        ${room.pricePerNight} / night*/}
+            {/*                    </p>*/}
+            {/*                </div>*/}
+            {/*            ))}*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*)}*/}
+
 
             {/* Availability */}
             <div>

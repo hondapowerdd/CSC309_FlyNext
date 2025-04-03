@@ -92,6 +92,7 @@ export async function GET(req) {
 
             return {
                 id: hotel.id,
+                hid: hotel.hid,
                 name: hotel.name,
                 starRating: hotel.starRating,
                 city: hotel.city,
