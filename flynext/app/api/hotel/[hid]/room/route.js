@@ -146,6 +146,7 @@ export async function PATCH(request, { params }) {
     }
 
     const update = (await request.json())["availabilityUpdate"];
+    console.log(update);
     if (!update) return NextResponse.json({ error: "Invalid availability update" }, { status: 400 });
 
     const room = update["room"];
