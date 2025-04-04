@@ -224,15 +224,15 @@ export default function HotelSearchPage() {
                         className="flex-1 border p-2 rounded min-w-[100px]"
                     />
 
-                    <select
-                        className="flex-1 border p-2 rounded min-w-[150px]"
-                        value={roomType}
-                        onChange={(e) => setRoomType(e.target.value)}
-                    >
-                        <option value="Single">Single</option>
-                        <option value="Double">Double</option>
-                        <option value="Deluxe"> Deluxe</option>
-                    </select>
+                    {/*<select*/}
+                    {/*    className="flex-1 border p-2 rounded min-w-[150px]"*/}
+                    {/*    value={roomType}*/}
+                    {/*    onChange={(e) => setRoomType(e.target.value)}*/}
+                    {/*>*/}
+                    {/*    <option value="Single">Single</option>*/}
+                    {/*    <option value="Double">Double</option>*/}
+                    {/*    <option value="Deluxe"> Deluxe</option>*/}
+                    {/*</select>*/}
 
                     <button
                         className="bg-blue-600 text-white px-4 py-2 rounded min-w-[100px]"
