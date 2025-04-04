@@ -3,16 +3,60 @@
   "WorkspaceRootPath": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\[hid]\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:hotel\\[hid]\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\flight\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:api\\book\\flight\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightResultList.tsx||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:components\\flights\\FlightResultList.tsx||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightBookingForm.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:components\\flights\\FlightBookingForm.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\results_round\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:flight_search\\results_round\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightSearchForm.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:components\\flights\\FlightSearchForm.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\results\\FlightResultsClient.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:flight_search\\results\\FlightResultsClient.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\results\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:flight_search\\results\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\dashboard\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:dashboard\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:flight_search\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\[hid]\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:hotel\\[hid]\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\[hid]\\bookings\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:hotel\\[hid]\\bookings\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\hotel\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:api\\book\\hotel\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\contain_hotel\\route.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:api\\itineraries\\contain_hotel\\route.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\route.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:api\\itineraries\\route.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\get_id\\route.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
@@ -63,10 +107,6 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:api\\booking\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightResultList.tsx||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:components\\flights\\FlightResultList.tsx||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\notification\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:notification\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
@@ -75,24 +115,8 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:components\\main\\Navigator.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\results\\FlightResultsClient.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:flight_search\\results\\FlightResultsClient.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\results\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:flight_search\\results\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\main\\Header.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:components\\main\\Header.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightSearchForm.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:components\\flights\\FlightSearchForm.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:flight_search\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
@@ -104,10 +128,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\[uid]\\login\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:api\\account\\[uid]\\login\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\flight\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:api\\book\\flight\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\layout.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
@@ -134,235 +154,84 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "route.ts",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\get_id\\route.ts",
-              "RelativeDocumentMoniker": "api\\account\\get_id\\route.ts",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\get_id\\route.ts",
-              "RelativeToolTip": "api\\account\\get_id\\route.ts",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T16:32:34.392Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "route.ts",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\profile\\route.ts",
-              "RelativeDocumentMoniker": "api\\account\\profile\\route.ts",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\profile\\route.ts",
-              "RelativeToolTip": "api\\account\\profile\\route.ts",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T16:30:55.241Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "route.js",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\hotel\\route.js",
-              "RelativeDocumentMoniker": "api\\book\\hotel\\route.js",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\hotel\\route.js",
-              "RelativeToolTip": "api\\book\\hotel\\route.js",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-03T15:59:13.301Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "page.tsx",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\[hid]\\page.tsx",
-              "RelativeDocumentMoniker": "hotel\\[hid]\\page.tsx",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\[hid]\\page.tsx",
-              "RelativeToolTip": "hotel\\[hid]\\page.tsx",
-              "ViewState": "AgIAAPgAAAAAAAAAAAAwwBkBAAAMAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\results_round\\page.tsx",
+              "RelativeDocumentMoniker": "flight_search\\results_round\\page.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\results_round\\page.tsx",
+              "RelativeToolTip": "flight_search\\results_round\\page.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T15:55:03.716Z",
+              "WhenOpened": "2025-04-04T14:57:05.062Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "LoginForm.tsx",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\LoginForm.tsx",
-              "RelativeDocumentMoniker": "components\\account-management\\LoginForm.tsx",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\LoginForm.tsx",
-              "RelativeToolTip": "components\\account-management\\LoginForm.tsx",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAAAHEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T02:37:19.742Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "page.tsx",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\page.tsx",
-              "RelativeDocumentMoniker": "hotel\\page.tsx",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\page.tsx",
-              "RelativeToolTip": "hotel\\page.tsx",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAiwC0AAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-02T19:42:30.397Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "route.js",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\[uid]\\route.js",
-              "RelativeDocumentMoniker": "api\\account\\[uid]\\route.js",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\[uid]\\route.js",
-              "RelativeToolTip": "api\\account\\[uid]\\route.js",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAAYAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-02T00:21:23.792Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "FlightBookingForm.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightBookingForm.tsx",
               "RelativeDocumentMoniker": "components\\flights\\FlightBookingForm.tsx",
               "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightBookingForm.tsx",
               "RelativeToolTip": "components\\flights\\FlightBookingForm.tsx",
-              "ViewState": "AgIAAHUAAAAAAAAAAAAAwJoAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABYAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-01T19:22:59.85Z"
+              "WhenOpened": "2025-04-01T19:22:59.85Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "route.ts",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\[id]\\route.ts",
-              "RelativeDocumentMoniker": "api\\itineraries\\[id]\\route.ts",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\[id]\\route.ts",
-              "RelativeToolTip": "api\\itineraries\\[id]\\route.ts",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-02T19:46:38.727Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "route.js",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\checkout\\route.js",
-              "RelativeDocumentMoniker": "api\\book\\checkout\\route.js",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\checkout\\route.js",
-              "RelativeToolTip": "api\\book\\checkout\\route.js",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAcwD0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-03T02:27:04.405Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "route.js",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\booking\\route.js",
-              "RelativeDocumentMoniker": "api\\booking\\route.js",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\booking\\route.js",
-              "RelativeToolTip": "api\\booking\\route.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-03T01:28:40.924Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "RegisterForm.tsx",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\RegisterForm.tsx",
-              "RelativeDocumentMoniker": "components\\account-management\\RegisterForm.tsx",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\RegisterForm.tsx",
-              "RelativeToolTip": "components\\account-management\\RegisterForm.tsx",
-              "ViewState": "AgIAAIwAAAAAAAAAAAAAALoAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T02:37:20.322Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "AccountDropdown.tsx",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\AccountDropdown.tsx",
-              "RelativeDocumentMoniker": "components\\account-management\\AccountDropdown.tsx",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\AccountDropdown.tsx",
-              "RelativeToolTip": "components\\account-management\\AccountDropdown.tsx",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAACoAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-01T18:40:54.426Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Booking.tsx",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\booking\\Booking.tsx",
-              "RelativeDocumentMoniker": "components\\booking\\Booking.tsx",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\booking\\Booking.tsx",
-              "RelativeToolTip": "components\\booking\\Booking.tsx",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBUAAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T02:17:01.69Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "page.tsx",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\dashboard\\booking-history\\page.tsx",
-              "RelativeDocumentMoniker": "dashboard\\booking-history\\page.tsx",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\dashboard\\booking-history\\page.tsx",
-              "RelativeToolTip": "dashboard\\booking-history\\page.tsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T02:24:21.574Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 1,
               "Title": "FlightResultList.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightResultList.tsx",
               "RelativeDocumentMoniker": "components\\flights\\FlightResultList.tsx",
               "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightResultList.tsx",
               "RelativeToolTip": "components\\flights\\FlightResultList.tsx",
-              "ViewState": "AgIAABQAAAAAAAAAAAAQwAMAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAAAswKgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-03-29T21:47:36.338Z"
+              "WhenOpened": "2025-03-29T21:47:36.338Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "page.tsx",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\notification\\page.tsx",
-              "RelativeDocumentMoniker": "notification\\page.tsx",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\notification\\page.tsx",
-              "RelativeToolTip": "notification\\page.tsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-02T19:22:16.359Z"
+              "DocumentIndex": 0,
+              "Title": "route.js",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\flight\\route.js",
+              "RelativeDocumentMoniker": "api\\book\\flight\\route.js",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\flight\\route.js",
+              "RelativeToolTip": "api\\book\\flight\\route.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-01T20:42:22.703Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Navigator.tsx",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\main\\Navigator.tsx",
-              "RelativeDocumentMoniker": "components\\main\\Navigator.tsx",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\main\\Navigator.tsx",
-              "RelativeToolTip": "components\\main\\Navigator.tsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "FlightSearchForm.tsx",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightSearchForm.tsx",
+              "RelativeDocumentMoniker": "components\\flights\\FlightSearchForm.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightSearchForm.tsx",
+              "RelativeToolTip": "components\\flights\\FlightSearchForm.tsx",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAowEsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-02T20:15:09.657Z"
+              "WhenOpened": "2025-03-29T21:47:32.056Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 5,
               "Title": "FlightResultsClient.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\results\\FlightResultsClient.tsx",
               "RelativeDocumentMoniker": "flight_search\\results\\FlightResultsClient.tsx",
               "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\results\\FlightResultsClient.tsx",
               "RelativeToolTip": "flight_search\\results\\FlightResultsClient.tsx",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAuwEMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-03-31T19:36:43.332Z"
+              "WhenOpened": "2025-03-31T19:36:43.332Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 6,
               "Title": "page.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\results\\page.tsx",
               "RelativeDocumentMoniker": "flight_search\\results\\page.tsx",
@@ -370,35 +239,25 @@
               "RelativeToolTip": "flight_search\\results\\page.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-03-29T22:54:35.19Z"
+              "WhenOpened": "2025-03-29T22:54:35.19Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Header.tsx",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\main\\Header.tsx",
-              "RelativeDocumentMoniker": "components\\main\\Header.tsx",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\main\\Header.tsx",
-              "RelativeToolTip": "components\\main\\Header.tsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA4AAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "page.tsx",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\dashboard\\page.tsx",
+              "RelativeDocumentMoniker": "dashboard\\page.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\dashboard\\page.tsx",
+              "RelativeToolTip": "dashboard\\page.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-01T18:51:21.994Z"
+              "WhenOpened": "2025-04-04T16:07:27.153Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "FlightSearchForm.tsx",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightSearchForm.tsx",
-              "RelativeDocumentMoniker": "components\\flights\\FlightSearchForm.tsx",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightSearchForm.tsx",
-              "RelativeToolTip": "components\\flights\\FlightSearchForm.tsx",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-03-29T21:47:32.056Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 8,
               "Title": "page.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\page.tsx",
               "RelativeDocumentMoniker": "flight_search\\page.tsx",
@@ -406,11 +265,272 @@
               "RelativeToolTip": "flight_search\\page.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-03-29T21:33:27.071Z"
+              "WhenOpened": "2025-03-29T21:33:27.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "page.tsx",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\[hid]\\page.tsx",
+              "RelativeDocumentMoniker": "hotel\\[hid]\\page.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\[hid]\\page.tsx",
+              "RelativeToolTip": "hotel\\[hid]\\page.tsx",
+              "ViewState": "AgIAAD0BAAAAAAAAAAAowFcBAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-03T15:55:03.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "page.tsx",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\[hid]\\bookings\\page.tsx",
+              "RelativeDocumentMoniker": "hotel\\[hid]\\bookings\\page.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\[hid]\\bookings\\page.tsx",
+              "RelativeToolTip": "hotel\\[hid]\\bookings\\page.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-04T14:47:50.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "LoginForm.tsx",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\LoginForm.tsx",
+              "RelativeDocumentMoniker": "components\\account-management\\LoginForm.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\LoginForm.tsx",
+              "RelativeToolTip": "components\\account-management\\LoginForm.tsx",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAAAHEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-03T02:37:19.742Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "route.ts",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\route.ts",
+              "RelativeDocumentMoniker": "api\\itineraries\\route.ts",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\route.ts",
+              "RelativeToolTip": "api\\itineraries\\route.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-04T14:19:34.547Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "route.ts",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\contain_hotel\\route.ts",
+              "RelativeDocumentMoniker": "api\\itineraries\\contain_hotel\\route.ts",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\contain_hotel\\route.ts",
+              "RelativeToolTip": "api\\itineraries\\contain_hotel\\route.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-04T14:17:20.631Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "route.ts",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\get_id\\route.ts",
+              "RelativeDocumentMoniker": "api\\account\\get_id\\route.ts",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\get_id\\route.ts",
+              "RelativeToolTip": "api\\account\\get_id\\route.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-03T16:32:34.392Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "route.js",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\hotel\\route.js",
+              "RelativeDocumentMoniker": "api\\book\\hotel\\route.js",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\hotel\\route.js",
+              "RelativeToolTip": "api\\book\\hotel\\route.js",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAE0AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-03T15:59:13.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "route.ts",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\profile\\route.ts",
+              "RelativeDocumentMoniker": "api\\account\\profile\\route.ts",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\profile\\route.ts",
+              "RelativeToolTip": "api\\account\\profile\\route.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-03T16:30:55.241Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "page.tsx",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\page.tsx",
+              "RelativeDocumentMoniker": "hotel\\page.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\page.tsx",
+              "RelativeToolTip": "hotel\\page.tsx",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAiwC0AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-02T19:42:30.397Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "route.js",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\[uid]\\route.js",
+              "RelativeDocumentMoniker": "api\\account\\[uid]\\route.js",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\[uid]\\route.js",
+              "RelativeToolTip": "api\\account\\[uid]\\route.js",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAAYAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-02T00:21:23.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "route.ts",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\[id]\\route.ts",
+              "RelativeDocumentMoniker": "api\\itineraries\\[id]\\route.ts",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\[id]\\route.ts",
+              "RelativeToolTip": "api\\itineraries\\[id]\\route.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-02T19:46:38.727Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "route.js",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\checkout\\route.js",
+              "RelativeDocumentMoniker": "api\\book\\checkout\\route.js",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\checkout\\route.js",
+              "RelativeToolTip": "api\\book\\checkout\\route.js",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAcwD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-03T02:27:04.405Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "route.js",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\booking\\route.js",
+              "RelativeDocumentMoniker": "api\\booking\\route.js",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\booking\\route.js",
+              "RelativeToolTip": "api\\booking\\route.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-03T01:28:40.924Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "RegisterForm.tsx",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\RegisterForm.tsx",
+              "RelativeDocumentMoniker": "components\\account-management\\RegisterForm.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\RegisterForm.tsx",
+              "RelativeToolTip": "components\\account-management\\RegisterForm.tsx",
+              "ViewState": "AgIAAIwAAAAAAAAAAAAAALoAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-03T02:37:20.322Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "AccountDropdown.tsx",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\AccountDropdown.tsx",
+              "RelativeDocumentMoniker": "components\\account-management\\AccountDropdown.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\AccountDropdown.tsx",
+              "RelativeToolTip": "components\\account-management\\AccountDropdown.tsx",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAACoAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-01T18:40:54.426Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 23,
+              "Title": "Booking.tsx",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\booking\\Booking.tsx",
+              "RelativeDocumentMoniker": "components\\booking\\Booking.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\booking\\Booking.tsx",
+              "RelativeToolTip": "components\\booking\\Booking.tsx",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBUAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-03T02:17:01.69Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "page.tsx",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\dashboard\\booking-history\\page.tsx",
+              "RelativeDocumentMoniker": "dashboard\\booking-history\\page.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\dashboard\\booking-history\\page.tsx",
+              "RelativeToolTip": "dashboard\\booking-history\\page.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-03T02:24:21.574Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "page.tsx",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\notification\\page.tsx",
+              "RelativeDocumentMoniker": "notification\\page.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\notification\\page.tsx",
+              "RelativeToolTip": "notification\\page.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-02T19:22:16.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Navigator.tsx",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\main\\Navigator.tsx",
+              "RelativeDocumentMoniker": "components\\main\\Navigator.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\main\\Navigator.tsx",
+              "RelativeToolTip": "components\\main\\Navigator.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-02T20:15:09.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Header.tsx",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\main\\Header.tsx",
+              "RelativeDocumentMoniker": "components\\main\\Header.tsx",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\main\\Header.tsx",
+              "RelativeToolTip": "components\\main\\Header.tsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-01T18:51:21.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
               "Title": "page.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\page.tsx",
               "RelativeDocumentMoniker": "page.tsx",
@@ -418,11 +538,12 @@
               "RelativeToolTip": "page.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-02T20:13:23.304Z"
+              "WhenOpened": "2025-04-02T20:13:23.304Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 30,
               "Title": "token.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\src\\auth\\token.js",
               "RelativeDocumentMoniker": "..\\src\\auth\\token.js",
@@ -430,11 +551,12 @@
               "RelativeToolTip": "..\\src\\auth\\token.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-02T19:20:43.29Z"
+              "WhenOpened": "2025-04-02T19:20:43.29Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 31,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\[uid]\\login\\route.js",
               "RelativeDocumentMoniker": "api\\account\\[uid]\\login\\route.js",
@@ -442,23 +564,12 @@
               "RelativeToolTip": "api\\account\\[uid]\\login\\route.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-02T00:00:30.773Z"
+              "WhenOpened": "2025-04-02T00:00:30.773Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "route.js",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\flight\\route.js",
-              "RelativeDocumentMoniker": "api\\book\\flight\\route.js",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\flight\\route.js",
-              "RelativeToolTip": "api\\book\\flight\\route.js",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAADYAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-01T20:42:22.703Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 32,
               "Title": "layout.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\layout.tsx",
               "RelativeDocumentMoniker": "layout.tsx",
@@ -466,11 +577,12 @@
               "RelativeToolTip": "layout.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-01T19:04:32.088Z"
+              "WhenOpened": "2025-04-01T19:04:32.088Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 33,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\flights_search\\flights\\route.js",
               "RelativeDocumentMoniker": "api\\flights_search\\flights\\route.js",
@@ -478,11 +590,12 @@
               "RelativeToolTip": "api\\flights_search\\flights\\route.js",
               "ViewState": "AgIAADwAAAAAAAAAAAAqwEwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-03-31T19:43:38.702Z"
+              "WhenOpened": "2025-03-31T19:43:38.702Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 34,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\suggestion\\flights\\route.js",
               "RelativeDocumentMoniker": "api\\suggestion\\flights\\route.js",
@@ -490,7 +603,8 @@
               "RelativeToolTip": "api\\suggestion\\flights\\route.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-03-29T23:33:48.793Z"
+              "WhenOpened": "2025-03-29T23:33:48.793Z",
+              "EditorCaption": ""
             }
           ]
         }

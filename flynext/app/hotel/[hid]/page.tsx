@@ -90,7 +90,7 @@ export default function HotelDetailPage() {
     }, [hotelId, checkInDate, checkOutDate]);
 
     useEffect(() => {
-        const fetchUserId = async () => {
+        const fetchUserIdAndItineraries = async () => {
             if (!accessToken) return;
 
             try {
@@ -99,20 +99,24 @@ export default function HotelDetailPage() {
                 });
                 setUserId(res.data.id);
 
-                const itinRes = await axios.get("/api/itineraries/contain_hotel", {
+                // 拉取 itineraries 并筛掉已有 HOTEL booking 的
+                const itinRes = await axios.get("/api/itineraries", {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 });
 
-                setItineraries(itinRes.data);               
+                const filtered = itinRes.data.filter((itin: Itinerary) =>
+                    !itin.bookings.some((b) => b.type === "HOTEL")
+                );
+                setItineraries(filtered);
+
             } catch (error) {
-                console.error("Error fetching user id:", error);
-            } finally {
-                // setUserLoading(false); //change
+                console.error("Error fetching user id or itineraries:", error);
             }
         };
 
-        fetchUserId();
+        fetchUserIdAndItineraries();
     }, [accessToken]);
+
 
     //Kenson: add to book hotel
     const handleBooking = async () => {

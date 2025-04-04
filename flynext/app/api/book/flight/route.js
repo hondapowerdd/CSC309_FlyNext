@@ -29,48 +29,56 @@ export const POST = async (req) => {
             return new Response(JSON.stringify({ error: "User not found" }), { status: 404 });
         }
 
-        const apiUrl = "https://advanced-flights-system.replit.app/api/bookings";
+        const createdBookings = [];
 
-        const bookingData = {
-            firstName,
-            lastName,
-            email,
-            passportNumber,
-            flightIds,
-        };
+        for (const flightId of flightIds) {
+            const bookingData = {
+                firstName,
+                lastName,
+                email,
+                passportNumber,
+                flightIds: [flightId],
+            };
 
-        //console.log("Sending booking data to AFS:", JSON.stringify(bookingData, null, 2));
+            try {
+                const response = await axios.post("https://advanced-flights-system.replit.app/api/bookings", bookingData, {
+                    headers: {
+                        "x-api-key": process.env.AFS_API_KEY,
+                        "Content-Type": "application/json"
+                    }
+                });
 
-        const response = await axios.post(apiUrl, bookingData, {
-            headers: {
-                "x-api-key": process.env.AFS_API_KEY,
-                "Content-Type": "application/json"
+                const bookingReference = response.data?.bookingReference;
+
+                if (!bookingReference) {
+                    console.warn(`No booking reference returned for flight ${flightId}`);
+                    continue;
+                }
+
+                const createdBooking = await prisma.booking.create({
+                    data: {
+                        userId: user.id,
+                        itineraryId: itineraryId,
+                        flightReference: flightId,
+                        status: "PENDING",
+                        type: "FLIGHT",
+                    },
+                });
+
+                createdBookings.push(createdBooking);
+
+            } catch (err) {
+                console.error(`Failed to book flight ${flightId}:`, err);
             }
-        });
-
-        //console.log("Response from AFS:", response.data);
-
-        const bookingReference = response.data?.bookingReference;
-
-        if (!bookingReference) {
-            return new Response(JSON.stringify({ error: "No booking reference returned from AFS" }), { status: 500 });
         }
 
-        const createdBooking = await prisma.booking.create({
-            data: {
-                userId: user.id,
-                itineraryId: itineraryId,
-                flightReference: flightIds[0],
-                status: "PENDING",
-                type: "FLIGHT",
-            },
-        });
-
-        //console.log("Created booking:", createdBooking);
+        if (createdBookings.length === 0) {
+            return new Response(JSON.stringify({ error: "All flight bookings failed." }), { status: 500 });
+        }
 
         return new Response(JSON.stringify({
-            message: "Flight booking created successfully",
-            bookings: [createdBooking],
+            message: "Flight bookings completed.",
+            bookings: createdBookings,
             tokenUpdates: tokenType === "refresh" ? updateTokens(tokenUid) : null,
         }), {
             status: 200,

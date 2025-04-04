@@ -15,7 +15,6 @@ interface Props {
 export default function FlightBookingForm({ flightIds, onClose, destinationCity, arrivalTime }: Props) {
     const { accessToken } = useContext(AuthContext);
     const router = useRouter();
-    console.error("[DEBUG] GET token for flights:", accessToken)
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -41,7 +40,14 @@ export default function FlightBookingForm({ flightIds, onClose, destinationCity,
                 const itinRes = await axios.get("/api/itineraries", {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 });
-                setItineraries(itinRes.data);
+
+                const filtered = itinRes.data.filter((itin: any) =>
+                    !itin.bookings.some((b: any) => b.type === "FLIGHT")
+                );
+
+                console.log("[Filtered flight-free itineraries]", filtered);
+                setItineraries(filtered);
+
             } catch (err) {
                 console.error("Failed to fetch user or itineraries", err);
             }

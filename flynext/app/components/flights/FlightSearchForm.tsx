@@ -65,11 +65,14 @@ export default function FlightSearchForm() {
 
     const handleSearch = () => {
         if (!departureDate) return;
-        const base = "/flight_search/results";
+
+        const base = isRoundTrip ? "/flight_search/results_round" : "/flight_search/results";
         const query = `?origin=${origin}&destination=${destination}&date=${departureDate.toISOString().split("T")[0]}`;
         const returnQ = isRoundTrip && returnDate ? `&returnDate=${returnDate.toISOString().split("T")[0]}` : "";
+
         router.push(`${base}${query}${returnQ}`);
     };
+
 
     return (
         <div className="w-full bg-white p-6 rounded-md shadow-md">

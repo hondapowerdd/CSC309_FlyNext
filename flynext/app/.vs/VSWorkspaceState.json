@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\api",
-    "\\api\\account",
-    "\\api\\account\\profile",
-    "\\api\\book",
-    "\\api\\book\\hotel",
     "\\components",
     "\\components\\flights",
-    "\\hotel",
-    "\\hotel\\[hid]"
+    "\\dashboard",
+    "\\flight_search",
+    "\\flight_search\\results",
+    "\\flight_search\\results_round",
+    "\\hotel\\[hid]",
+    "\\hotel\\[hid]\\bookings"
   ],
-  "SelectedNode": "\\hotel\\[hid]\\page.tsx",
+  "SelectedNode": "\\api\\book",
   "PreviewInSolutionExplorer": false
 }

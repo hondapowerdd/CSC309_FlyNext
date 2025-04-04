@@ -7,12 +7,24 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:hotel\\[hid]\\page.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightBookingForm.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:components\\flights\\FlightBookingForm.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\hotel\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:api\\book\\hotel\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\flight\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:api\\book\\flight\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\contain_hotel\\route.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:api\\itineraries\\contain_hotel\\route.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\route.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:api\\itineraries\\route.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightBookingForm.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:components\\flights\\FlightBookingForm.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\get_id\\route.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
@@ -106,10 +118,6 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:api\\account\\[uid]\\login\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\flight\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:api\\book\\flight\\route.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\layout.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:layout.tsx||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
     },
@@ -129,24 +137,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "route.ts",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\get_id\\route.ts",
-              "RelativeDocumentMoniker": "api\\account\\get_id\\route.ts",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\get_id\\route.ts",
-              "RelativeToolTip": "api\\account\\get_id\\route.ts",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAZAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\route.ts",
+              "RelativeDocumentMoniker": "api\\itineraries\\route.ts",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\route.ts",
+              "RelativeToolTip": "api\\itineraries\\route.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T16:32:34.392Z",
+              "WhenOpened": "2025-04-04T14:19:34.547Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
+              "Title": "route.ts",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\contain_hotel\\route.ts",
+              "RelativeDocumentMoniker": "api\\itineraries\\contain_hotel\\route.ts",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\contain_hotel\\route.ts",
+              "RelativeToolTip": "api\\itineraries\\contain_hotel\\route.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-04T14:17:20.631Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "route.ts",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\profile\\route.ts",
               "RelativeDocumentMoniker": "api\\account\\profile\\route.ts",
@@ -159,13 +180,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\hotel\\route.js",
               "RelativeDocumentMoniker": "api\\book\\hotel\\route.js",
               "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\hotel\\route.js",
               "RelativeToolTip": "api\\book\\hotel\\route.js",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAE0AAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-04-03T15:59:13.301Z",
               "EditorCaption": ""
@@ -178,14 +199,40 @@
               "RelativeDocumentMoniker": "hotel\\[hid]\\page.tsx",
               "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\[hid]\\page.tsx",
               "RelativeToolTip": "hotel\\[hid]\\page.tsx",
-              "ViewState": "AgIAAPgAAAAAAAAAAAAwwBkBAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADoAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
               "WhenOpened": "2025-04-03T15:55:03.716Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
+              "Title": "route.js",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\flight\\route.js",
+              "RelativeDocumentMoniker": "api\\book\\flight\\route.js",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\flight\\route.js",
+              "RelativeToolTip": "api\\book\\flight\\route.js",
+              "ViewState": "AgIAACgAAAAAAAAAAAAQwFcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-04-01T20:42:22.703Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "route.ts",
+              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\get_id\\route.ts",
+              "RelativeDocumentMoniker": "api\\account\\get_id\\route.ts",
+              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\get_id\\route.ts",
+              "RelativeToolTip": "api\\account\\get_id\\route.ts",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2025-04-03T16:32:34.392Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "LoginForm.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\LoginForm.tsx",
               "RelativeDocumentMoniker": "components\\account-management\\LoginForm.tsx",
@@ -198,7 +245,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "page.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\hotel\\page.tsx",
               "RelativeDocumentMoniker": "hotel\\page.tsx",
@@ -211,7 +258,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\[uid]\\route.js",
               "RelativeDocumentMoniker": "api\\account\\[uid]\\route.js",
@@ -224,7 +271,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "FlightBookingForm.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightBookingForm.tsx",
               "RelativeDocumentMoniker": "components\\flights\\FlightBookingForm.tsx",
@@ -237,7 +284,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "route.ts",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\itineraries\\[id]\\route.ts",
               "RelativeDocumentMoniker": "api\\itineraries\\[id]\\route.ts",
@@ -250,7 +297,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\checkout\\route.js",
               "RelativeDocumentMoniker": "api\\book\\checkout\\route.js",
@@ -263,7 +310,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\booking\\route.js",
               "RelativeDocumentMoniker": "api\\booking\\route.js",
@@ -276,7 +323,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "RegisterForm.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\RegisterForm.tsx",
               "RelativeDocumentMoniker": "components\\account-management\\RegisterForm.tsx",
@@ -289,7 +336,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "AccountDropdown.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\account-management\\AccountDropdown.tsx",
               "RelativeDocumentMoniker": "components\\account-management\\AccountDropdown.tsx",
@@ -302,7 +349,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "Booking.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\booking\\Booking.tsx",
               "RelativeDocumentMoniker": "components\\booking\\Booking.tsx",
@@ -315,7 +362,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "page.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\dashboard\\booking-history\\page.tsx",
               "RelativeDocumentMoniker": "dashboard\\booking-history\\page.tsx",
@@ -328,7 +375,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "FlightResultList.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightResultList.tsx",
               "RelativeDocumentMoniker": "components\\flights\\FlightResultList.tsx",
@@ -341,7 +388,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "page.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\notification\\page.tsx",
               "RelativeDocumentMoniker": "notification\\page.tsx",
@@ -354,7 +401,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "Navigator.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\main\\Navigator.tsx",
               "RelativeDocumentMoniker": "components\\main\\Navigator.tsx",
@@ -367,7 +414,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "FlightResultsClient.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\results\\FlightResultsClient.tsx",
               "RelativeDocumentMoniker": "flight_search\\results\\FlightResultsClient.tsx",
@@ -380,7 +427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "page.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\results\\page.tsx",
               "RelativeDocumentMoniker": "flight_search\\results\\page.tsx",
@@ -393,7 +440,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "Header.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\main\\Header.tsx",
               "RelativeDocumentMoniker": "components\\main\\Header.tsx",
@@ -406,7 +453,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 24,
               "Title": "FlightSearchForm.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\components\\flights\\FlightSearchForm.tsx",
               "RelativeDocumentMoniker": "components\\flights\\FlightSearchForm.tsx",
@@ -419,7 +466,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 25,
               "Title": "page.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\flight_search\\page.tsx",
               "RelativeDocumentMoniker": "flight_search\\page.tsx",
@@ -432,7 +479,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 26,
               "Title": "page.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\page.tsx",
               "RelativeDocumentMoniker": "page.tsx",
@@ -445,7 +492,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 27,
               "Title": "token.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\src\\auth\\token.js",
               "RelativeDocumentMoniker": "..\\src\\auth\\token.js",
@@ -458,7 +505,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\account\\[uid]\\login\\route.js",
               "RelativeDocumentMoniker": "api\\account\\[uid]\\login\\route.js",
@@ -471,20 +518,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "route.js",
-              "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\flight\\route.js",
-              "RelativeDocumentMoniker": "api\\book\\flight\\route.js",
-              "ToolTip": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\book\\flight\\route.js",
-              "RelativeToolTip": "api\\book\\flight\\route.js",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAADYAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-01T20:42:22.703Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 29,
               "Title": "layout.tsx",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\layout.tsx",
               "RelativeDocumentMoniker": "layout.tsx",
@@ -497,7 +531,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 30,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\flights_search\\flights\\route.js",
               "RelativeDocumentMoniker": "api\\flights_search\\flights\\route.js",
@@ -510,7 +544,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 31,
               "Title": "route.js",
               "DocumentMoniker": "C:\\Users\\Kenson\\CSC309\\PP1-main\\flynext\\app\\api\\suggestion\\flights\\route.js",
               "RelativeDocumentMoniker": "api\\suggestion\\flights\\route.js",

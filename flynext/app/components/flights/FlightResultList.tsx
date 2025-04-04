@@ -39,12 +39,8 @@ export default function FlightResultList({
     date,
 }: Props) {
     const [details, setDetails] = useState<{ [key: string]: any }>({});
-    const [activeFlightGroup, setActiveFlightGroup] = useState<{
-        flightIds: string[];
-        destinationCity: string;
-        arrivalTime: string;
-        groupKey: string;
-    } | null>(null);
+    const [selectedOutbound, setSelectedOutbound] = useState<FlightGroup | null>(null);
+    const [selectedReturn, setSelectedReturn] = useState<FlightGroup | null>(null);
     const [showLoginPrompt, setShowLoginPrompt] = useState<string | null>(null);
 
     const { uid } = useContext(AuthContext);
@@ -61,32 +57,22 @@ export default function FlightResultList({
         }
     };
 
-    const handleBooking = (flights: Flight[]) => {
-        if (!uid) {
-            setShowLoginPrompt(flights[0].id);
-            return;
-        }
-
-        const destinationCity = flights[flights.length - 1].destination.city;
-        const arrivalTime = flights[flights.length - 1].arrivalTime;
-
-        setActiveFlightGroup({
-            flightIds: flights.map((f) => f.id),
-            destinationCity,
-            arrivalTime,
-            groupKey: flights[0].id,
-        });
-    };
-
-    const renderFlightGroup = (group: FlightGroup, index: number) => {
+    const renderFlightGroup = (
+        group: FlightGroup,
+        index: number,
+        type: "outbound" | "return"
+    ) => {
         const first = group.flights[0];
         const last = group.flights[group.flights.length - 1];
         const totalDuration = group.flights.reduce((sum, f) => sum + f.duration, 0);
         const flightId = first.id;
         const info = details[flightId];
 
+        const isSelected = (type === "outbound" && selectedOutbound?.flights[0].id === flightId)
+            || (type === "return" && selectedReturn?.flights[0].id === flightId);
+
         return (
-            <div key={index} className="border rounded p-4 mb-4 shadow relative">
+            <div key={index} className={`border rounded p-4 mb-4 shadow relative ${isSelected ? 'ring-2 ring-blue-500' : ''}`}>
                 {group.flights.map((flight) => (
                     <div key={flight.id} className="mb-2">
                         <div className="font-semibold">{flight.flightNumber} - {flight.airline.name}</div>
@@ -99,16 +85,26 @@ export default function FlightResultList({
 
                 <div className="text-right flex gap-4 justify-end">
                     <button
-                        className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                        className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
                         onClick={() => fetchDetails(flightId)}
                     >
                         Detail
                     </button>
                     <button
-                        className="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-                        onClick={() => handleBooking(group.flights)}
+                        className={`px-4 py-2 rounded ${isSelected ? 'bg-blue-700 text-white' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+                        onClick={() => {
+                            if (!uid) {
+                                setShowLoginPrompt(flightId);
+                                return;
+                            }
+                            if (type === "outbound") {
+                                setSelectedOutbound(group);
+                            } else {
+                                setSelectedReturn(group);
+                            }
+                        }}
                     >
-                        Booking
+                        {isSelected ? "Selected" : "Select"}
                     </button>
                 </div>
 
@@ -122,15 +118,6 @@ export default function FlightResultList({
                             Login
                         </button>
                     </div>
-                )}
-
-                {activeFlightGroup?.groupKey === flightId && (
-                    <FlightBookingForm
-                        flightIds={activeFlightGroup.flightIds}
-                        destinationCity={activeFlightGroup.destinationCity}
-                        arrivalTime={activeFlightGroup.arrivalTime}
-                        onClose={() => setActiveFlightGroup(null)}
-                    />
                 )}
 
                 {info && (
@@ -150,14 +137,32 @@ export default function FlightResultList({
             {outboundFlights.length > 0 && (
                 <>
                     <h2 className="text-xl font-bold mb-2">Outbound Flights</h2>
-                    {outboundFlights.map(renderFlightGroup)}
+                    {outboundFlights.map((group, idx) => renderFlightGroup(group, idx, "outbound"))}
                 </>
             )}
             {returnFlights.length > 0 && (
                 <>
                     <h2 className="text-xl font-bold mt-6 mb-2">Return Flights</h2>
-                    {returnFlights.map(renderFlightGroup)}
+                    {returnFlights.map((group, idx) => renderFlightGroup(group, idx, "return"))}
                 </>
+            )}
+
+            {selectedOutbound && selectedReturn && (
+                <div className="mt-6 border rounded p-6 bg-white shadow">
+                    <h3 className="text-lg font-semibold mb-4">Ready to Book</h3>
+                    <FlightBookingForm
+                        flightIds={[
+                            ...selectedOutbound.flights.map(f => f.id),
+                            ...selectedReturn.flights.map(f => f.id)
+                        ]}
+                        destinationCity={selectedReturn.flights[selectedReturn.flights.length - 1].destination.city}
+                        arrivalTime={selectedReturn.flights[selectedReturn.flights.length - 1].arrivalTime}
+                        onClose={() => {
+                            setSelectedOutbound(null);
+                            setSelectedReturn(null);
+                        }}
+                    />
+                </div>
             )}
         </div>
     );
