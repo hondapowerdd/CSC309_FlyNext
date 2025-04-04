@@ -59,13 +59,23 @@ export default () => {
 
 	const checkout = async (e: React.FormEvent) => {
 		e.preventDefault();
+
+		console.log({
+			// @ts-ignore
+			cardNumber: cardDetails.number,
+			expiryDate: cardDetails.expiry,
+			cvv: cardDetails.cvc,
+			totalAmount: total,
+			itineraryId: selectedItinerary, 
+			bookingIds: bookings.map(booking => booking.id)
+		});
 		
 		fetch("/api/book/checkout", {
 			method: "POST",
 			headers: {
 				'Authorization': `Bearer ${accessToken}` // Add authorization header
 			},
-			body: {
+			body: JSON.stringify({
 				// @ts-ignore
 				cardNumber: cardDetails.number,
 				expiryDate: cardDetails.expiry,
@@ -73,13 +83,16 @@ export default () => {
 				totalAmount: total,
 				itineraryId: selectedItinerary, 
 				bookingIds: bookings.map(booking => booking.id)
-			}
+			})
 		})
 		.then(res => {
 			res.json()
 			.then(resContent => {
 				if (res.status !== 200) window.confirm(resContent.error);
-				else window.confirm("Checkout succeed");
+				else {
+					window.confirm("Checkout succeed");
+					window.location.reload();
+				}
 			});
 		});
 	};

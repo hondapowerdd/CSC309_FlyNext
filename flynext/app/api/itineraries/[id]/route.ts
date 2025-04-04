@@ -5,7 +5,7 @@ import { resolveTokens } from "@/auth/token";
 // export async function GET(req: NextRequest, context: { params: { id: string } }) {
 export async function GET(req: NextRequest, context: any) {
     try {
-        const itineraryId = context.params.id;
+        const itineraryId = (await context.params).id;
         const { uid } = await resolveTokens(req);
 
         const user = await prisma.user.findUnique({
