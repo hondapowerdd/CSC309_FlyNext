@@ -32,29 +32,40 @@ export default ({ hid, existingRoomTypes: existingRoomTypes, close }: { hid: str
 
 	const submit = (e: React.FormEvent) => {
 		e.preventDefault();
+
 		const formData = new FormData();
-		
 		formData.append('name', name);
 		formData.append('type', type);
 		formData.append('amenities', amenities);
 		formData.append('pricePerNight', pricePerNight);
 		formData.append('availability', availability);
-		
-		images.forEach((image, index) => {
-		formData.append(`images`, image);
+
+		images.forEach((image) => {
+			formData.append('images', image);
 		});
 
 		fetch(`/api/hotel/${hid}/room`, {
 			method: "POST",
-			body: formData, // Send the FormData as body
+			body: formData,
 			headers: {
-				'Authorization': `Bearer ${accessToken}` // Add authorization header
+				'Authorization': `Bearer ${accessToken}`
 			}
 		})
-		.then(res => {
-			if (!res.ok) close();
-		});
+			.then(async (res) => {
+				const responseText = await res.text(); // helpful for debugging
+				if (res.ok) {
+					close();
+				} else {
+					console.error("Room creation failed:", responseText);
+					alert("Failed to add room. See console for details.");
+				}
+			})
+			.catch((err) => {
+				console.error("Request error:", err);
+				alert("An error occurred while submitting the form.");
+			});
 	};
+
 
 	return (
 		<div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">

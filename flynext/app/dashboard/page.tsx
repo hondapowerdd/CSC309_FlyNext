@@ -4,6 +4,8 @@ import { useState, useEffect, useContext } from 'react';
 import { CameraIcon } from '@heroicons/react/24/outline';
 import { AuthContext } from "@/frontend/contexts/auth";
 
+import { useRouter } from "next/navigation";
+
 export default () => {
 	const { uid, accessToken } = useContext(AuthContext)!;
 	// console.log(uid);
@@ -15,6 +17,8 @@ export default () => {
     const [profileImg, setProfileImg] = useState<File | null>(null);
 	const [profileImgPreview, setProfileImgPreview] = useState<string | undefined>(undefined);
 	const [message, setMessage] = useState("");
+
+	const router = useRouter();
 
 	useEffect(() => {
 		if (!uid) return;
@@ -77,18 +81,20 @@ export default () => {
 				<form onSubmit={submit} className="space-y-6 bg-white rounded-lg shadow-md p-6">
 					{/* Profile Picture Upload */}
 					<div className="flex flex-col items-center">
-						<div className="relative w-32 h-32 rounded-full bg-gray-100 border-2 border-dashed border-blue-200">
+						<div
+							className="relative w-32 h-32 rounded-full bg-gray-100 border-2 border-dashed border-blue-200">
 							{profileImg ? (
-								<img 
-									src={profileImgPreview} 
-									alt="Profile" 
+								<img
+									src={profileImgPreview}
+									alt="Profile"
 									className="w-full h-full rounded-full object-cover"
 								/>
 							) : (
-								<div className="w-full h-full rounded-full bg-gray-200" />
+								<div className="w-full h-full rounded-full bg-gray-200"/>
 							)}
-							<label className="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-sm cursor-pointer hover:bg-blue-50 transition-colors">
-								<CameraIcon className="w-6 h-6 text-blue-600" />
+							<label
+								className="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-sm cursor-pointer hover:bg-blue-50 transition-colors">
+								<CameraIcon className="w-6 h-6 text-blue-600"/>
 								<input
 									type="file"
 									accept="image/*"
@@ -158,10 +164,10 @@ export default () => {
 
 					{message && (
 						<div className={`p-3 rounded-md ${
-							message.includes("updated") 
-								? "bg-green-100 text-green-800" 
+							message.includes("updated")
+								? "bg-green-100 text-green-800"
 								: "bg-red-100 text-red-800"
-							}`}>
+						}`}>
 							{message}
 						</div>
 					)}
@@ -177,8 +183,21 @@ export default () => {
 							</button>
 						</div>
 					</div>
+
+					{/* Hotel Manage Button */}
+					<div className="flex justify-center">
+						<button
+							type="button"
+							onClick={() => router.push("/hotel/manage_hotel")}
+							className="w-full md:w-1/2 py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+						>
+							Manage Hotel
+						</button>
+					</div>
+
+
 				</form>
 			</div>
 		</div>
-    );
+	);
 }
