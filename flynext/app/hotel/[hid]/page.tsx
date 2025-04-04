@@ -119,7 +119,7 @@ export default function HotelDetailPage() {
 
     //Kenson: add to book hotel
     const handleBooking = async () => {
-
+        let itineraryName = "";
         //change
         if (!selectedRoom || !userId || !hotelId || !checkInDate || !checkOutDate) {
             const missingFields = [];
@@ -139,6 +139,7 @@ export default function HotelDetailPage() {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 });
                 itineraryId = res.data.id;
+                itineraryName = res.data.name;
             } catch (err: any) {
                 console.error("Failed to create itinerary", err);
                 setMessage("❌ Failed to create itinerary");
@@ -166,8 +167,16 @@ export default function HotelDetailPage() {
             });
 
             const data = await res.json();
+            if (!itineraryName && itineraryId) {
+                const matched = itineraries.find(i => i.id === itineraryId);
+                if (matched?.name) {
+                    itineraryName = matched.name;
+                }
+            }
+
             if (res.ok) {
-                setMessage("✅ Hotel booked successfully!");
+                setMessage(`✅ Hotel booked successfully! Your itinerary is ${itineraryName || itineraryId}`);
+
 
                 try {
                     const itinCheck = await axios.get(`/api/itineraries/${itineraryId}`, {
@@ -278,7 +287,9 @@ export default function HotelDetailPage() {
                     <select className="w-full border px-3 py-2 rounded" value={selectedItinerary} onChange={(e) => setSelectedItinerary(e.target.value)} disabled={createItinerary}>
                         <option value="">-- Select an existing itinerary --</option>
                         {itineraries.map((item) => (
-                            <option key={item.id} value={item.id}>{item.id}</option>
+                            <option key={item.id} value={item.id}>
+                                {item.name || item.id} 
+                            </option>
                         ))}
                     </select>
 

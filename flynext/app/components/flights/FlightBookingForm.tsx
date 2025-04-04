@@ -20,7 +20,7 @@ export default function FlightBookingForm({ flightIds, arrivalTimes, onClose, de
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [passportNumber, setPassportNumber] = useState("");
-    const [itineraries, setItineraries] = useState<{ id: string }[]>([]);
+    const [itineraries, setItineraries] = useState<{ id: string; name?: string }[]>([]);
     const [selectedItinerary, setSelectedItinerary] = useState("");
     const [createItinerary, setCreateItinerary] = useState(false);
     const [message, setMessage] = useState("");
@@ -66,6 +66,7 @@ export default function FlightBookingForm({ flightIds, arrivalTimes, onClose, de
         }
 
         let itineraryId = selectedItinerary;
+        let itineraryName = "";
 
         if (createItinerary) {
             try {
@@ -73,6 +74,7 @@ export default function FlightBookingForm({ flightIds, arrivalTimes, onClose, de
                     headers: { Authorization: `Bearer ${accessToken}` },
                 });
                 itineraryId = res.data.id;
+                itineraryName = res.data.name;
             } catch (err: any) {
                 console.error("Failed to create itinerary", err);
                 setMessage(err?.response?.data?.error || "Failed to create itinerary.");
@@ -80,9 +82,17 @@ export default function FlightBookingForm({ flightIds, arrivalTimes, onClose, de
             }
         }
 
-        if (!itineraryId) {
-            setMessage("Itinerary ID is required.");
-            return;
+
+        //if (!itineraryId) {
+        //    setMessage("Itinerary ID is required.");
+        //    return;
+        //}
+
+        if (!itineraryName && itineraryId) {
+            const matched = itineraries.find(i => i.id === itineraryId);
+            if (matched?.name) {
+                itineraryName = matched.name;
+            }
         }
 
         const bookingPayload = {
@@ -98,8 +108,10 @@ export default function FlightBookingForm({ flightIds, arrivalTimes, onClose, de
             const res = await axios.post("/api/book/flight", bookingPayload, {
                 headers: { Authorization: `Bearer ${accessToken}` },
             });
-            console.log("Created bookings:", res.data.bookings);
-            setMessage("Booking successful!");
+            //console.log("Created bookings:", res.data.bookings);
+            const displayName = itineraryName || itineraryId;
+            setMessage(`✅ Booking successful! Your itinerary is ${displayName}`);
+
 
             const itinCheck = await axios.get(`/api/itineraries/${itineraryId}`, {
                 headers: { Authorization: `Bearer ${accessToken}` },
@@ -152,7 +164,7 @@ export default function FlightBookingForm({ flightIds, arrivalTimes, onClose, de
             <select className="w-full border px-3 py-2 rounded" value={selectedItinerary} onChange={(e) => setSelectedItinerary(e.target.value)} disabled={createItinerary}>
                 <option value="">-- Select an existing itinerary --</option>
                 {itineraries.map((item) => (
-                    <option key={item.id} value={item.id}>{item.id}</option>
+                    <option key={item.id} value={item.id}>{item.name ?? item.id}</option>
                 ))}
             </select>
 
