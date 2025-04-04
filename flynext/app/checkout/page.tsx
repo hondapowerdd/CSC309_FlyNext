@@ -5,7 +5,7 @@ import Booking from 'APP/components/booking/Booking';
 import { AuthContext } from "@/frontend/contexts/auth";
 
 export default () => {
-	const [itineraries, setItineraries] = useState<Itinerary[]>([]);
+	const [itineraries, setItineraries] = useState<any>({});
 	const [selectedItinerary, setSelectedItinerary] = useState<any>("");
 	const [bookings, setBookings] = useState<Booking[]>([]);
 	const [total, setTotal] = useState(0);
@@ -28,19 +28,19 @@ export default () => {
 			res.json()
 			.then(resContent => {
 				if (!res.ok) return;
-				setItineraries(resContent.itineraries.filter((itinerary: any) => {
-					return !itinerary.invoices &&
-					itinerary.bookings.some((booking: any) => booking.type === "Flight");
-				}));
-				console.log(resContent);
+				const it: any = {};
+				resContent.itineraries.filter((itinerary: any) => {
+					return itinerary.invoices.length < 1 &&
+					itinerary.bookings.some((booking: any) => booking.type === "FLIGHT");
+				}).forEach((itinerary: any) => it[itinerary.id] = itinerary);
+				setItineraries(it);
 			});
 		});
 	}, []);
 
 	// Update bookings when itinerary changes
 	useEffect(() => {
-
-		if (selectedItinerary) setBookings(selectedItinerary.bookings);
+		if (selectedItinerary) setBookings(itineraries[selectedItinerary].bookings);
 		else setBookings([]);
 	}, [selectedItinerary, itineraries]);
 
@@ -51,18 +51,39 @@ export default () => {
 				((new Date(booking.checkOutDate)).getTime() - (new Date(booking.checkInDate)).getTime())
 				/ (1000 * 60 * 60 * 24)
 			);
-			else total += booking.flight.price;
+			else return total + booking.flight.price;
 		}, 0));
-		
+		console.log(total);
 	}, [bookings]);
 
 	const checkout = async (e: React.FormEvent) => {
 		e.preventDefault();
-		// Add your payment processing logic here
-		console.log('Processing payment...', cardDetails);
+		
+		fetch("/api/book/checkout", {
+			method: "POST",
+			headers: {
+				'Authorization': `Bearer ${accessToken}` // Add authorization header
+			},
+			body: {
+				// @ts-ignore
+				cardNumber: cardDetails.number,
+				expiryDate: cardDetails.expiry,
+				cvv: cardDetails.cvc,
+				totalAmount: total,
+				itineraryId: selectedItinerary, 
+				bookingIds: bookings.map(booking => booking.id)
+			}
+		})
+		.then(res => {
+			res.json()
+			.then(resContent => {
+				if (res.status !== 200) window.confirm(resContent.error);
+				else window.confirm("Checkout succeed");
+			});
+		});
 	};
 
-	if (itineraries.length === 0) {
+	if (Object.keys(itineraries).length === 0) {
 		return (
 			<div className="min-h-screen bg-gray-50 p-8 flex items-center justify-center">
 				<div className="text-center text-gray-600">
@@ -88,7 +109,7 @@ export default () => {
 					className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
 				>
 					<option value="">Choose an itinerary</option>
-					{itineraries.map((itinerary) => (
+					{Object.values(itineraries).map((itinerary: any) => (
 						<option key={itinerary.id} value={itinerary.id}>
 							{itinerary.id}
 						</option>
@@ -106,7 +127,7 @@ export default () => {
 							id={booking.id}
 							type={booking.type}
 							status={""}
-							details={booking.type === "Flight"? booking.flight:{
+							details={booking.type === "FLIGHT"? booking.flight:{
 								hotel: booking.hotel.name,
 								room: booking.room.name,
 								checkin: booking.checkInDate,
@@ -122,10 +143,10 @@ export default () => {
 				{/* Total and Payment */}
 				<div className="border-t pt-6">
 					<div className="flex justify-between items-center mb-6">
-					<span className="text-lg font-semibold">Total:</span>
-					<span className="text-2xl font-bold text-blue-900">
-						${total.toFixed(2)}
-					</span>
+						<span className="text-lg font-semibold">Total:</span>
+						<span className="text-2xl font-bold text-blue-900">
+							C$ {total}
+						</span>
 					</div>
 
 					{/* Payment Form */}
