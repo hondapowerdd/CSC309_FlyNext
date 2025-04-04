@@ -23,15 +23,19 @@ export async function GET(request) {
             include: {
                 itineraries: {
                     include: {
-                        invoices: true
+                        invoices: {
+                            select: {
+                                amount: true
+                            }
+                        },
+                        bookings: {
+                            include: {
+                                room: true,
+                                hotel: true
+                            }
+                        }
                     }
                 },
-                bookings: {
-                    include: {
-                        room: true,
-                        hotel: true,
-                    }
-                }
             }
         });
     } catch (e) {
@@ -45,8 +49,8 @@ export async function GET(request) {
 
     let afsFailed = false
     // Retrieve flight info
-    Promise.all(user.bookings.map((booking => {
-        booking => {
+    user.itineraries.forEach(itinerary => {
+        itinerary.bookings.forEach(booking => {
             if (booking.type === "FLIGHT") {
                 try {
                     booking["flight"] = axios.get(apiUrl, {
@@ -58,8 +62,8 @@ export async function GET(request) {
                     });
                 } catch (e) { afsFailed = true }
             }
-        }
-    })));
+        });
+    });
     
     return NextResponse.json({
         bookings: user.bookings,

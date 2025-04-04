@@ -1,22 +1,25 @@
 import { DocumentArrowDownIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { useContext, useState } from 'react';
 import { AuthContext } from '@/frontend/contexts/auth';
+import { jsPDF } from 'jspdf';
 
 interface BookingCardProps {
 	id: string;
 	type: string;
 	status: string;
 	details: Record<string, string>
+	itineraryId: string
+	amount: string
 }
 
 const statusColors: Record<string, string> = {
 	"CONFIRMED": 'bg-green-100 text-green-800',
-	"CANCELLED": 'bg-red-100 text-red-800',
+	"CANCELED": 'bg-red-100 text-red-800',
 	"PENDING": 'bg-yellow-100 text-yellow-800',
 	"default": 'bg-yellow-100 text-yellow-800'
 };
 
-export default ({ id, type, status, details }: BookingCardProps) => {
+export default ({ id, type, status, details, itineraryId, amount }: BookingCardProps) => {
 	const { accessToken } = useContext(AuthContext)!;
 	const [canceled, setCanceled] = useState(status == 'CANCELED');
 
@@ -45,14 +48,20 @@ export default ({ id, type, status, details }: BookingCardProps) => {
 
 			<div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-100 flex flex-col md:flex-row justify-end gap-y-2 md:gap-3">
 				<button
-					onClick={() => {}}
+					onClick={() => {
+						const doc = new jsPDF();
+						doc.text("itinerary id: " + itineraryId, 10, 10);
+						doc.text("amount: " + amount, 10, 20);
+						doc.save(`invoice.pdf`);
+					}}
 					className="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
 				>
 					<DocumentArrowDownIcon className="w-4 h-4 md:w-5 md:h-5" />
 					<span className="text-sm md:text-base">Download</span>
 				</button>
 				
-				{canceled && (
+				{
+					!canceled && 
 					<button
 						onClick={() => {
 							fetch('/api/booking/' + id, {
@@ -70,7 +79,7 @@ export default ({ id, type, status, details }: BookingCardProps) => {
 						<XCircleIcon className="w-4 h-4 md:w-5 md:h-5" />
 						<span className="text-sm md:text-base">Cancel</span>
 					</button>
-				)}
+				}
 			</div>
 		</div>
 	);

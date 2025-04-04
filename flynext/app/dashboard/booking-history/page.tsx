@@ -12,16 +12,9 @@ type BookingType = {
 	type: string;
 	status: string;
 	details: Record<string, string>;
+	amount: string
+	itineraryId: string
 };
-
-const fetchBookings = async (accessToken: string) => {
-	await fetch('/api/booking', {
-		method: "GET",
-		headers: {
-			'Authorization': `Bearer ${accessToken}` // Add authorization header
-		}
-	})
-}
 
 export default () => {
 	const { accessToken } = useContext(AuthContext)!;
@@ -41,21 +34,30 @@ export default () => {
 			res.json()
 			.then(resContent => {
 				if (!res.ok) return;
-				setBookings(resContent.bookings.map((booking: any) => {
-					return {
-						id: booking.id,
-						type: booking.type,
-						status: booking.status,
-						details: booking.type === "HOTEL"? {
-							hotel: booking.hotel.name,
-							room: booking.room.name,
-							checkin: booking.checkInDate,
-							checkout: booking.checkOutDate
-						}:{
-							flight: booking.flightReference
-						}
-					}
-				}));
+				// console.log(resContent.itineraries);
+				setBookings(
+					resContent.itineraries.reduce((bookings: any, itinerary: any) => {
+						console.log(itinerary);
+						itinerary.bookings.forEach((booking: any) => {
+							bookings.push({
+								id: booking.id,
+								type: booking.type,
+								status: booking.status,
+								details: booking.type === "HOTEL"? {
+									hotel: booking.hotel.name,
+									room: booking.room.name,
+									checkin: booking.checkInDate,
+									checkout: booking.checkOutDate
+								}:{
+									flight: booking.flightReference
+								},
+								amount: itinerary.invoices[0].amount,
+								itineraryId: itinerary.id
+							});
+						});
+						return bookings;
+					}, [])
+				);
 				console.log(resContent);
 			});
 		});
@@ -90,6 +92,8 @@ export default () => {
 							type={booking.type}
 							status={booking.status}
 							details={booking.details}
+							amount={booking.amount}
+							itineraryId={booking.itineraryId}
 						/>
 					))
 				) : (
