@@ -36,7 +36,9 @@ export default ({ close }: { close: () => void }) => {
 				'Authorization': `Bearer ${accessToken}` // Add authorization header
 			}
 		})
-		.then(response => close());
+		.then(res => {
+			if (!res.ok) close();
+		});
 	};
 
 	return (

@@ -26,21 +26,40 @@ const fetchBookings = async (accessToken: string) => {
 export default () => {
 	const { accessToken } = useContext(AuthContext)!;
 
-	// const [bookings, setBookings] = useState([]);
 	const [bookings, setBookings] = useState<BookingType[]>([]);
 
 	const [currentPage, setCurrentPage] = useState(1);
 
-	// fetch('/api/booking', {
-	// 	method: "GET",
-	// 	headers: {
-	// 		'Authorization': `Bearer ${accessToken}` // Add authorization header
-	// 	}
-	// })
-
-	// useEffect(() => {
-	// 	const 
-	// });
+	useEffect(() => {
+		fetch('/api/booking', {
+			method: "GET",
+			headers: {
+				'Authorization': `Bearer ${accessToken}` // Add authorization header
+			}
+		})
+		.then(res => {
+			res.json()
+			.then(resContent => {
+				if (!res.ok) return;
+				setBookings(resContent.bookings.map((booking: any) => {
+					return {
+						id: booking.id,
+						type: booking.type,
+						status: booking.status,
+						details: booking.type === "HOTEL"? {
+							hotel: booking.hotel.name,
+							room: booking.room.name,
+							checkin: booking.checkInDate,
+							checkout: booking.checkOutDate
+						}:{
+							flight: booking.flightReference
+						}
+					}
+				}));
+				console.log(resContent);
+			});
+		});
+	}, []);
 
 	// Pagination calculations
 	const indexOfLastBooking = currentPage * bookingsPerPage;
@@ -65,17 +84,17 @@ export default () => {
 				<div className="space-y-4">
 				{currentBookings.length > 0 ? (
 					currentBookings.map((booking) => (
-					<Booking
-						key={booking.id}
-						id={booking.id}
-						type={booking.type}
-						status={booking.status}
-						details={booking.details}
-					/>
+						<Booking
+							key={booking.id}
+							id={booking.id}
+							type={booking.type}
+							status={booking.status}
+							details={booking.details}
+						/>
 					))
 				) : (
 					<div className="text-center py-8 text-gray-500">
-					No bookings found
+						No bookings found
 					</div>
 				)}
 				</div>
