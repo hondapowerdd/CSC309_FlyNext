@@ -39,40 +39,56 @@ export default function FlightResultList({
     date,
 }: Props) {
     const [details, setDetails] = useState<{ [key: string]: any }>({});
-    const [selectedOutbound, setSelectedOutbound] = useState<FlightGroup | null>(null);
-    const [selectedReturn, setSelectedReturn] = useState<FlightGroup | null>(null);
+    const [activeFlightGroup, setActiveFlightGroup] = useState<{
+        flightIds: string[];
+        destinationCity: string;
+        arrivalTime: string;
+        groupKey: string;
+    } | null>(null);
     const [showLoginPrompt, setShowLoginPrompt] = useState<string | null>(null);
 
     const { uid } = useContext(AuthContext);
     const { setShowLogin } = useShowLogin();
 
-    const fetchDetails = async (flightId: string) => {
+    const fetchDetails = async (flightId: string, isReturn = false) => {
+        const o = isReturn ? destination : origin;
+        const d = isReturn ? origin : destination;
+
+        const url = `/api/flights_search/flights?origin=${o}&destination=${d}&date=${date}&id=${flightId}`;
         try {
-            const res = await axios.get(
-                `/api/flights_search/flights?origin=${origin}&destination=${destination}&date=${date}&id=${flightId}`
-            );
+            const res = await axios.get(url);
             setDetails((prev) => ({ ...prev, [flightId]: res.data }));
         } catch (err) {
             console.error("Failed to fetch details:", err);
         }
     };
 
-    const renderFlightGroup = (
-        group: FlightGroup,
-        index: number,
-        type: "outbound" | "return"
-    ) => {
+    const handleBooking = (flights: Flight[]) => {
+        if (!uid) {
+            setShowLoginPrompt(flights[0].id);
+            return;
+        }
+
+        const destinationCity = flights[flights.length - 1].destination.city;
+        const arrivalTime = flights[flights.length - 1].arrivalTime;
+
+        setActiveFlightGroup({
+            flightIds: flights.map((f) => f.id),
+            destinationCity,
+            arrivalTime,
+            groupKey: flights[0].id,
+        });
+    };
+
+    const renderFlightGroup = (group: FlightGroup, index: number, isReturn = false) => {
         const first = group.flights[0];
         const last = group.flights[group.flights.length - 1];
         const totalDuration = group.flights.reduce((sum, f) => sum + f.duration, 0);
         const flightId = first.id;
         const info = details[flightId];
 
-        const isSelected = (type === "outbound" && selectedOutbound?.flights[0].id === flightId)
-            || (type === "return" && selectedReturn?.flights[0].id === flightId);
-
         return (
-            <div key={index} className={`border rounded p-4 mb-4 shadow relative ${isSelected ? 'ring-2 ring-blue-500' : ''}`}>
+            <div key={index} className="border rounded p-4 mb-4 shadow relative">
                 {group.flights.map((flight) => (
                     <div key={flight.id} className="mb-2">
                         <div className="font-semibold">{flight.flightNumber} - {flight.airline.name}</div>
@@ -80,31 +96,22 @@ export default function FlightResultList({
                         <div>Departure: {new Date(flight.departureTime).toLocaleString()}</div>
                         <div>Arrival: {new Date(flight.arrivalTime).toLocaleString()}</div>
                         <div>Price: {flight.price} {flight.currency}</div>
+                        <div className="text-xs text-gray-500">Flight ID: {flight.id}</div>
                     </div>
                 ))}
 
                 <div className="text-right flex gap-4 justify-end">
                     <button
-                        className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-                        onClick={() => fetchDetails(flightId)}
+                        className="mt-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                        onClick={() => fetchDetails(flightId, isReturn)}
                     >
                         Detail
                     </button>
                     <button
-                        className={`px-4 py-2 rounded ${isSelected ? 'bg-blue-700 text-white' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
-                        onClick={() => {
-                            if (!uid) {
-                                setShowLoginPrompt(flightId);
-                                return;
-                            }
-                            if (type === "outbound") {
-                                setSelectedOutbound(group);
-                            } else {
-                                setSelectedReturn(group);
-                            }
-                        }}
+                        className="mt-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                        onClick={() => handleBooking(group.flights)}
                     >
-                        {isSelected ? "Selected" : "Select"}
+                        Booking
                     </button>
                 </div>
 
@@ -118,6 +125,15 @@ export default function FlightResultList({
                             Login
                         </button>
                     </div>
+                )}
+
+                {activeFlightGroup?.groupKey === flightId && (
+                    <FlightBookingForm
+                        flightIds={activeFlightGroup.flightIds}
+                        destinationCity={activeFlightGroup.destinationCity}
+                        arrivalTime={activeFlightGroup.arrivalTime}
+                        onClose={() => setActiveFlightGroup(null)}
+                    />
                 )}
 
                 {info && (
@@ -137,32 +153,14 @@ export default function FlightResultList({
             {outboundFlights.length > 0 && (
                 <>
                     <h2 className="text-xl font-bold mb-2">Outbound Flights</h2>
-                    {outboundFlights.map((group, idx) => renderFlightGroup(group, idx, "outbound"))}
+                    {outboundFlights.map((group, idx) => renderFlightGroup(group, idx))}
                 </>
             )}
             {returnFlights.length > 0 && (
                 <>
                     <h2 className="text-xl font-bold mt-6 mb-2">Return Flights</h2>
-                    {returnFlights.map((group, idx) => renderFlightGroup(group, idx, "return"))}
+                    {returnFlights.map((group, idx) => renderFlightGroup(group, idx, true))}
                 </>
-            )}
-
-            {selectedOutbound && selectedReturn && (
-                <div className="mt-6 border rounded p-6 bg-white shadow">
-                    <h3 className="text-lg font-semibold mb-4">Ready to Book</h3>
-                    <FlightBookingForm
-                        flightIds={[
-                            ...selectedOutbound.flights.map(f => f.id),
-                            ...selectedReturn.flights.map(f => f.id)
-                        ]}
-                        destinationCity={selectedReturn.flights[selectedReturn.flights.length - 1].destination.city}
-                        arrivalTime={selectedReturn.flights[selectedReturn.flights.length - 1].arrivalTime}
-                        onClose={() => {
-                            setSelectedOutbound(null);
-                            setSelectedReturn(null);
-                        }}
-                    />
-                </div>
             )}
         </div>
     );

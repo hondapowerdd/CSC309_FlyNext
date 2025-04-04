@@ -99,7 +99,6 @@ export default function HotelDetailPage() {
                 });
                 setUserId(res.data.id);
 
-                // 拉取 itineraries 并筛掉已有 HOTEL booking 的
                 const itinRes = await axios.get("/api/itineraries", {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 });
@@ -169,8 +168,40 @@ export default function HotelDetailPage() {
             const data = await res.json();
             if (res.ok) {
                 setMessage("✅ Hotel booked successfully!");
-                setTimeout(() => window.location.reload(), 1000);
-            } else {
+
+                try {
+                    const itinCheck = await axios.get(`/api/itineraries/${itineraryId}`, {
+                        headers: { Authorization: `Bearer ${accessToken}` },
+                    });
+
+                    const bookings = itinCheck.data.bookings;
+                    const hasFlightBooking = bookings.some((b: any) => b.type === "FLIGHT");
+
+                    if (!hasFlightBooking) {
+                        const city = hotel.city ?? "";
+                        const checkOut = new Date(checkOutDate);
+                        const formattedDate = checkOut.toISOString().split("T")[0];
+
+                        const shouldRedirect = window.confirm(
+                            "Booking successful!\nWe found you have not booked a flight yet.\nDo you want to search for one now?"
+                        );
+
+                        if (shouldRedirect) {
+                            localStorage.setItem("activeItineraryId", itineraryId);
+                            router.push(`/flight_search?city=${encodeURIComponent(city)}&date=${formattedDate}`);
+                        } else {
+                            setTimeout(() => window.location.reload(), 1500);
+                        }
+                    } else {
+                        setTimeout(() => window.location.reload(), 1500);
+                    }
+
+                } catch (err) {
+                    console.error("Error checking itinerary after booking:", err);
+                    setTimeout(() => window.location.reload(), 1500);
+                }
+            }
+            else {
                 setMessage(`❌ Booking failed: ${data.error}`);
             }
         } catch (err) {
@@ -308,7 +339,14 @@ export default function HotelDetailPage() {
                             {/* Conditionally render input or text */}
                             <div className="text-sm mb-2 flex items-center gap-2">
                                 <span className="text-gray-700">Total:</span>
-                                <span className="font-medium text-blue-900">{entry.totalRooms}</span>
+                                <span className="font-medium text-blue-900">
+                                    {Math.min(...Object.entries(entry.availabilityByDate)
+                                        .filter(([date]) => {
+                                            const d = new Date(date);
+                                            return d >= new Date(checkInDate) && d < new Date(checkOutDate);
+                                        })
+                                        .map(([, count]) => count))}
+                                </span>
                             </div>
 
                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-sm text-gray-700">

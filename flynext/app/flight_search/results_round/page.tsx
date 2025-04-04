@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import FlightResultList from "APP/components/flights/FlightResultList";
+import FlightResultList from "APP/components/flights/FlightResultListRoundTrip";
 
 export default function FlightResultsRoundPage() {
     const searchParams = useSearchParams();
@@ -60,6 +60,7 @@ export default function FlightResultsRoundPage() {
                     origin={origin}
                     destination={destination}
                     date={date}
+                    returnDate={returnDate}
                 />
             )}
         </div>

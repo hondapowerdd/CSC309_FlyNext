@@ -7,12 +7,12 @@ import { useRouter } from "next/navigation";
 
 interface Props {
     flightIds: string[];
+    arrivalTimes: string[];
     onClose: () => void;
     destinationCity: string;
-    arrivalTime: string;
 }
 
-export default function FlightBookingForm({ flightIds, onClose, destinationCity, arrivalTime }: Props) {
+export default function FlightBookingForm({ flightIds, arrivalTimes, onClose, destinationCity }: Props) {
     const { accessToken } = useContext(AuthContext);
     const router = useRouter();
 
@@ -30,13 +30,14 @@ export default function FlightBookingForm({ flightIds, onClose, destinationCity,
         const fetchUserAndItineraries = async () => {
             try {
                 const userRes = await axios.get("/api/account/profile", {
-                    headers: { Authorization: `Bearer ${accessToken}` },
+                    headers: { Authorization: `Bearer accessToken` },
                 });
                 const user = userRes.data;
                 setFirstName(user.firstName ?? "");
                 setLastName(user.lastName ?? "");
                 setEmail(user.email ?? "");
                 setPassportNumber(user.passportNumber ?? "");
+
                 const itinRes = await axios.get("/api/itineraries", {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 });
@@ -45,9 +46,7 @@ export default function FlightBookingForm({ flightIds, onClose, destinationCity,
                     !itin.bookings.some((b: any) => b.type === "FLIGHT")
                 );
 
-                console.log("[Filtered flight-free itineraries]", filtered);
                 setItineraries(filtered);
-
             } catch (err) {
                 console.error("Failed to fetch user or itineraries", err);
             }
@@ -111,7 +110,10 @@ export default function FlightBookingForm({ flightIds, onClose, destinationCity,
 
             if (!hasHotelBooking) {
                 const city = destinationCity ?? "";
-                const checkIn = new Date(arrivalTime);
+
+                const checkInRaw = arrivalTimes?.[0];
+                const checkIn = checkInRaw ? new Date(checkInRaw) : new Date(); 
+
                 const formattedCheckIn = checkIn.toISOString().split("T")[0];
 
                 const shouldRedirect = window.confirm(
@@ -124,7 +126,8 @@ export default function FlightBookingForm({ flightIds, onClose, destinationCity,
                 } else {
                     setTimeout(onClose, 1500);
                 }
-            } else {
+            }
+ else {
                 setTimeout(onClose, 1500);
             }
         } catch (err: any) {

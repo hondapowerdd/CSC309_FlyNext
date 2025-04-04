@@ -8,13 +8,17 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 import { AuthContext } from "@/frontend/contexts/auth";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import axios from "axios"; 
 
 import NewHotelForm from "APP/components/hotel-management/NewHotelForm";
 
 export default function HotelSearchPage() {
     const { uid } = useContext(AuthContext)!;
-
     const router = useRouter();
+    const searchParams = useSearchParams(); 
+
     const [showCalendar, setShowCalendar] = useState(false);
     const [dateRange, setDateRange] = useState([
         {
@@ -34,8 +38,51 @@ export default function HotelSearchPage() {
 
     const [newHotes, setNewHotel] = useState(false);
 
+    const [suggestions, setSuggestions] = useState<any[]>([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
+
     const checkInDate = format(dateRange[0].startDate, "yyyy-MM-dd");
     const checkOutDate = format(dateRange[0].endDate, "yyyy-MM-dd");
+
+    useEffect(() => {
+        const urlCity = searchParams.get("city");
+        const checkIn = searchParams.get("checkInDate");
+
+        if (urlCity) setCity(urlCity);
+
+        if (checkIn) {
+            const [year, month, day] = checkIn.split("-").map(Number);
+            const parsed = new Date(year, month - 1, day);
+
+            if (!isNaN(parsed.getTime())) {
+                setDateRange([
+                    {
+                        startDate: parsed,
+                        endDate: new Date(parsed.getTime() + 86400000),
+                        key: "selection",
+                    },
+                ]);
+            }
+        }
+    }, [searchParams]);
+
+    useEffect(() => {
+        const fetchSuggestions = async () => {
+            if (city.trim()) {
+                try {
+                    const res = await axios.get(`/api/auto-complete?query=${city}`);
+                    setSuggestions(res.data.results);
+                } catch (err) {
+                    console.error("Autocomplete fetch failed", err);
+                }
+            } else {
+                setSuggestions([]);
+            }
+        };
+
+        fetchSuggestions();
+    }, [city]);
+
 
     const searchHotels = async () => {
         const params = new URLSearchParams({
@@ -80,13 +127,30 @@ export default function HotelSearchPage() {
             <div className="bg-white shadow-md rounded-lg p-4 mt-6 mx-4 space-y-4">
                 {/* Line 1: City + Dates + Hotel Name */}
                 <div className="flex flex-wrap gap-4">
-                    <input
-                        type="text"
-                        placeholder="Where are you going?"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        className="flex-1 border p-2 rounded min-w-[200px]"
-                    />
+                    <div className="relative flex-1 min-w-[200px]">
+                        <input
+                            type="text"
+                            placeholder="Where are you going?"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                            onFocus={() => setShowSuggestions(true)}
+                            onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
+                            className="w-full border p-2 rounded"
+                        />
+                        {showSuggestions && suggestions.length > 0 && (
+                            <ul className="absolute z-10 bg-white border mt-1 w-full max-h-40 overflow-y-auto rounded shadow">
+                                {suggestions.map((item, idx) => (
+                                    <li
+                                        key={idx}
+                                        className="px-3 py-2 hover:bg-blue-100 cursor-pointer"
+                                        onClick={() => setCity(item.code || item.name)}
+                                    >
+                                        {item.name} {item.code ? `(${item.code})` : ""}, {item.country}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
 
                     <div className="relative flex-1 min-w-[200px]">
                         <div
