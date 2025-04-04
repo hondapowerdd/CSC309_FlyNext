@@ -60,7 +60,7 @@ export const POST = async (req) => {
             data: {
                 userId: user.id,
                 itineraryId: itineraryId,
-                flightReference: bookingReference,
+                flightReference: flightIds[0],
                 status: "PENDING",
                 type: "FLIGHT",
             },

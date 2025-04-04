@@ -23,6 +23,11 @@ export async function GET(req, res) {
                         pricePerNight: true,
                     },
                 },
+                owner: {
+                    select: {
+                        uid: true
+                    }
+                }
             },
         });
 

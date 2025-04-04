@@ -7,40 +7,53 @@ import { AuthContext } from "@/frontend/contexts/auth";
 
 const bookingsPerPage = 5;
 
-type BookingType = {
-	id: string;
-	type: string;
-	status: string;
-	details: Record<string, string>;
-};
-
-const fetchBookings = async (accessToken: string) => {
-	await fetch('/api/booking', {
-		method: "GET",
-		headers: {
-			'Authorization': `Bearer ${accessToken}` // Add authorization header
-		}
-	})
-}
-
 export default () => {
 	const { accessToken } = useContext(AuthContext)!;
 
-	// const [bookings, setBookings] = useState([]);
-	const [bookings, setBookings] = useState<BookingType[]>([]);
+	const [bookings, setBookings] = useState([]);
 
 	const [currentPage, setCurrentPage] = useState(1);
 
-	// fetch('/api/booking', {
-	// 	method: "GET",
-	// 	headers: {
-	// 		'Authorization': `Bearer ${accessToken}` // Add authorization header
-	// 	}
-	// })
-
-	// useEffect(() => {
-	// 	const 
-	// });
+	useEffect(() => {
+		fetch('/api/booking', {
+			method: "GET",
+			headers: {
+				'Authorization': `Bearer ${accessToken}` // Add authorization header
+			}
+		})
+		.then(res => {
+			res.json()
+			.then(resContent => {
+				if (!res.ok) return;
+				// console.log(resContent.itineraries);
+				setBookings(
+					resContent.itineraries.reduce((bookings: any, itinerary: any) => {
+						console.log(itinerary);
+						itinerary.bookings.forEach((booking: any) => {
+							bookings.push({
+								id: booking.id,
+								type: booking.type,
+								status: booking.status,
+								details: booking.type === "HOTEL"? {
+									hotel: booking.hotel.name,
+									room: booking.room.name,
+									checkin: booking.checkInDate,
+									checkout: booking.checkOutDate
+								}:{
+									flight: booking.flightReference,
+									origin: booking.flight.origin,
+									dest: booking.flight.destination
+								},
+								amount: itinerary.invoices[0].amount,
+								itineraryId: itinerary.id
+							});
+						});
+						return bookings;
+					}, [])
+				);
+			});
+		});
+	}, []);
 
 	// Pagination calculations
 	const indexOfLastBooking = currentPage * bookingsPerPage;
@@ -64,18 +77,21 @@ export default () => {
 				{/* Bookings List */}
 				<div className="space-y-4">
 				{currentBookings.length > 0 ? (
-					currentBookings.map((booking) => (
-					<Booking
-						key={booking.id}
-						id={booking.id}
-						type={booking.type}
-						status={booking.status}
-						details={booking.details}
-					/>
+					currentBookings.map((booking: any) => (
+						<Booking
+							key={booking.id}
+							id={booking.id}
+							type={booking.type}
+							status={booking.status}
+							details={booking.details}
+							amount={booking.amount}
+							itineraryId={booking.itineraryId}
+							hid={null}
+						/>
 					))
 				) : (
 					<div className="text-center py-8 text-gray-500">
-					No bookings found
+						No bookings found
 					</div>
 				)}
 				</div>

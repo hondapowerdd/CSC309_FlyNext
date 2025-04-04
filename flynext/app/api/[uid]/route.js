@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import { resolveTokens, updateTokens } from "@/auth/token";
 import { saveFilePublic } from "@/utils/io";
 import { join } from "path";
-import { use } from "react";
 
 export async function PATCH(request, { params }) {
     // Profile update
@@ -76,21 +75,15 @@ export async function GET(request, { params }) {
         );
     }
 
-    // Use form data since we have images.
-    const form = await request.formData();
-
-    const profilePic = form.get("profilePic");
-    let profilePicName = undefined;
-    if (profilePic && profilePic.type && profilePic.type.startsWith('image/')) {
-        try {
-            profilePicName = await saveFilePublic(join('profiles', uid, 'profileImgs'), profilePic);
-        } catch (e) {
-            return NextResponse.json({ error: "Could not save the profile img" }, { status: 400 });
-        }
-    }
-
-    // Ignore illegal entries
-    Object.entries(user).forEach(([k, v]) => (!v || typeof v !== "string")  && delete user[k]);
+    // const profilePic = form.get("profilePic");
+    // let profilePicName = undefined;
+    // if (profilePic && profilePic.type && profilePic.type.startsWith('image/')) {
+    //     try {
+    //         profilePicName = await saveFilePublic(join('profiles', uid, 'profileImgs'), profilePic);
+    //     } catch (e) {
+    //         return NextResponse.json({ error: "Could not load the profile img" }, { status: 400 });
+    //     }
+    // }
 
     let user;
     try { // Update profile

@@ -29,10 +29,10 @@ export default () => {
                         Flights
                     </button>
                     <button
-                        className={`text-sm md:text-base ${getButtonClass('/hotel_flight')}`}
-                        onClick={() => router.push('/hotel_flight')}
+                        className={`text-sm md:text-base ${getButtonClass('/checkout')}`}
+                        onClick={() => router.push('/checkout')}
                     >
-                        Hotel + Flights
+                        Checkout
                     </button>
                 </nav>
             </div>

@@ -8,9 +8,11 @@ export const POST = async (req) => {
         const tokenType = resolvedToken["tokenType"];
         const tokenUid = resolvedToken["uid"];
 
-        const { userId, cardNumber, expiryDate, cvv, totalAmount, itineraryId, bookingIds } = await req.json();
+        if (!tokenUid) return new Response(JSON.stringify({ error: "Invalid credential" }), { status: 401 });
 
-        if (!userId || !cardNumber || !expiryDate || !cvv || !totalAmount || !itineraryId || !bookingIds || !Array.isArray(bookingIds)) {
+        const { cardNumber, expiryDate, cvv, totalAmount, itineraryId, bookingIds } = await req.json();
+
+        if (!cardNumber || !expiryDate || !cvv || !totalAmount || !itineraryId || !bookingIds || !Array.isArray(bookingIds)) {
             return new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400 });
         }
 
@@ -26,10 +28,11 @@ export const POST = async (req) => {
             return new Response(JSON.stringify({ error: "Invalid CVV" }), { status: 400 });
         }
 
-        const userExists = await prisma.user.findUnique({ where: { id: userId } });
+        const userExists = await prisma.user.findUnique({ where: { uid: tokenUid } });
         if (!userExists) {
             return new Response(JSON.stringify({ error: "User not found" }), { status: 404 });
         }
+        const id = userExists.id;
 
         const itineraryExists = await prisma.itinerary.findUnique({ where: { id: itineraryId } });
         if (!itineraryExists) {
@@ -64,7 +67,7 @@ export const POST = async (req) => {
             data: {
                 amount: totalAmount,
                 status: "COMPLETED",
-                userId: userId,
+                userId: id,
                 itineraryId: itineraryId
             }
         });
@@ -81,7 +84,7 @@ export const POST = async (req) => {
         const invoice = await prisma.invoice.create({
             data: {
                 amount: totalAmount,
-                userId: userId,
+                userId: id,
                 itineraryId: itineraryId,
                 pdfUrl: `/invoices/${payment.id}.pdf`
             }
