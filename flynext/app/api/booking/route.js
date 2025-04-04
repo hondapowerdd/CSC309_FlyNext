@@ -49,24 +49,35 @@ export async function GET(request) {
 
     let afsFailed = false
     // Retrieve flight info
-    user.itineraries.forEach(itinerary => {
-        itinerary.bookings.forEach(booking => {
+    for (const itinerary of user.itineraries) {
+        for (const booking of itinerary.bookings) {
             if (booking.type === "FLIGHT") {
                 try {
-                    booking["flight"] = axios.get(apiUrl, {
-                        params: {
-                            lastName: user.lastName,
-                            bookingReference: booking.flightReference
-                        },
-                        headers: { "x-api-key": process.env.AFS_API_KEY }
-                    });
-                } catch (e) { afsFailed = true }
+                    const flight = (await axios.get("https://advanced-flights-system.replit.app/api/flights/" + booking.flightReference, {
+                        // params: {
+                        //     "x-api-key": process.env.AFS_API_KEY
+                        // },
+                        headers: {
+                            "x-api-key": process.env.AFS_API_KEY,
+                            "Content-Type": "application/json"
+                        }
+                    })).data;
+                    booking.flight = {
+                        price: flight.price,
+                        origin: flight.origin.code,
+                        destination: flight.destination.code
+                    }
+                    
+                } catch (e) { 
+                    console.log(e);
+                    afsFailed = true;
+                }
             }
-        });
-    });
+        };
+    }
     
     return NextResponse.json({
-        bookings: user.bookings,
+        // bookings: user.bookings,
         itineraries: user.itineraries,
         afsFailed,
         tokenUpdates: tokenType==="refresh"? updateTokens(uid):null

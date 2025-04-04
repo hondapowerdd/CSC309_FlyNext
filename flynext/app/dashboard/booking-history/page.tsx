@@ -40,7 +40,9 @@ export default () => {
 									checkin: booking.checkInDate,
 									checkout: booking.checkOutDate
 								}:{
-									flight: booking.flightReference
+									flight: booking.flightReference,
+									origin: booking.flight.origin,
+									dest: booking.flight.destination
 								},
 								amount: itinerary.invoices[0].amount,
 								itineraryId: itinerary.id
@@ -49,7 +51,6 @@ export default () => {
 						return bookings;
 					}, [])
 				);
-				console.log(resContent);
 			});
 		});
 	}, []);

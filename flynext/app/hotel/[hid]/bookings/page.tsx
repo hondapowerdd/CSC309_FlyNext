@@ -22,7 +22,7 @@ export default () => {
     const [showCalendar, setShowCalendar] = useState(false);
     const [dateRange, setDateRange] = useState([
         {
-            startDate: new Date(),
+            startDate: (new Date()).setDate((new Date()).getDate() - 30),
             endDate: new Date(),
             key: "selection",
         },
@@ -58,14 +58,14 @@ export default () => {
 
     useEffect(() => {
         setFBookings(allBookings.filter(booking => {
-            console.log(booking.checkInDate, dateRange.startDate, );
             // @ts-ignore
-            return (booking.type === selectedRoom || selectedRoom === "All") &&
+            return (booking.room.type === selectedRoom || selectedRoom === "All") &&
             // @ts-ignore
             booking.checkInDate >= dateRange[0].startDate &&
             // @ts-ignore
             booking.checkInDate <= dateRange[0].endDate
         }));
+        setCurrentPage(1);
     }, [allBookings, dateRange, selectedRoom]);
 
     useEffect(() => {
@@ -98,22 +98,41 @@ export default () => {
                 {/* Date Range Picker */}
                 <div className="relative flex-1 min-w-[200px]">
                     <div
-                        onClick={() => setShowCalendar(!showCalendar)}
-                        className="border p-2 rounded cursor-pointer"
+                        onClick={() => {
+                            // @ts-ignore
+                            import('react-date-range/dist/styles.css');
+                            // @ts-ignore
+                            import('react-date-range/dist/theme/default.css');
+                            setShowCalendar(!showCalendar);
+                        }}
+                        className="border p-2 rounded cursor-pointer hover:bg-gray-50 transition-colors"
                     >
                         {`${format(dateRange[0].startDate, "yyyy/MM/dd")} - ${format(
                             dateRange[0].endDate,
                             "yyyy/MM/dd"
                         )}`}
                     </div>
+                    
                     {showCalendar && (
-                        <div className="absolute z-10 mt-2">
-                            <DateRange
-                                editableDateInputs={true}
-                                onChange={(item: { selection: { startDate: Date; endDate: Date; key: string; }; }) => setDateRange([item.selection])}
-                                moveRangeOnFirstSelection={false}
-                                ranges={dateRange}
-                            />
+                        <div className="absolute z-[100] mt-2 origin-top">
+                            {/* Add shadow and border */}
+                            <div className="overflow-hidden rounded-lg shadow-xl border border-gray-200">
+                                <DateRange
+                                    key={showCalendar.toString()} // Force fresh instance
+                                    editableDateInputs={true}
+                                    onChange={(item: any) => setDateRange([item.selection])}
+                                    moveRangeOnFirstSelection={false}
+                                    ranges={dateRange}
+                                    // Tailwind-style overrides
+                                    classNames={{
+                                        calendarWrapper: "!bg-white",
+                                        monthAndYearWrapper: "!bg-gray-50",
+                                        dayNumber: "!text-blue-900",
+                                        dayToday: "!text-red-600 before:!bg-transparent",
+                                        dayActive: "!bg-blue-600 !text-white"
+                                    }}
+                                />
+                            </div>
                         </div>
                     )}
                 </div>
@@ -125,7 +144,7 @@ export default () => {
                         value={selectedRoom}
                         onChange={(e) => setSelectedRoom(e.target.value)}
                     >
-                        <option value="DELUXE">All</option>
+                        <option value="All">All</option>
                         <option value="SINGLE">Single Room</option>
                         <option value="DOUBLE">Double Room</option>
                         <option value="SUITE">Suite</option>
@@ -148,7 +167,7 @@ export default () => {
                             status={booking.status}
                             details={{
                                 "room name": booking.room.name,
-                                checkin: booking.checkInDate.toString(),
+                                checkin: booking.checkInDate.toISOString(),
 								checkout: booking.checkOutDate.toString()
                             }}
                             amount={booking.amount}

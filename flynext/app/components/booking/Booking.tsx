@@ -28,7 +28,7 @@ export default ({ id, type, status, details, itineraryId, amount, hid }: Booking
 		<div className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-4 border border-gray-100 hover:shadow-lg transition-shadow duration-200">
 			<div className="flex justify-between items-start mb-3 md:mb-4">
 				<span className={`px-2 md:px-3 py-1 rounded-full text-xs md:text-sm truncate ${statusColors[status] || statusColors.default}`}>
-					{status}
+					{status || "Checking"}
 				</span>
 			</div>
 
@@ -52,7 +52,7 @@ export default ({ id, type, status, details, itineraryId, amount, hid }: Booking
 
 			<div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-100 flex flex-col md:flex-row justify-end gap-y-2 md:gap-3">
 				{
-					!hid &&
+					!hid && status &&
 					<button
 						onClick={() => {
 							const doc = new jsPDF();
@@ -69,7 +69,7 @@ export default ({ id, type, status, details, itineraryId, amount, hid }: Booking
 				
 				
 				{
-					!canceled && 
+					!canceled && status &&
 					<button
 						onClick={() => {
 							if (hid) {
