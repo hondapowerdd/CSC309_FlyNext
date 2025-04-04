@@ -3,7 +3,6 @@
     "",
     "\\api",
     "\\api\\account",
-    "\\api\\account\\get_id",
     "\\api\\account\\profile",
     "\\api\\book",
     "\\api\\book\\hotel",

@@ -141,8 +141,7 @@
               "RelativeToolTip": "api\\account\\get_id\\route.ts",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T16:32:34.392Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T16:32:34.392Z"
             },
             {
               "$type": "Document",
@@ -154,8 +153,7 @@
               "RelativeToolTip": "api\\account\\profile\\route.ts",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T16:30:55.241Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T16:30:55.241Z"
             },
             {
               "$type": "Document",
@@ -167,8 +165,7 @@
               "RelativeToolTip": "api\\book\\hotel\\route.js",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-03T15:59:13.301Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T15:59:13.301Z"
             },
             {
               "$type": "Document",
@@ -193,8 +190,7 @@
               "RelativeToolTip": "components\\account-management\\LoginForm.tsx",
               "ViewState": "AgIAAEMAAAAAAAAAAAAAAHEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T02:37:19.742Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T02:37:19.742Z"
             },
             {
               "$type": "Document",
@@ -206,8 +202,7 @@
               "RelativeToolTip": "hotel\\page.tsx",
               "ViewState": "AgIAAAsAAAAAAAAAAAAiwC0AAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-02T19:42:30.397Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T19:42:30.397Z"
             },
             {
               "$type": "Document",
@@ -219,8 +214,7 @@
               "RelativeToolTip": "api\\account\\[uid]\\route.js",
               "ViewState": "AgIAABgAAAAAAAAAAAAAAAYAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-02T00:21:23.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T00:21:23.792Z"
             },
             {
               "$type": "Document",
@@ -232,8 +226,7 @@
               "RelativeToolTip": "components\\flights\\FlightBookingForm.tsx",
               "ViewState": "AgIAAHUAAAAAAAAAAAAAwJoAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-01T19:22:59.85Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T19:22:59.85Z"
             },
             {
               "$type": "Document",
@@ -245,8 +238,7 @@
               "RelativeToolTip": "api\\itineraries\\[id]\\route.ts",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-02T19:46:38.727Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T19:46:38.727Z"
             },
             {
               "$type": "Document",
@@ -258,8 +250,7 @@
               "RelativeToolTip": "api\\book\\checkout\\route.js",
               "ViewState": "AgIAAC8AAAAAAAAAAAAcwD0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-03T02:27:04.405Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T02:27:04.405Z"
             },
             {
               "$type": "Document",
@@ -271,8 +262,7 @@
               "RelativeToolTip": "api\\booking\\route.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-03T01:28:40.924Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T01:28:40.924Z"
             },
             {
               "$type": "Document",
@@ -284,8 +274,7 @@
               "RelativeToolTip": "components\\account-management\\RegisterForm.tsx",
               "ViewState": "AgIAAIwAAAAAAAAAAAAAALoAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T02:37:20.322Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T02:37:20.322Z"
             },
             {
               "$type": "Document",
@@ -297,8 +286,7 @@
               "RelativeToolTip": "components\\account-management\\AccountDropdown.tsx",
               "ViewState": "AgIAAAsAAAAAAAAAAAAAACoAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-01T18:40:54.426Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T18:40:54.426Z"
             },
             {
               "$type": "Document",
@@ -310,8 +298,7 @@
               "RelativeToolTip": "components\\booking\\Booking.tsx",
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwBUAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T02:17:01.69Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T02:17:01.69Z"
             },
             {
               "$type": "Document",
@@ -323,8 +310,7 @@
               "RelativeToolTip": "dashboard\\booking-history\\page.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-03T02:24:21.574Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-03T02:24:21.574Z"
             },
             {
               "$type": "Document",
@@ -336,8 +322,7 @@
               "RelativeToolTip": "components\\flights\\FlightResultList.tsx",
               "ViewState": "AgIAABQAAAAAAAAAAAAQwAMAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-03-29T21:47:36.338Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T21:47:36.338Z"
             },
             {
               "$type": "Document",
@@ -349,8 +334,7 @@
               "RelativeToolTip": "notification\\page.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-02T19:22:16.359Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T19:22:16.359Z"
             },
             {
               "$type": "Document",
@@ -362,8 +346,7 @@
               "RelativeToolTip": "components\\main\\Navigator.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-02T20:15:09.657Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T20:15:09.657Z"
             },
             {
               "$type": "Document",
@@ -375,8 +358,7 @@
               "RelativeToolTip": "flight_search\\results\\FlightResultsClient.tsx",
               "ViewState": "AgIAAA8AAAAAAAAAAAAuwEMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-03-31T19:36:43.332Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-31T19:36:43.332Z"
             },
             {
               "$type": "Document",
@@ -388,8 +370,7 @@
               "RelativeToolTip": "flight_search\\results\\page.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-03-29T22:54:35.19Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T22:54:35.19Z"
             },
             {
               "$type": "Document",
@@ -401,8 +382,7 @@
               "RelativeToolTip": "components\\main\\Header.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-01T18:51:21.994Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T18:51:21.994Z"
             },
             {
               "$type": "Document",
@@ -414,8 +394,7 @@
               "RelativeToolTip": "components\\flights\\FlightSearchForm.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAKQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-03-29T21:47:32.056Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T21:47:32.056Z"
             },
             {
               "$type": "Document",
@@ -427,8 +406,7 @@
               "RelativeToolTip": "flight_search\\page.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-03-29T21:33:27.071Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T21:33:27.071Z"
             },
             {
               "$type": "Document",
@@ -440,8 +418,7 @@
               "RelativeToolTip": "page.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-02T20:13:23.304Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T20:13:23.304Z"
             },
             {
               "$type": "Document",
@@ -453,8 +430,7 @@
               "RelativeToolTip": "..\\src\\auth\\token.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-02T19:20:43.29Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T19:20:43.29Z"
             },
             {
               "$type": "Document",
@@ -466,8 +442,7 @@
               "RelativeToolTip": "api\\account\\[uid]\\login\\route.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-02T00:00:30.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T00:00:30.773Z"
             },
             {
               "$type": "Document",
@@ -479,8 +454,7 @@
               "RelativeToolTip": "api\\book\\flight\\route.js",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAADYAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-04-01T20:42:22.703Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T20:42:22.703Z"
             },
             {
               "$type": "Document",
@@ -492,8 +466,7 @@
               "RelativeToolTip": "layout.tsx",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
-              "WhenOpened": "2025-04-01T19:04:32.088Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-01T19:04:32.088Z"
             },
             {
               "$type": "Document",
@@ -505,8 +478,7 @@
               "RelativeToolTip": "api\\flights_search\\flights\\route.js",
               "ViewState": "AgIAADwAAAAAAAAAAAAqwEwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-03-31T19:43:38.702Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-31T19:43:38.702Z"
             },
             {
               "$type": "Document",
@@ -518,8 +490,7 @@
               "RelativeToolTip": "api\\suggestion\\flights\\route.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-03-29T23:33:48.793Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-29T23:33:48.793Z"
             }
           ]
         }

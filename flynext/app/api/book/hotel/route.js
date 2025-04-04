@@ -1,4 +1,4 @@
-import prisma from "@/db/database";
+﻿import prisma from "@/db/database";
 import { resolveTokens, updateTokens } from "@/auth/token";
 
 export const POST = async (req) => {
@@ -7,7 +7,7 @@ export const POST = async (req) => {
         const tokenType = resolvedToken["tokenType"];
         const tokenUid = resolvedToken["uid"];
 
-        const { userId, hotelId, roomId, checkInDate, checkOutDate } = await req.json();
+        const { userId, hotelId, roomId, checkInDate, checkOutDate, itineraryId } = await req.json(); // ✅ 加 itineraryId
 
         if (!userId || !hotelId || !roomId || !checkInDate || !checkOutDate) {
             return new Response(JSON.stringify({ error: "Missing required hotel booking information" }), { status: 400 });
@@ -75,9 +75,12 @@ export const POST = async (req) => {
                 roomId,
                 checkInDate: checkIn,
                 checkOutDate: checkOut,
+                itineraryId,
                 status: "PENDING",
+                type: "HOTEL",
             }
         });
+
 
         const roomAvailabilityUpdates = [];
         for (const date of datesToCheck) {

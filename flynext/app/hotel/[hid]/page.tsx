@@ -28,6 +28,11 @@ interface AvailabilityEntry {
     availabilityByDate: Record<string, number>;
 }
 
+interface Itinerary {
+    id: string;
+    bookings: { type: string }[];
+}
+
 export default function HotelDetailPage() {
     const params = useParams();
     const searchParams = useSearchParams();
@@ -88,14 +93,15 @@ export default function HotelDetailPage() {
                 });
                 setUserId(res.data.id);
 
-                const itinRes = await axios.get("/api/itineraries", {
+                const itinRes = await axios.get("/api/itineraries/contain_hotel", {
                     headers: { Authorization: `Bearer ${accessToken}` },
                 });
-                setItineraries(itinRes.data);
+
+                setItineraries(itinRes.data);               
             } catch (error) {
                 console.error("Error fetching user id:", error);
             } finally {
-                setUserLoading(false); //change
+                setUserLoading(false); 
             }
         };
 
@@ -139,15 +145,14 @@ export default function HotelDetailPage() {
 
             const res = await fetch("/api/book/hotel", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     userId,
                     hotelId,
                     roomId: selectedRoom.id,
                     checkInDate,
                     checkOutDate,
+                    itineraryId, 
                 }),
             });
 
