@@ -10,7 +10,6 @@ import { format } from "date-fns";
 import { AuthContext } from "@/frontend/contexts/auth";
 
 import NewHotelForm from "APP/components/hotel-management/NewHotelForm";
-import { tr } from "date-fns/locale";
 
 export default function HotelSearchPage() {
     const { uid } = useContext(AuthContext)!;

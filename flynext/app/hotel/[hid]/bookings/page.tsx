@@ -5,6 +5,7 @@ import Booking from 'APP/components/booking/Booking';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { AuthContext } from "@/frontend/contexts/auth";
 import { useParams } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 // @ts-ignore
 import { DateRange } from "react-date-range";
@@ -14,8 +15,10 @@ const bookingsPerPage = 5;
 export default () => {
     const { accessToken } = useContext(AuthContext)!;
     const { hid } = useParams<{ hid: string }>();
+    const router = useRouter();
 
-    const [bookings, setBookings] = useState([]);
+    const [allBookings, setAllBookings] = useState([]);
+    const [fBookings, setFBookings] = useState([]);
     const [showCalendar, setShowCalendar] = useState(false);
     const [dateRange, setDateRange] = useState([
         {
@@ -28,6 +31,8 @@ export default () => {
 
     const [currentPage, setCurrentPage] = useState(1);
 
+    const [dBookings, setDBookings] = useState([]);
+
     useEffect(() => {
         fetch(`/api/hotel/${hid}/booking`, {
             method: "GET",
@@ -39,24 +44,41 @@ export default () => {
             res.json()
             .then(resContent => {
                 if (!res.ok) return;
-                // console.log(resContent.bookings);
-                setBookings(
-                    resContent.bookings
+                setAllBookings(
+                    resContent.bookings.map(
+                        (booking: any) => {
+                            booking.checkInDate = new Date(booking.checkInDate);
+                            return booking;
+                        }
+                    )
                 );
             });
         });
     }, []);
 
-    // Pagination calculations
-    const indexOfLastBooking = currentPage * bookingsPerPage;
-    const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
-    const currentBookings = bookings.slice(indexOfFirstBooking, indexOfLastBooking);
-    // console.log(currentBookings);
-    const totalPages = Math.ceil(bookings.length / bookingsPerPage);
+    useEffect(() => {
+        setFBookings(allBookings.filter(booking => {
+            console.log(booking.checkInDate, dateRange.startDate, );
+            // @ts-ignore
+            return (booking.type === selectedRoom || selectedRoom === "All") &&
+            // @ts-ignore
+            booking.checkInDate >= dateRange[0].startDate &&
+            // @ts-ignore
+            booking.checkInDate <= dateRange[0].endDate
+        }));
+    }, [allBookings, dateRange, selectedRoom]);
+
+    useEffect(() => {
+        // Pagination calculations
+        const indexOfLastBooking = currentPage * bookingsPerPage;
+        const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
+        setDBookings(fBookings.slice(indexOfFirstBooking, indexOfLastBooking));
+    }, [currentPage, fBookings]);
+    
 
     // Pagination controls
     const goToPage = (pageNumber: number) => {
-        setCurrentPage(Math.max(1, Math.min(pageNumber, totalPages)));
+        setCurrentPage(Math.max(1, Math.min(pageNumber, Math.ceil(fBookings.length / bookingsPerPage))));
     };
 
     const nextPage = () => goToPage(currentPage + 1);
@@ -65,12 +87,19 @@ export default () => {
     return (
         <div className="min-h-screen bg-gray-50 p-8">
             <div className="flex flex-wrap gap-4">
+                {/* Back Button */}
+                <button
+                    onClick={() => router.back()} // Or your custom back handler
+                    className="flex-none px-4 py-2 border rounded hover:bg-gray-50 transition-colors whitespace-nowrap"
+                >
+                    &laquo; Back
+                </button>
 
                 {/* Date Range Picker */}
                 <div className="relative flex-1 min-w-[200px]">
                     <div
                         onClick={() => setShowCalendar(!showCalendar)}
-                        className="border p-2 rounded cursor-pointer hover:bg-gray-50 transition-colors"
+                        className="border p-2 rounded cursor-pointer"
                     >
                         {`${format(dateRange[0].startDate, "yyyy/MM/dd")} - ${format(
                             dateRange[0].endDate,
@@ -78,12 +107,10 @@ export default () => {
                         )}`}
                     </div>
                     {showCalendar && (
-                        <div className="absolute z-10 mt-2 bg-white border rounded shadow-lg">
+                        <div className="absolute z-10 mt-2">
                             <DateRange
                                 editableDateInputs={true}
-                                onChange={(item: { selection: { startDate: Date; endDate: Date; key: string } }) => 
-                                    setDateRange([item.selection])
-                                }
+                                onChange={(item: { selection: { startDate: Date; endDate: Date; key: string; }; }) => setDateRange([item.selection])}
                                 moveRangeOnFirstSelection={false}
                                 ranges={dateRange}
                             />
@@ -107,13 +134,13 @@ export default () => {
                 </div>
             </div>
 
-            <div className="max-w-4xl mx-auto">
+            <div className="mt-5 max-w-4xl mx-auto">
                 {/* <h1 className="text-3xl font-bold text-blue-900 mb-8">Booking History</h1> */}
                 
                 {/* Bookings List */}
                 <div className="space-y-4">
-                {currentBookings.length > 0 ? (
-                    currentBookings.map((booking: any) => (
+                {dBookings.length > 0 ? (
+                    dBookings.map((booking: any) => (
                         <Booking
                             key={booking.id}
                             id={booking.id}
@@ -121,8 +148,8 @@ export default () => {
                             status={booking.status}
                             details={{
                                 "room name": booking.room.name,
-                                checkin: booking.checkInDate,
-								checkout: booking.checkOutDate
+                                checkin: booking.checkInDate.toString(),
+								checkout: booking.checkOutDate.toString()
                             }}
                             amount={booking.amount}
                             itineraryId={booking.itineraryId}
@@ -147,12 +174,12 @@ export default () => {
                     </button>
 
                     <span className="text-sm text-gray-700">
-                        Page {currentPage} of {totalPages}
+                        Page {currentPage} of {Math.ceil(fBookings.length / bookingsPerPage)}
                     </span>
 
                     <button
                         onClick={nextPage}
-                        disabled={currentPage === totalPages}
+                        disabled={currentPage === Math.ceil(fBookings.length / bookingsPerPage)}
                         className="p-2 rounded-md hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         <ChevronRightIcon className="w-6 h-6 text-blue-900" />
