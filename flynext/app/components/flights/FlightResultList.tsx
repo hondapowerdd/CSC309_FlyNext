@@ -42,7 +42,7 @@ export default function FlightResultList({
     const [activeFlightGroup, setActiveFlightGroup] = useState<{
         flightIds: string[];
         destinationCity: string;
-        arrivalTime: string;
+        arrivalTimes: string[];
         groupKey: string;
     } | null>(null);
     const [showLoginPrompt, setShowLoginPrompt] = useState<string | null>(null);
@@ -53,7 +53,6 @@ export default function FlightResultList({
     const fetchDetails = async (flightId: string, isReturn = false) => {
         const o = isReturn ? destination : origin;
         const d = isReturn ? origin : destination;
-
         const url = `/api/flights_search/flights?origin=${o}&destination=${d}&date=${date}&id=${flightId}`;
         try {
             const res = await axios.get(url);
@@ -70,33 +69,43 @@ export default function FlightResultList({
         }
 
         const destinationCity = flights[flights.length - 1].destination.city;
-        const arrivalTime = flights[flights.length - 1].arrivalTime;
+        const arrivalTimes = flights.map((f) => f.arrivalTime);
 
         setActiveFlightGroup({
             flightIds: flights.map((f) => f.id),
             destinationCity,
-            arrivalTime,
+            arrivalTimes,
             groupKey: flights[0].id,
         });
     };
 
-    const renderFlightGroup = (group: FlightGroup, index: number, isReturn = false) => {
+    const renderFlightGroup = (
+        group: FlightGroup,
+        index: number,
+        isReturn = false
+    ) => {
         const first = group.flights[0];
         const last = group.flights[group.flights.length - 1];
         const totalDuration = group.flights.reduce((sum, f) => sum + f.duration, 0);
         const flightId = first.id;
         const info = details[flightId];
 
-        // @ts-ignore
         return (
             <div key={index} className="border rounded p-4 mb-4 shadow relative">
                 {group.flights.map((flight) => (
                     <div key={flight.id} className="mb-2">
-                        <div className="font-semibold">{flight.flightNumber} - {flight.airline.name}</div>
-                        <div>{flight.origin.city} ({flight.origin.code}) → {flight.destination.city} ({flight.destination.code})</div>
+                        <div className="font-semibold">
+                            {flight.flightNumber} - {flight.airline.name}
+                        </div>
+                        <div>
+                            {flight.origin.city} ({flight.origin.code}) →{" "}
+                            {flight.destination.city} ({flight.destination.code})
+                        </div>
                         <div>Departure: {new Date(flight.departureTime).toLocaleString()}</div>
                         <div>Arrival: {new Date(flight.arrivalTime).toLocaleString()}</div>
-                        <div>Price: {flight.price} {flight.currency}</div>
+                        <div>
+                            Price: {flight.price} {flight.currency}
+                        </div>
                         <div className="text-xs text-gray-500">Flight ID: {flight.id}</div>
                     </div>
                 ))}
@@ -132,17 +141,28 @@ export default function FlightResultList({
                     <FlightBookingForm
                         flightIds={activeFlightGroup.flightIds}
                         destinationCity={activeFlightGroup.destinationCity}
-                        arrivalTime={activeFlightGroup.arrivalTime}
+                        arrivalTimes={activeFlightGroup.arrivalTimes}
                         onClose={() => setActiveFlightGroup(null)}
                     />
                 )}
 
                 {info && (
                     <div className="mt-4 bg-gray-100 p-3 rounded">
-                        <div><strong>Departure Time:</strong> {new Date(info.departureTime).toLocaleString()}</div>
-                        <div><strong>Arrival Time:</strong> {new Date(info.arrivalTime).toLocaleString()}</div>
-                        <div><strong>Duration:</strong> {Math.floor(info.duration / 60)}h {info.duration % 60}m</div>
-                        <div><strong>Layovers:</strong> {info.layovers}</div>
+                        <div>
+                            <strong>Departure Time:</strong>{" "}
+                            {new Date(info.departureTime).toLocaleString()}
+                        </div>
+                        <div>
+                            <strong>Arrival Time:</strong>{" "}
+                            {new Date(info.arrivalTime).toLocaleString()}
+                        </div>
+                        <div>
+                            <strong>Duration:</strong> {Math.floor(info.duration / 60)}h{" "}
+                            {info.duration % 60}m
+                        </div>
+                        <div>
+                            <strong>Layovers:</strong> {info.layovers}
+                        </div>
                     </div>
                 )}
             </div>
@@ -154,13 +174,17 @@ export default function FlightResultList({
             {outboundFlights.length > 0 && (
                 <>
                     <h2 className="text-xl font-bold mb-2">Outbound Flights</h2>
-                    {outboundFlights.map((group, idx) => renderFlightGroup(group, idx))}
+                    {outboundFlights.map((group, idx) =>
+                        renderFlightGroup(group, idx)
+                    )}
                 </>
             )}
             {returnFlights.length > 0 && (
                 <>
                     <h2 className="text-xl font-bold mt-6 mb-2">Return Flights</h2>
-                    {returnFlights.map((group, idx) => renderFlightGroup(group, idx, true))}
+                    {returnFlights.map((group, idx) =>
+                        renderFlightGroup(group, idx, true)
+                    )}
                 </>
             )}
         </div>
