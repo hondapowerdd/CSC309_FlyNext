@@ -6,7 +6,7 @@ import { useState, useContext } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { format, set } from "date-fns";
+import { format } from "date-fns";
 import { AuthContext } from "@/frontend/contexts/auth";
 
 import NewHotelForm from "APP/components/hotel-management/NewHotelForm";

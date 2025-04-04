@@ -35,7 +35,7 @@ export default function HotelDetailPage() {
     const params = useParams();
     const searchParams = useSearchParams();
     const { uid, accessToken } = useContext(AuthContext);
-    // const router = useRouter();
+    const router = useRouter();
 
     const hotelId = params.hid as string;
     // console.log(hotelId);
@@ -192,7 +192,7 @@ export default function HotelDetailPage() {
                 
                 {uid === hotel.owner.uid && (
                     <button
-                        // onClick={() => router.push('/bookings')}
+                        onClick={() => router.push(`/hotel/${hotel.hid}/bookings`)}
                         className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors whitespace-nowrap"
                     >
                         View Bookings

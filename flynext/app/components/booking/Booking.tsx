@@ -5,11 +5,12 @@ import { jsPDF } from 'jspdf';
 
 interface BookingCardProps {
 	id: string;
-	type: string;
+	type: string | null;
 	status: string;
 	details: Record<string, string>
 	itineraryId: string
 	amount: string
+	hid: string | null
 }
 
 const statusColors: Record<string, string> = {
@@ -19,7 +20,7 @@ const statusColors: Record<string, string> = {
 	"default": 'bg-yellow-100 text-yellow-800'
 };
 
-export default ({ id, type, status, details, itineraryId, amount }: BookingCardProps) => {
+export default ({ id, type, status, details, itineraryId, amount, hid }: BookingCardProps) => {
 	const { accessToken } = useContext(AuthContext)!;
 	const [canceled, setCanceled] = useState(status == 'CANCELED');
 
@@ -40,30 +41,52 @@ export default ({ id, type, status, details, itineraryId, amount }: BookingCardP
 				
 				{/* Column 2 */}
 				<div className="space-y-1 md:space-y-2">
-					{Object.entries(details).map(([k, v]) => (
-						<p key={k}><span className="font-medium">{k}:</span> {v}</p>
-					))}
+					{
+						details &&
+						Object.entries(details).map(([k, v]) => (
+							<p key={k}><span className="font-medium">{k}:</span> {v}</p>
+						))
+					}
 				</div>
 			</div>
 
 			<div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-100 flex flex-col md:flex-row justify-end gap-y-2 md:gap-3">
-				<button
-					onClick={() => {
-						const doc = new jsPDF();
-						doc.text("itinerary id: " + itineraryId, 10, 10);
-						doc.text("amount: " + amount, 10, 20);
-						doc.save(`invoice.pdf`);
-					}}
-					className="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
-				>
-					<DocumentArrowDownIcon className="w-4 h-4 md:w-5 md:h-5" />
-					<span className="text-sm md:text-base">Download</span>
-				</button>
+				{
+					!hid &&
+					<button
+						onClick={() => {
+							const doc = new jsPDF();
+							doc.text("itinerary id: " + itineraryId, 10, 10);
+							doc.text("amount: " + amount, 10, 20);
+							doc.save(`invoice.pdf`);
+						}}
+						className="w-full md:w-auto flex items-center justify-center gap-2 px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
+					>
+						<DocumentArrowDownIcon className="w-4 h-4 md:w-5 md:h-5" />
+						<span className="text-sm md:text-base">Download</span>
+					</button>
+				}
+				
 				
 				{
 					!canceled && 
 					<button
 						onClick={() => {
+							if (hid) {
+								fetch(`/api/hotel/${hid}/booking`, {
+									method: "PATCH",
+									headers: {
+										'Authorization': `Bearer ${accessToken}` // Add authorization header
+									},
+									body: JSON.stringify({
+										bookingIds: [id]
+									})
+								})
+								.then(res => {
+									if (res.ok) setCanceled(true);
+								});
+								return;
+							}
 							fetch('/api/booking/' + id, {
 								method: "PATCH",
 								headers: {

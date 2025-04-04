@@ -21,7 +21,7 @@ export async function GET(request, { params }) {
     try { // Validate hotel ownership
         hotel = await database.Hotel.findUnique({
             where: { hid },
-            include: { owner: true, bookings: { include: { room: params["roomTypes"] } } }
+            include: { owner: true, bookings: { include: { room: true } } }
         });
     } catch (e) {
         return NextResponse.json({ error: "Database issue" }, { status: 500 });
@@ -39,40 +39,40 @@ export async function GET(request, { params }) {
 
     // Filter bookings
     let bookings = hotel.bookings
-    if (bookings) {
-        const { searchParams } = new URL(request.url);
+    // if (bookings) {
+    //     const { searchParams } = new URL(request.url);
 
-        let startDate = searchParams.get("startDate");
-        if (startDate) {
-            try {
-                startDate = new Date(startDate);
-            }
-            catch (e) {
-                return NextResponse.json({error: "Invalid check-in date"}, { status: 400 });
-            }
+    //     let startDate = searchParams.get("startDate");
+    //     if (startDate) {
+    //         try {
+    //             startDate = new Date(startDate);
+    //         }
+    //         catch (e) {
+    //             return NextResponse.json({error: "Invalid check-in date"}, { status: 400 });
+    //         }
             
-            bookings = bookings.filter(booking => booking.checkInDate >= startDate);
-        }
+    //         bookings = bookings.filter(booking => booking.checkInDate >= startDate);
+    //     }
 
-        let endDate = searchParams.get("endDate");
-        if (endDate) {
-            try {
-                endDate = new Date(endDate);
-            }
-            catch (e) {
-                return NextResponse.json({error: "Invalid check-out date"}, { status: 400 });
-            }
+    //     let endDate = searchParams.get("endDate");
+    //     if (endDate) {
+    //         try {
+    //             endDate = new Date(endDate);
+    //         }
+    //         catch (e) {
+    //             return NextResponse.json({error: "Invalid check-out date"}, { status: 400 });
+    //         }
 
-            bookings = bookings.filter(booking => booking.checkOutDate <= endDate);
-        }
+    //         bookings = bookings.filter(booking => booking.checkOutDate <= endDate);
+    //     }
 
-        let roomTypes = searchParams.get("roomTypes");
-        if (roomTypes) {
-            roomTypes = roomTypes.split(',');
+    //     let roomTypes = searchParams.get("roomTypes");
+    //     if (roomTypes) {
+    //         roomTypes = roomTypes.split(',');
 
-            bookings = bookings.filter(booking => (booking.room && roomTypes.includes(booking.room.type)));
-        } 
-    }
+    //         bookings = bookings.filter(booking => (booking.room && roomTypes.includes(booking.room.type)));
+    //     } 
+    // }
     
     return NextResponse.json({bookings: bookings, tokenUpdates: tokenType==="refresh"? updateTokens(uid):null});
 }

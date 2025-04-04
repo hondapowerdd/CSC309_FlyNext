@@ -7,19 +7,10 @@ import { AuthContext } from "@/frontend/contexts/auth";
 
 const bookingsPerPage = 5;
 
-type BookingType = {
-	id: string;
-	type: string;
-	status: string;
-	details: Record<string, string>;
-	amount: string
-	itineraryId: string
-};
-
 export default () => {
 	const { accessToken } = useContext(AuthContext)!;
 
-	const [bookings, setBookings] = useState<BookingType[]>([]);
+	const [bookings, setBookings] = useState([]);
 
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -85,7 +76,7 @@ export default () => {
 				{/* Bookings List */}
 				<div className="space-y-4">
 				{currentBookings.length > 0 ? (
-					currentBookings.map((booking) => (
+					currentBookings.map((booking: any) => (
 						<Booking
 							key={booking.id}
 							id={booking.id}
@@ -94,6 +85,7 @@ export default () => {
 							details={booking.details}
 							amount={booking.amount}
 							itineraryId={booking.itineraryId}
+							hid={null}
 						/>
 					))
 				) : (
