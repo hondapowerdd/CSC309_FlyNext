@@ -23,7 +23,10 @@ export default function HotelSearchPage() {
     const [dateRange, setDateRange] = useState([
         {
             startDate: new Date(),
-            endDate: new Date(),
+            endDate: new Date(new Date().getTime() + 86400000),
+
+            // startDate: null,
+            // endDate: null,
             key: "selection",
         },
     ]);
@@ -153,20 +156,32 @@ export default function HotelSearchPage() {
                     </div>
 
                     <div className="relative flex-1 min-w-[200px]">
+                        {/*<div*/}
+                        {/*    onClick={() => setShowCalendar(!showCalendar)}*/}
+                        {/*    className="border p-2 rounded cursor-pointer"*/}
+                        {/*>*/}
+                        {/*    {`${format(dateRange[0].startDate, "yyyy/MM/dd")} - ${format(*/}
+                        {/*        dateRange[0].endDate,*/}
+                        {/*        "yyyy/MM/dd"*/}
+                        {/*    )}`}*/}
+                        {/*</div>*/}
+
                         <div
                             onClick={() => setShowCalendar(!showCalendar)}
                             className="border p-2 rounded cursor-pointer"
                         >
-                            {`${format(dateRange[0].startDate, "yyyy/MM/dd")} - ${format(
-                                dateRange[0].endDate,
-                                "yyyy/MM/dd"
-                            )}`}
+                            {dateRange[0].startDate && dateRange[0].endDate
+                                ? `${format(dateRange[0].startDate, "yyyy/MM/dd")} - ${format(dateRange[0].endDate, "yyyy/MM/dd")}`
+                                : "Please select date"}
                         </div>
+
                         {showCalendar && (
                             <div className="absolute z-10 mt-2">
                                 <DateRange
                                     editableDateInputs={true}
-                                    onChange={(item: { selection: { startDate: Date; endDate: Date; key: string; }; }) => setDateRange([item.selection])}
+                                    onChange={(item: {
+                                        selection: { startDate: Date; endDate: Date; key: string; };
+                                    }) => setDateRange([item.selection])}
                                     moveRangeOnFirstSelection={false}
                                     ranges={dateRange}
                                 />
@@ -209,16 +224,15 @@ export default function HotelSearchPage() {
                         className="flex-1 border p-2 rounded min-w-[100px]"
                     />
 
-                    <select
-                        className="flex-1 border p-2 rounded min-w-[150px]"
-                        value={roomType}
-                        onChange={(e) => setRoomType(e.target.value)}
-                    >
-                        <option value="single">Single</option>
-                        <option value="double">Double</option>
-                        <option value="suite">Suite</option>
-                        <option value="family">Family</option>
-                    </select>
+                    {/*<select*/}
+                    {/*    className="flex-1 border p-2 rounded min-w-[150px]"*/}
+                    {/*    value={roomType}*/}
+                    {/*    onChange={(e) => setRoomType(e.target.value)}*/}
+                    {/*>*/}
+                    {/*    <option value="Single">Single</option>*/}
+                    {/*    <option value="Double">Double</option>*/}
+                    {/*    <option value="Deluxe"> Deluxe</option>*/}
+                    {/*</select>*/}
 
                     <button
                         className="bg-blue-600 text-white px-4 py-2 rounded min-w-[100px]"

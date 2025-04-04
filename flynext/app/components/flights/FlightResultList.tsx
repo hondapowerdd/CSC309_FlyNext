@@ -87,6 +87,7 @@ export default function FlightResultList({
         const flightId = first.id;
         const info = details[flightId];
 
+        // @ts-ignore
         return (
             <div key={index} className="border rounded p-4 mb-4 shadow relative">
                 {group.flights.map((flight) => (
