@@ -33,6 +33,12 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
                     >
                         Booking History
                     </button>
+                    <button
+                        className={getButtonClass('/dashboard/manage_hotel')}
+                        onClick={() => router.push("/dashboard/manage_hotel")}
+                    >
+                        Manage hotels
+                    </button>
                 </nav>
             </div>
             {children}

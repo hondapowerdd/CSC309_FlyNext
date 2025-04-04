@@ -185,7 +185,7 @@ export default () => {
 					</div>
 
 					{/* Hotel Manage Button */}
-					<div className="flex justify-center">
+					{/* <div className="flex justify-center">
 						<button
 							type="button"
 							onClick={() => router.push("/hotel/manage_hotel")}
@@ -193,7 +193,7 @@ export default () => {
 						>
 							Manage Hotel
 						</button>
-					</div>
+					</div> */}
 
 
 				</form>

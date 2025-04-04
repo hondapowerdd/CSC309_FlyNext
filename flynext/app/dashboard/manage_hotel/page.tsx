@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface Hotel {
-    hid: string;
+    id: string;
     name: string;
     city: string;
     starRating?: number;
@@ -52,8 +52,8 @@ export default function ManageHotelPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                     {hotels.map((hotel) => (
                         <div
-                            key={hotel.hid}
-                            onClick={() => router.push(`/hotel/manage_hotel/${hotel.hid}`)}
+                            key={hotel.id}
+                            onClick={() => router.push(`/dashboard/manage_hotel/${hotel.id}`)}
                             className="bg-white rounded-lg shadow-md p-4 border hover:shadow-lg transition cursor-pointer"
                         >
                             <h2 className="text-lg font-semibold">{hotel.name}</h2>
