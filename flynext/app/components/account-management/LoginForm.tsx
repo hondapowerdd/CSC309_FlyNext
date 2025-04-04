@@ -9,7 +9,7 @@ export default ({ close }: { close: () => void }) => {
 
     const [submitDisabled, setSubmitDisabled] = useState(false);
     useEffect(() => {
-        const newStatus = uid.length < 10 || password.length < 1;
+        const newStatus =  password.length < 1 // || uid.length < 10;
         if (submitDisabled !== newStatus) setSubmitDisabled(newStatus);
     }, [uid, password]);
 

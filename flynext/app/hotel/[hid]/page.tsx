@@ -4,6 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
 import { AuthContext } from "@/frontend/contexts/auth";
 import axios from "axios";
+import NewRoomForm from "APP/components/hotel-management/NewRoomForm";
 
 interface Room {
     id: string;
@@ -15,11 +16,13 @@ interface Room {
 
 interface Hotel {
     id: string;
+    hid: string
     name: string;
     address: string;
     city: string;
     starRating: number;
     rooms: Room[];
+    owner: Record<string, string>
 }
 
 interface AvailabilityEntry {
@@ -31,8 +34,8 @@ interface AvailabilityEntry {
 export default function HotelDetailPage() {
     const params = useParams();
     const searchParams = useSearchParams();
-    const { accessToken } = useContext(AuthContext);
-    const router = useRouter();
+    const { uid, accessToken } = useContext(AuthContext);
+    // const router = useRouter();
 
     const hotelId = params.hid as string;
     // console.log(hotelId);
@@ -47,10 +50,12 @@ export default function HotelDetailPage() {
     const [message, setMessage] = useState<string>("");
 
     const [userId, setUserId] = useState(""); //change:
-    const [userLoading, setUserLoading] = useState(true);
+    // const [userLoading, setUserLoading] = useState(true);
     const [itineraries, setItineraries] = useState<{ id: string }[]>([]);
     const [selectedItinerary, setSelectedItinerary] = useState("");
     const [createItinerary, setCreateItinerary] = useState(false);
+
+    const [showRoomForm, setShowRoomForm] = useState(false);
 
     useEffect(() => {
         const fetchHotelData = async () => {
@@ -59,10 +64,11 @@ export default function HotelDetailPage() {
                     `../api/hotel_search/information?hotelId=${hotelId}`
                 );
                 const hotelData = await infoRes.json();
+                // console.log(hotelData);
                 setHotel(hotelData);
 
                 const availabilityRes = await fetch(
-                    `../api/hotel_search/availability?hotelId=${hotelId}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
+                    `/api/hotel_search/availability?hotelId=${hotelId}&checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
                 );
                 const availabilityData = await availabilityRes.json();
                 setAvailability(availabilityData.availabilityByRoomType || []);
@@ -95,7 +101,7 @@ export default function HotelDetailPage() {
             } catch (error) {
                 console.error("Error fetching user id:", error);
             } finally {
-                setUserLoading(false); //change
+                // setUserLoading(false); //change
             }
         };
 
@@ -175,17 +181,39 @@ export default function HotelDetailPage() {
     return (
         <div className="p-6 max-w-6xl mx-auto">
             {/* Hotel Header */}
-            <div className="mb-6">
-                <h1 className="text-3xl font-bold">{hotel.name}</h1>
-                <p className="text-gray-600">{hotel.address || "No address provided"}</p>
-                <p className="text-sm text-gray-500">
-                    ⭐ {hotel.starRating} stars — {hotel.city}
-                </p>
+            <div className="flex justify-between items-start gap-4">
+                <div>
+                    <h1 className="text-3xl font-bold">{hotel.name}</h1>
+                    <p className="text-gray-600">{hotel.address || "No address provided"}</p>
+                    <p className="text-sm text-gray-500">
+                        ⭐ {hotel.starRating} stars — {hotel.city}
+                    </p>
+                </div>
+                
+                {uid === hotel.owner.uid && (
+                    <button
+                        // onClick={() => router.push('/bookings')}
+                        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors whitespace-nowrap"
+                    >
+                        View Bookings
+                    </button>
+                )}
             </div>
 
             {/* Rooms */}
-            <div className="mb-10">
-                <h2 className="text-2xl font-semibold mb-3">Rooms</h2>
+            <div className="my-8">
+                <div className="flex justify-between items-start gap-4 mb-3">
+                    <h2 className="text-2xl font-semibold mb-3">Rooms</h2>
+                    {uid === hotel.owner.uid && (
+                        <button
+                            onClick={() => setShowRoomForm(true)}
+                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors whitespace-nowrap text-sm"
+                            disabled={hotel.rooms.length >= 4}
+                        >
+                            Add New Room
+                        </button>
+                    )}
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {hotel.rooms.map((room) => (
                         <div
@@ -204,55 +232,8 @@ export default function HotelDetailPage() {
                 </div>
             </div>
 
-            {/*/!* Rooms *!/*/}
-            {/*{hotel?.rooms && Array.isArray(hotel.rooms) && hotel.rooms.length > 0 && (*/}
-            {/*    <div className="mb-10">*/}
-            {/*        <h2 className="text-2xl font-semibold mb-3">Rooms</h2>*/}
-            {/*        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">*/}
-            {/*            {hotel.rooms.map((room) => (*/}
-            {/*                <div key={room.id} className="border rounded p-4 shadow-sm bg-white">*/}
-            {/*                    <h3 className="text-lg font-bold mb-1">{room.name}</h3>*/}
-            {/*                    <p className="text-sm mb-1">Type: {room.type}</p>*/}
-            {/*                    <p className="text-sm mb-1">Amenities: {room.amenities}</p>*/}
-            {/*                    <p className="text-blue-600 font-semibold">*/}
-            {/*                        ${room.pricePerNight} / night*/}
-            {/*                    </p>*/}
-            {/*                </div>*/}
-            {/*            ))}*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*)}*/}
-
-
-            {/* Availability */}
-            <div>
-                <h2 className="text-2xl font-semibold mb-3">Room Availability</h2>
-                {availability.length === 0 ? (
-                    <p className="text-gray-500">No availability data found.</p>
-                ) : (
-                    availability.map((entry, index) => (
-                        <div
-                            key={index}
-                            className="mb-6 p-4 border rounded shadow-sm bg-white"
-                        >
-                            <h3 className="text-lg font-bold mb-2">{entry.type} Rooms</h3>
-                            <p className="text-sm mb-2">Total: {entry.totalRooms}</p>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-sm text-gray-700">
-                                {Object.entries(entry.availabilityByDate).map(
-                                    ([date, count]) => (
-                                        <div key={date}>
-                                            {date}: <span className="font-medium">{count}</span>
-                                        </div>
-                                    )
-                                )}
-                            </div>
-                        </div>
-                    ))
-                )}
-            </div>
-            {/* Itinerary Selection */} {/* change: */}
             {selectedRoom && (
-                <div className="mt-6 border p-4 rounded bg-gray-50 shadow">
+                <div className="mb-6 border p-4 rounded bg-gray-50 shadow">
                     <label className="block font-medium mb-1">Select Itinerary</label>
                     <select className="w-full border px-3 py-2 rounded" value={selectedItinerary} onChange={(e) => setSelectedItinerary(e.target.value)} disabled={createItinerary}>
                         <option value="">-- Select an existing itinerary --</option>
@@ -279,7 +260,96 @@ export default function HotelDetailPage() {
                 </div>
             )}
 
-            
+            {/*/!* Rooms *!/*/}
+            {/*{hotel?.rooms && Array.isArray(hotel.rooms) && hotel.rooms.length > 0 && (*/}
+            {/*    <div className="mb-10">*/}
+            {/*        <h2 className="text-2xl font-semibold mb-3">Rooms</h2>*/}
+            {/*        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">*/}
+            {/*            {hotel.rooms.map((room) => (*/}
+            {/*                <div key={room.id} className="border rounded p-4 shadow-sm bg-white">*/}
+            {/*                    <h3 className="text-lg font-bold mb-1">{room.name}</h3>*/}
+            {/*                    <p className="text-sm mb-1">Type: {room.type}</p>*/}
+            {/*                    <p className="text-sm mb-1">Amenities: {room.amenities}</p>*/}
+            {/*                    <p className="text-blue-600 font-semibold">*/}
+            {/*                        ${room.pricePerNight} / night*/}
+            {/*                    </p>*/}
+            {/*                </div>*/}
+            {/*            ))}*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*)}*/}
+
+
+            {/* Availability */}
+            <div>
+                <div className="flex justify-between items-start gap-4 mb-3">
+                    <h2 className="text-2xl font-semibold">Room Availability</h2>
+                </div>
+                
+                {availability.length === 0 ? (
+                    <p className="text-gray-500">No availability data found.</p>
+                ) : (
+                    availability.map((entry, index) => (
+                        <div
+                            key={index}
+                            className="mb-6 p-4 border rounded shadow-sm bg-white"
+                        >
+                            <h3 className="text-lg font-bold mb-2">{entry.type} Rooms</h3>
+                            
+                            {/* Conditionally render input or text */}
+                            <div className="text-sm mb-2 flex items-center gap-2">
+                                <span className="text-gray-700">Total:</span>
+                                <span className="font-medium text-blue-900">{entry.totalRooms}</span>
+                            </div>
+
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-sm text-gray-700">
+                                {Object.entries(entry.availabilityByDate).map(([date, count]) => (
+                                <div key={date}>
+                                    {date}: <span className="font-medium">{count}</span>
+                                </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))
+                )}
+            </div>
+            {/* Itinerary Selection */} {/* change: */}
+            {/* {selectedRoom && (
+                <div className="mt-6 border p-4 rounded bg-gray-50 shadow">
+                    <label className="block font-medium mb-1">Select Itinerary</label>
+                    <select className="w-full border px-3 py-2 rounded" value={selectedItinerary} onChange={(e) => setSelectedItinerary(e.target.value)} disabled={createItinerary}>
+                        <option value="">-- Select an existing itinerary --</option>
+                        {itineraries.map((item) => (
+                            <option key={item.id} value={item.id}>{item.id}</option>
+                        ))}
+                    </select>
+
+                    <label className="flex items-center gap-2 mt-2">
+                        <input type="checkbox" checked={createItinerary} onChange={() => {
+                            setCreateItinerary(!createItinerary);
+                            if (!createItinerary) setSelectedItinerary("");
+                        }} />
+                        Create a new itinerary
+                    </label>
+
+                    <button
+                        onClick={handleBooking}
+                        className="mt-4 bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700"
+                    >
+                        Book Selected Room
+                    </button>
+                    {message && <p className="mt-2 text-sm text-blue-600">{message}</p>}
+                </div>
+            )} */}
+
+            {
+                showRoomForm &&
+                <NewRoomForm
+                    hid={hotel.hid}
+                    existingRoomTypes={hotel.rooms.map(room => room.type)}
+                    close={() => setShowRoomForm(false)}
+                />
+            }
 
         </div>
     );
