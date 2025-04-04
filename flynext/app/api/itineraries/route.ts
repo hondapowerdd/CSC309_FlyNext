@@ -36,9 +36,8 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: Request) {
     try {
-        const { uid, tokenType } = await resolveTokens(req);
+        const { uid } = await resolveTokens(req);
         if (!uid) {
-            console.warn("[POST itinerary] Invalid token:", uid);
             return NextResponse.json({ error: "Invalid token" }, { status: 401 });
         }
 
@@ -47,8 +46,28 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
 
+        const existing = await prisma.itinerary.findMany({
+            where: { userId: user.id },
+        });
+
+        let maxNum = 0;
+        for (const itin of existing) {
+            const match = itin.name?.match(/^Itinerary (\d+)$/);
+            if (match) {
+                const num = parseInt(match[1]);
+                if (!isNaN(num)) {
+                    maxNum = Math.max(maxNum, num);
+                }
+            }
+        }
+
+        const newName = `Itinerary ${maxNum + 1}`;
+
         const itinerary = await prisma.itinerary.create({
-            data: { userId: user.id }
+            data: {
+                userId: user.id,
+                name: newName,
+            },
         });
 
         return NextResponse.json(itinerary, { status: 201 });
