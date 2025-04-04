@@ -127,284 +127,84 @@ async function main() {
 
 
 
-    // create a hotel -----------------------------------------------------------------------------
+    // create 50 hotels -----------------------------------------------------------------------------
     const existingHotels = await prisma.hotel.findMany();
     if (existingHotels.length === 0) {
-        await prisma.hotel.create({
-            data: {
-                id: "hotel_1",
-                hid: "hotel_1",
-                name: "Grand Hotel",
-                city: "Toronto",
-                starRating: 5,
-                ownerId: owner.id,
-            },
-        });
+        const cities = [
+            "Toronto", "New York", "Paris", "Tokyo", "London",
+            "Rome", "Dubai", "Shanghai", "Singapore", "Los Angeles"
+        ];
 
-        await prisma.hotel.create({
-            data: {
-                id: "hotel_2",
-                hid: "hotel_2",
-                name: "SB Hotel",
-                city: "New York",
-                starRating: 4,
-                ownerId: owner.id,
-            },
-        });
+        for (let i = 1; i <= 50; i++) {
+            const city = cities[i % cities.length];
+            const hotel = await prisma.hotel.create({
+                data: {
+                    id: `hotel_${i}`,
+                    hid: `hotel_${i}`,
+                    name: `Hotel ${i}`,
+                    city,
+                    starRating: (i % 5) + 1,
+                    ownerId: owner.id,
+                },
+            });
+
+            await prisma.hotelImage.create({
+                data: {
+                    id: `hotel_img_${i}`,
+                    hotelId: hotel.id,
+                    imageUrl: `https://source.unsplash.com/random/800x600?sig=${i}&hotel`,
+                },
+            });
+
+            // Add rooms
+            const roomTypes = ["SINGLE", "DOUBLE", "DELUXE"];
+            for (let j = 0; j < roomTypes.length; j++) {
+                const type = roomTypes[j];
+                const roomName = `${type} Room ${i}-${j + 1}`;
+                const price = 80 + i * 2 + j * 15;
+
+                const room = await prisma.room.create({
+                    data: {
+                        id: `room_${i}_${j + 1}`,
+                        hotelId: hotel.id,
+                        name: roomName,
+                        type,
+                        pricePerNight: price,
+                        availability: 5,
+                        amenities: "Free Wi-Fi, Air Conditioning",
+                    },
+                });
+
+                await prisma.roomImage.create({
+                    data: {
+                        id: `room_img_${i}_${j + 1}`,
+                        roomId: room.id,
+                        imageUrl: `https://source.unsplash.com/random/800x600?sig=${i}_${j}&room`,
+                    },
+                });
+
+                // Generate room availability for 365 days starting from 2025-04-01
+                const availabilityDays = 365;
+                const startDate = new Date("2025-04-01");
+
+                const dailyAvailability = roomName.toLowerCase().includes("deluxe") ? 1 : 5;
+
+                for (let d = 0; d < availabilityDays; d++) {
+                    const date = new Date(startDate);
+                    date.setDate(startDate.getDate() + d);
+
+                    await prisma.roomAvailability.create({
+                        data: {
+                            roomId: room.id,
+                            date,
+                            availability: dailyAvailability,
+                        },
+                    });
+                }
+            }
+        }
     }
-    // ------------------------------------------------------------------------------------------
-
-
-
-    // create hotel images -----------------------------------------------------------------------------
-    const existingImages = await prisma.hotelImage.findMany();
-    if (existingImages.length === 0) {
-        await prisma.hotelImage.create({
-            data: {
-                id: "image_1",
-                hotelId: "hotel_1",
-                imageUrl: "https://example.com/hotel_1.jpg",
-            },
-        });
-
-        await prisma.hotelImage.create({
-            data: {
-                id: "image_2",
-                hotelId: "hotel_2",
-                imageUrl: "https://example.com/hotel_2.jpg",
-            },
-        });
-    }
-    // ------------------------------------------------------------------------------------------
-
-
-
-    // create rooms -----------------------------------------------------------------------------
-    const existingRooms = await prisma.room.findMany();
-    if (existingRooms.length === 0) {
-        await prisma.room.create({
-            data: {
-                id: "room_1",
-                hotelId: "hotel_1",
-                name: "Deluxe Suite",
-                type: "SINGLE",
-                pricePerNight: 300,
-                availability: 5,
-                amenities: "Free Wi-Fi, Breakfast Included",
-            },
-        });
-
-        await prisma.room.create({
-            data: {
-                id: "room_2",
-                hotelId: "hotel_1",
-                type: "DOUBLE",
-                name: "Standard Room",
-                pricePerNight: 150,
-                availability: 1,
-                amenities: "Free Wi-Fi",
-            },
-        });
-
-        await prisma.room.create({
-            data: {
-                id: "room_3",
-                hotelId: "hotel_2",
-                type: "SINGLE",
-                name: "Executive Suite",
-                pricePerNight: 250,
-                availability: 3,
-                amenities: "Free Wi-Fi, Breakfast Included",
-            },
-        });
-
-        await prisma.room.create({
-            data: {
-                id: "room_4",
-                hotelId: "hotel_2",
-                type: "DOUBLE",
-                name: "Standard Room",
-                pricePerNight: 100,
-                availability: 2,
-                amenities: "Free Wi-Fi",
-            },
-        });
-    }
-    // ------------------------------------------------------------------------------------------
-
-
-    // create room images -----------------------------------------------------------------------------
-    await prisma.roomImage.create({
-        data: {
-            id: "image_1",
-            roomId: "room_1",
-            imageUrl: "https://example.com/room_1.jpg",
-        },
-    });
-
-    await prisma.roomImage.create({
-        data: {
-            id: "image_2",
-            roomId: "room_2",
-            imageUrl: "https://example.com/room_2.jpg",
-        },
-    });
-
-    await prisma.roomImage.create({
-        data: {
-            id: "image_3",
-            roomId: "room_3",
-            imageUrl: "https://example.com/room_3.jpg",
-        },
-    });
-
-    await prisma.roomImage.create({
-        data: {
-            id: "image_4",
-            roomId: "room_4",
-            imageUrl: "https://example.com/room_4.jpg",
-        },
-    });
-    // ------------------------------------------------------------------------------------------
-
-
-    // create room availability -----------------------------------------------------------------------------
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_1",
-            date: new Date("2025-03-09"),
-            availability: 5,
-        },
-    });
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_1",
-            date: new Date("2025-03-10"),
-            availability: 5,
-        },
-    });
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_1",
-            date: new Date("2025-03-11"),
-            availability: 5,
-        },
-    });
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_1",
-            date: new Date("2025-03-12"),
-            availability: 5,
-        },
-    });
-
-
-
-
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_2",
-            date: new Date("2025-03-09"),
-            availability: 2,
-        },
-    });
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_2",
-            date: new Date("2025-03-10"),
-            availability: 2,
-        },
-    });
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_2",
-            date: new Date("2025-03-11"),
-            availability: 2,
-        },
-    });
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_2",
-            date: new Date("2025-03-12"),
-            availability: 2,
-        },
-    });
-
-
-
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_3",
-            date: new Date("2025-03-09"),
-            availability: 3,
-        },
-    });
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_3",
-            date: new Date("2025-03-10"),
-            availability: 3,
-        },
-    });
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_3",
-            date: new Date("2025-03-11"),
-            availability: 3,
-        },
-    });
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_3",
-            date: new Date("2025-03-12"),
-            availability: 3,
-        },
-    });
-
-
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_4",
-            date: new Date("2025-03-09"),
-            availability: 2,
-        },
-    });
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_4",
-            date: new Date("2025-03-10"),
-            availability: 2,
-        },
-    });
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_4",
-            date: new Date("2025-03-11"),
-            availability: 2,
-        },
-    });
-
-    await prisma.roomAvailability.create({
-        data: {
-            roomId: "room_4",
-            date: new Date("2025-03-12"),
-            availability: 2,
-        },
-    });
+    
 
 
     // create bookings -----------------------------------------------------------------------------
