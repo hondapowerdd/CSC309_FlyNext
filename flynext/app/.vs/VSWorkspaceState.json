@@ -1,9 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\api\\hotel_search\\availability",
-    "\\api\\hotel_search\\information",
-    "\\api\\hotel_search\\search",
+    "\\api",
+    "\\api\\itineraries",
     "\\api\\itineraries\\[id]",
     "\\components",
     "\\components\\flights",
