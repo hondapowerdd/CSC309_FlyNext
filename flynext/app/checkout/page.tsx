@@ -7,6 +7,7 @@ import { AuthContext } from "@/frontend/contexts/auth";
 export default () => {
 	const [itineraries, setItineraries] = useState<any>({});
 	const [selectedItinerary, setSelectedItinerary] = useState<any>("");
+	// @ts-ignore
 	const [bookings, setBookings] = useState<Booking[]>([]);
 	const [total, setTotal] = useState(0);
 	const [cardDetails, setCardDetails] = useState({

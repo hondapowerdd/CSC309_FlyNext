@@ -7,25 +7,7 @@ const prisma = new PrismaClient();
 async function main() {
     console.log("Seeding database...");
 
-    // // delete the users table
-    // await prisma.user.deleteMany({});
-    //
-    // // delete the hotel images table
-    // await prisma.hotelImage.deleteMany({});
-    //
-    // // clear the room table
-    // await prisma.room.deleteMany({});
-    //
-    // // clear the hotel table
-    // await prisma.hotel.deleteMany({});
-    //
-    // // delete all existing notifications
-    // await prisma.notification.deleteMany({});
-    //
-    // // delete the bookings table
-    // await prisma.booking.deleteMany({});
-
-    // run npx prisma migrate reset to reset the database
+    // npx prisma migrate reset to reset the database
 
 
     // create users -----------------------------------------------------------------------------
@@ -33,8 +15,8 @@ async function main() {
     if (!owner) {
         owner = await prisma.user.create({
             data: {
-                id: "owner_1",
-                uid: "owner_1",
+                id: "admin",
+                uid: "admin",
                 firstName: "John",
                 lastName: "Doe",
                 email: "owner@example.com",
@@ -44,37 +26,7 @@ async function main() {
         });
     }
 
-    let customer = await prisma.user.findFirst({ where: { email: "customer@example.com" } });
-    if (!customer) {
-        customer = await prisma.user.create({
-            data: {
-                id: "customer_1",
-                uid: "customer_1",
-                firstName: "Jane",
-                lastName: "Smith",
-                email: "customer@example.com",
-                password: encrypt("123456"),
-                role: "CUSTOMER",
-            },
-        });
-    }
-
-    let visitor = await prisma.user.findFirst({ where: { email: "vistor@example.com" } });
-    if (!visitor) {
-        visitor = await prisma.user.create({
-            data: {
-                id: "visitor_1",
-                uid: "visitor_1",
-                firstName: "Alice",
-                lastName: "Johnson",
-                email: "vistor@example.com",
-                password: encrypt("123456"),
-                role: "VISITOR",
-            },
-        });
-    }
     // ------------------------------------------------------------------------------------------
-
 
 
     // create notifications -----------------------------------------------------------------------------
@@ -83,7 +35,7 @@ async function main() {
         notif = await prisma.notification.create({
             data: {
                 id: "notif_1",
-                userId: "owner_1",
+                userId: "admin",
                 message: "New booking made for your hotel",
                 isRead: false,
                 type: "NEW_BOOKING",
@@ -93,7 +45,7 @@ async function main() {
         notif = await prisma.notification.create({
             data: {
                 id: "notif_2",
-                userId: "owner_1",
+                userId: "admin",
                 message: "Booking cancelled by customer",
                 isRead: false,
                 type: "CANCELLED_BOOKING",
@@ -101,28 +53,6 @@ async function main() {
         });
     }
 
-    let notif2 = await prisma.notification.findFirst({ where: { userId: "customer_1" } });
-    if (!notif2) {
-        notif2 = await prisma.notification.create({
-            data: {
-                id: "notif_3",
-                userId: "customer_1",
-                message: "Booking confirmed for Grand Hotel",
-                isRead: false,
-                type: "CONFIRMED_BOOKING",
-            },
-        });
-
-        notif2 = await prisma.notification.create({
-            data: {
-                id: "notif_4",
-                userId: "customer_1",
-                message: "Booking cancelled by hotel",
-                isRead: false,
-                type: "BOOKING_CANCELLED",
-            },
-        });
-    }
     // ------------------------------------------------------------------------------------------
 
 
@@ -136,6 +66,7 @@ async function main() {
         ];
 
         for (let i = 1; i <= 50; i++) {
+            console.log(`Creating hotel ${i}...`);
             const city = cities[i % cities.length];
             const hotel = await prisma.hotel.create({
                 data: {
@@ -184,7 +115,7 @@ async function main() {
                 });
 
                 // Generate room availability for 365 days starting from 2025-04-01
-                const availabilityDays = 365;
+                const availabilityDays = 30;
                 const startDate = new Date("2025-04-01");
 
                 const dailyAvailability = roomName.toLowerCase().includes("deluxe") ? 1 : 5;
@@ -208,132 +139,132 @@ async function main() {
 
 
     // create bookings -----------------------------------------------------------------------------
-    await prisma.booking.create({
-        data: {
-            id: "booking_1",
-            hotelId: "hotel_1",
-            roomId: "room_2",
-            userId: customer.id,
-            checkInDate: new Date("2025-03-09"),
-            checkOutDate: new Date("2025-03-12"),
-            status: "CONFIRMED",
-        },
-    });
-
-    await prisma.booking.create({
-        data: {
-            id: "booking_2",
-            hotelId: "hotel_1",
-            roomId: "room_1",
-            userId: customer.id,
-            checkInDate: new Date("2025-03-13"),
-            checkOutDate: new Date("2025-03-18"),
-            status: "CONFIRMED",
-        },
-    });
+    // await prisma.booking.create({
+    //     data: {
+    //         id: "booking_1",
+    //         hotelId: "hotel_1",
+    //         roomId: "room_2",
+    //         userId: customer.id,
+    //         checkInDate: new Date("2025-03-09"),
+    //         checkOutDate: new Date("2025-03-12"),
+    //         status: "CONFIRMED",
+    //     },
+    // });
+    //
+    // await prisma.booking.create({
+    //     data: {
+    //         id: "booking_2",
+    //         hotelId: "hotel_1",
+    //         roomId: "room_1",
+    //         userId: customer.id,
+    //         checkInDate: new Date("2025-03-13"),
+    //         checkOutDate: new Date("2025-03-18"),
+    //         status: "CONFIRMED",
+    //     },
+    // });
     // ------------------------------------------------------------------------------------------
 
 
 
     // create payments -----------------------------------------------------------------------------
-    await prisma.payment.create({
-        data: {
-            id: "payment_1",
-            userId: customer.id,
-            amount: 450.0,
-            status: "PAID",
-        }
-    });
-
-    await prisma.payment.create({
-        data: {
-            id: "payment_2",
-            userId: customer.id,
-            amount: 750.0,
-            status: "PAID",
-        }
-    });
+    // await prisma.payment.create({
+    //     data: {
+    //         id: "payment_1",
+    //         userId: customer.id,
+    //         amount: 450.0,
+    //         status: "PAID",
+    //     }
+    // });
+    //
+    // await prisma.payment.create({
+    //     data: {
+    //         id: "payment_2",
+    //         userId: customer.id,
+    //         amount: 750.0,
+    //         status: "PAID",
+    //     }
+    // });
     // ------------------------------------------------------------------------------------------
 
 
 
     // create invoices -----------------------------------------------------------------------------
-    let invoice = await prisma.invoice.findFirst({ where: { userId: "customer_1" } });
-    if (!invoice) {
-        invoice = await prisma.invoice.create({
-            data: {
-                id: "invoice_1",
-                userId: "customer_1",
-                amount: 450.0,
-                pdfUrl: "https://example.com/invoice_1.pdf",
-            },
-        });
-
-        invoice = await prisma.invoice.create({
-            data: {
-                id: "invoice_2",
-                userId: "customer_1",
-                amount: 750.0,
-                pdfUrl: "https://example.com/invoice_2.pdf",
-            },
-        });
-    }
+    // let invoice = await prisma.invoice.findFirst({ where: { userId: "customer_1" } });
+    // if (!invoice) {
+    //     invoice = await prisma.invoice.create({
+    //         data: {
+    //             id: "invoice_1",
+    //             userId: "customer_1",
+    //             amount: 450.0,
+    //             pdfUrl: "https://example.com/invoice_1.pdf",
+    //         },
+    //     });
+    //
+    //     invoice = await prisma.invoice.create({
+    //         data: {
+    //             id: "invoice_2",
+    //             userId: "customer_1",
+    //             amount: 750.0,
+    //             pdfUrl: "https://example.com/invoice_2.pdf",
+    //         },
+    //     });
+    // }
     // ------------------------------------------------------------------------------------------
 
 
 
     // create itineraries -----------------------------------------------------------------------------
-    let itinerary = await prisma.itinerary.findFirst({ where: { userId: "customer_1" } });
-    if (!itinerary) {
-        itinerary = await prisma.itinerary.create({
-            data: {
-                id: "itinerary_1",
-                userId: "customer_1",
-
-                bookings: {
-                    connect :[
-                        { id: "booking_1" },
-                        { id: "booking_2" },
-                    ]
-                },
-                payments: {
-                    connect :[
-                        { id: "payment_1" },
-                        { id: "payment_2" },
-                    ]
-                },
-                invoices: {
-                    connect: [
-                        { id: "invoice_1" },
-                        { id: "invoice_2" },
-                    ]
-                }
-            },
-        });
-
-        itinerary = await prisma.itinerary.create({
-            data: {
-                id: "itinerary_2",
-                userId: "customer_1",
-
-                bookings: {
-                    connect :[
-                        { id: "booking_1" },
-                    ]
-                },
-                payments: {
-                    connect :[
-                        { id: "payment_1" },
-                    ]
-                },
-                invoices: {
-                    connect: [
-                        { id: "invoice_1" },
-                    ]
-                }
-            },
-        });
-    }
+    // let itinerary = await prisma.itinerary.findFirst({ where: { userId: "customer_1" } });
+    // if (!itinerary) {
+    //     itinerary = await prisma.itinerary.create({
+    //         data: {
+    //             id: "itinerary_1",
+    //             userId: "customer_1",
+    //
+    //             bookings: {
+    //                 connect :[
+    //                     { id: "booking_1" },
+    //                     { id: "booking_2" },
+    //                 ]
+    //             },
+    //             payments: {
+    //                 connect :[
+    //                     { id: "payment_1" },
+    //                     { id: "payment_2" },
+    //                 ]
+    //             },
+    //             invoices: {
+    //                 connect: [
+    //                     { id: "invoice_1" },
+    //                     { id: "invoice_2" },
+    //                 ]
+    //             }
+    //         },
+    //     });
+    //
+    //     itinerary = await prisma.itinerary.create({
+    //         data: {
+    //             id: "itinerary_2",
+    //             userId: "customer_1",
+    //
+    //             bookings: {
+    //                 connect :[
+    //                     { id: "booking_1" },
+    //                 ]
+    //             },
+    //             payments: {
+    //                 connect :[
+    //                     { id: "payment_1" },
+    //                 ]
+    //             },
+    //             invoices: {
+    //                 connect: [
+    //                     { id: "invoice_1" },
+    //                 ]
+    //             }
+    //         },
+    //     });
+    // }
     // ------------------------------------------------------------------------------------------
 
 
@@ -341,32 +272,13 @@ async function main() {
     await prisma.userPreferences.create({
         data: {
             id: "preference_1",
-            userId: customer.id,
+            userId: owner.id,
 
             theme: "DARK",
             language: "en",
         },
     });
 
-    await prisma.userPreferences.create({
-        data: {
-            id: "preference_2",
-            userId: owner.id,
-
-            theme: "LIGHT",
-            language: "fr",
-        }
-    });
-
-    await prisma.userPreferences.create({
-        data: {
-            id: "preference_3",
-            userId: visitor.id,
-
-            theme: "LIGHT",
-            language: "en",
-        }
-    });
     // ------------------------------------------------------------------------------------------
 
     console.log("Seeding complete!");
