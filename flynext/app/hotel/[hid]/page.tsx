@@ -56,7 +56,7 @@ export default function HotelDetailPage() {
 
     const [userId, setUserId] = useState(""); //change:
     // const [userLoading, setUserLoading] = useState(true);
-    const [itineraries, setItineraries] = useState<{ id: string }[]>([]);
+    const [itineraries, setItineraries] = useState<{ id: string; name?: string }[]>([]);
     const [selectedItinerary, setSelectedItinerary] = useState("");
     const [createItinerary, setCreateItinerary] = useState(false);
 
@@ -186,7 +186,7 @@ export default function HotelDetailPage() {
                     const bookings = itinCheck.data.bookings;
                     const hasFlightBooking = bookings.some((b: any) => b.type === "FLIGHT");
 
-                    if (!hasFlightBooking) {
+                    if (!!hasFlightBooking && hotel) {
                         const city = hotel.city ?? "";
                         const checkOut = new Date(checkOutDate);
                         const formattedDate = checkOut.toISOString().split("T")[0];
