@@ -59,6 +59,7 @@ async function main() {
 
     // create 50 hotels -----------------------------------------------------------------------------
     const existingHotels = await prisma.hotel.findMany();
+
     if (existingHotels.length === 0) {
         const cities = [
             "Toronto", "New York", "Paris", "Tokyo", "London",
@@ -68,6 +69,7 @@ async function main() {
         for (let i = 1; i <= 50; i++) {
             console.log(`Creating hotel ${i}...`);
             const city = cities[i % cities.length];
+
             const hotel = await prisma.hotel.create({
                 data: {
                     id: `hotel_${i}`,
@@ -87,7 +89,6 @@ async function main() {
                 },
             });
 
-            // Add rooms
             const roomTypes = ["SINGLE", "DOUBLE", "DELUXE"];
             for (let j = 0; j < roomTypes.length; j++) {
                 const type = roomTypes[j];
@@ -114,27 +115,10 @@ async function main() {
                     },
                 });
 
-                // Generate room availability for 365 days starting from 2025-04-01
-                const availabilityDays = 30;
-                const startDate = new Date("2025-04-01");
-
-                const dailyAvailability = roomName.toLowerCase().includes("deluxe") ? 1 : 5;
-
-                for (let d = 0; d < availabilityDays; d++) {
-                    const date = new Date(startDate);
-                    date.setDate(startDate.getDate() + d);
-
-                    await prisma.roomAvailability.create({
-                        data: {
-                            roomId: room.id,
-                            date,
-                            availability: dailyAvailability,
-                        },
-                    });
-                }
             }
         }
     }
+
     
 
 
