@@ -48,7 +48,7 @@ export default () => {
 	// Calculate total
 	useEffect(() => {
 		setTotal(bookings.reduce((total, booking) => {
-			if (booking.type === "Hotel") return total += Math.ceil(
+			if (booking.type === "HOTEL") return total += Math.ceil(
 				((new Date(booking.checkOutDate)).getTime() - (new Date(booking.checkInDate)).getTime())
 				/ (1000 * 60 * 60 * 24)
 			);
