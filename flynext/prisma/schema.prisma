@@ -21,7 +21,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  // url      = env("DATABASE_URL")
+  url      = "postgresql://postgres:AAaa123456@flynext-database.cv6qec6kk3sf.us-east-2.rds.amazonaws.com:5432/postgres"
 }
 
 // generator erd {
