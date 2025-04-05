@@ -34,6 +34,7 @@ interface AvailabilityEntry {
 interface Itinerary {
     id: string;
     bookings: { type: string }[];
+    status: string
 }
 
 export default function HotelDetailPage() {
@@ -104,7 +105,7 @@ export default function HotelDetailPage() {
                 });
 
                 const filtered = itinRes.data.filter((itin: Itinerary) =>
-                    !itin.bookings.some((b) => b.type === "HOTEL")
+                    !itin.invoices && !itin.bookings.some((b) => b.type === "HOTEL" || b.status === "COMPLETED")
                 );
                 setItineraries(filtered);
 
