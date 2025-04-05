@@ -33,7 +33,7 @@ export default () => {
 				resContent.itineraries.filter((itinerary: any) => {
 					return itinerary.invoices.length < 1 &&
 					itinerary.bookings.some((booking: any) => booking.type === "FLIGHT");
-				}).forEach((itinerary: any) => it[itinerary.id] = itinerary);
+				}).forEach((itinerary: any) => it[itinerary.name] = itinerary);
 				setItineraries(it);
 			});
 		});
@@ -118,14 +118,14 @@ export default () => {
 					Select Itinerary
 				</label>
 				<select
-					value={selectedItinerary? selectedItinerary.id:""}
+					value={selectedItinerary? selectedItinerary.name:""}
 					onChange={(e) => setSelectedItinerary(e.target.value)}
 					className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
 				>
 					<option value="">Choose an itinerary</option>
 					{Object.values(itineraries).map((itinerary: any) => (
-						<option key={itinerary.id} value={itinerary.id}>
-							{itinerary.id}
+						<option key={itinerary.name} value={itinerary.name}>
+							{itinerary.name}
 						</option>
 					))}
 				</select>
