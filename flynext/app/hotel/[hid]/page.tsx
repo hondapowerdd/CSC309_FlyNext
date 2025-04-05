@@ -189,7 +189,7 @@ export default function HotelDetailPage() {
                     const bookings = itinCheck.data.bookings;
                     const hasFlightBooking = bookings.some((b: any) => b.type === "FLIGHT");
 
-                    if (!!hasFlightBooking && hotel) {
+                    if (!hasFlightBooking && hotel) {
                         const city = hotel.city ?? "";
                         const checkOut = new Date(checkOutDate);
                         const formattedDate = checkOut.toISOString().split("T")[0];
@@ -207,6 +207,7 @@ export default function HotelDetailPage() {
                     } else {
                         setTimeout(() => window.location.reload(), 1500);
                     }
+
 
                 } catch (err) {
                     console.error("Error checking itinerary after booking:", err);
