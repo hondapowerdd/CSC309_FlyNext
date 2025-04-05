@@ -2,15 +2,13 @@ version: '3.8'
 
 services:
   web:
-    container_name: nextjs-app
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
       - "3000:3000"
-    volumes:
-      - .:/app
-      - /app/node_modules
     environment:
       - NODE_ENV=production
-    command: npm start
+      - DATABASE_URL=postgresql://postgres:AAaa123456@flynext-database.cv6qec6kk3sf.us-east-2.rds.amazonaws.com:5432/postgres
+    command: npm run start
+
+
+

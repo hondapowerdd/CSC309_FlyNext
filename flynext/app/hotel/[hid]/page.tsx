@@ -33,8 +33,10 @@ interface AvailabilityEntry {
 
 interface Itinerary {
     id: string;
-    bookings: { type: string }[];
+    // bookings: { type: string }[];
+    bookings: { type: string; status: string }[];
     status: string
+    invoices?: any[];
 }
 
 export default function HotelDetailPage() {

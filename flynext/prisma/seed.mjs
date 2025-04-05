@@ -11,7 +11,7 @@ async function main() {
 
 
     // create users -----------------------------------------------------------------------------
-    let owner = await prisma.user.findFirst({ where: { email: "owner@example.com" } });
+    let owner = await prisma.user.findFirst({ where: { email: "asas@example.com" } });
     if (!owner) {
         owner = await prisma.user.create({
             data: {
